@@ -32,6 +32,116 @@
       </div>
     </section>
 
+    <!-- 新增：專業技能展示區 -->
+    <section class="section skills-section">
+      <h1>專業技能</h1>
+      
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3>前端開發</h3>
+          <div class="skill-items">
+            <!-- 前端技能內容 (待填寫) -->
+            <div class="skill-item">
+              <div class="skill-name">HTML/CSS</div>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 90%"></div>
+              </div>
+            </div>
+            <!-- 更多前端技能 (待填寫) -->
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>嵌入式系統</h3>
+          <div class="skill-items">
+            <!-- 嵌入式系統技能內容 (待填寫) -->
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>程式語言</h3>
+          <div class="skill-items">
+            <!-- 程式語言技能內容 (待填寫) -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 新增：專案經歷 -->
+    <section class="section projects-section">
+      <h1>專案經歷</h1>
+      
+      <div class="projects-container">
+        <!-- 專案1 (待填寫) -->
+        <div class="project-item">
+          <div class="project-title">
+            <h3><!-- 專案名稱 (待填寫) --></h3>
+            <span class="project-date"><!-- 日期 (待填寫) --></span>
+          </div>
+          <p class="project-description">
+            <!-- 專案描述 (待填寫) -->
+          </p>
+          <div class="project-tech">
+            <!-- 使用技術標籤 (待填寫) -->
+          </div>
+        </div>
+        
+        <!-- 專案2 (待填寫) -->
+        <div class="project-item">
+          <!-- 專案內容 (待填寫) -->
+        </div>
+        
+        <!-- 專案3 (待填寫) -->
+        <div class="project-item">
+          <!-- 專案內容 (待填寫) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 新增：教育背景時間線 -->
+    <section class="section education-section">
+      <h1>教育背景</h1>
+      
+      <div class="timeline">
+        <!-- 教育經歷1 (待填寫) -->
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <!-- 日期 (待填寫) -->
+          </div>
+          <div class="timeline-content">
+            <h3><!-- 學校/學位 (待填寫) --></h3>
+            <p><!-- 相關描述 (待填寫) --></p>
+            <ul>
+              <!-- 相關課程或成就 (待填寫) -->
+            </ul>
+          </div>
+        </div>
+        
+        <!-- 教育經歷2 (待填寫) -->
+        <div class="timeline-item">
+          <!-- 內容 (待填寫) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 新增：未來目標與願景 -->
+    <section class="section goals-section">
+      <h1>未來目標</h1>
+      
+      <div class="goals-container">
+        <!-- 目標與願景內容 (待填寫) -->
+      </div>
+    </section>
+
+    <!-- 新增：證照與技能認證 -->
+    <section class="section certificates-section">
+      <h1>證照與認證</h1>
+      
+      <div class="certificates-container">
+        <!-- 證照與認證內容 (待填寫) -->
+      </div>
+    </section>
+
     <!-- 第二個區域：個人興趣 -->
     <section class="section interests-section">
       <h1>個人興趣</h1>
@@ -694,5 +804,190 @@ onBeforeUnmount(() => {
 .lightbox-content .rotate-270 {
   max-height: 80vh;
   max-width: 80vw;
+}
+
+/* 新增的樣式 */
+/* 專業技能區塊樣式 */
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skill-category {
+  margin-bottom: 1.5rem;
+}
+
+.skill-category h3 {
+  color: #34495e;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.skill-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skill-name {
+  flex: 0 0 120px;
+  font-weight: 600;
+}
+
+.skill-bar {
+  flex: 1;
+  height: 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-level {
+  height: 100%;
+  background: linear-gradient(90deg, #41b883, #35495e);
+  border-radius: 5px;
+}
+
+/* 專案經歷樣式 */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-item {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.project-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.project-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tag {
+  background-color: #e8f5e9;
+  color: #388e3c;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+}
+
+/* 教育背景時間線樣式 */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #41b883;
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 0.5rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 4px solid #41b883;
+}
+
+.timeline-date {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+/* 其他區塊樣式 */
+.goals-container,
+.certificates-container,
+.contact-container {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #41b883;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.social-icon:hover {
+  background-color: #34495e;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  .project-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .skill-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .skill-name {
+    margin-bottom: 0.5rem;
+  }
+  
+  .skill-bar {
+    width: 100%;
+  }
 }
 </style>
