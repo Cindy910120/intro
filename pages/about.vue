@@ -42,9 +42,14 @@
           <div class="interest-image">
             <div class="slideshow-container">
               <div v-for="(image, index) in calligraphyImages" :key="'cal-'+index" class="slide" :class="{ active: currentIndexes.calligraphy === index }">
-                <img :src="image" alt="書法作品" />
+                <img :src="image" :alt="'書法作品 ' + (index + 1)" 
+                     :class="getImageRotationClass('calligraphy', index)"
+                     @click="openLightbox('calligraphy', index)" />
               </div>
               <div class="slide-counter">{{ currentIndexes.calligraphy + 1 }}/{{ calligraphyImages.length }}</div>
+              <!-- 添加左右切換按鈕 -->
+              <button class="slide-nav prev" @click="prevSlide('calligraphy')">&lt;</button>
+              <button class="slide-nav next" @click="nextSlide('calligraphy')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -58,9 +63,13 @@
           <div class="interest-image">
             <div class="slideshow-container">
               <div v-for="(image, index) in drumImages" :key="'drum-'+index" class="slide" :class="{ active: currentIndexes.drum === index }">
-                <img :src="image" alt="爵士鼓演奏" />
+                <img :src="image" :alt="'爵士鼓演奏 ' + (index + 1)" 
+                     :class="getImageRotationClass('drum', index)" 
+                     @click="openLightbox('drum', index)" />
               </div>
               <div class="slide-counter">{{ currentIndexes.drum + 1 }}/{{ drumImages.length }}</div>
+              <button class="slide-nav prev" @click="prevSlide('drum')">&lt;</button>
+              <button class="slide-nav next" @click="nextSlide('drum')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -75,9 +84,13 @@
           <div class="interest-image">
             <div class="slideshow-container">
               <div v-for="(image, index) in drawImages" :key="'draw-'+index" class="slide" :class="{ active: currentIndexes.draw === index }">
-                <img :src="image" alt="繪畫作品" />
+                <img :src="image" :alt="'繪畫作品 ' + (index + 1)" 
+                     :class="getImageRotationClass('draw', index)" 
+                     @click="openLightbox('draw', index)" />
               </div>
               <div class="slide-counter">{{ currentIndexes.draw + 1 }}/{{ drawImages.length }}</div>
+              <button class="slide-nav prev" @click="prevSlide('draw')">&lt;</button>
+              <button class="slide-nav next" @click="nextSlide('draw')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -92,9 +105,13 @@
           <div class="interest-image">
             <div class="slideshow-container">
               <div v-for="(image, index) in puzzleImages" :key="'puzzle-'+index" class="slide" :class="{ active: currentIndexes.puzzle === index }">
-                <img :src="image" alt="拼圖作品" />
+                <img :src="image" :alt="'拼圖作品 ' + (index + 1)" 
+                     :class="getImageRotationClass('puzzle', index)" 
+                     @click="openLightbox('puzzle', index)" />
               </div>
               <div class="slide-counter">{{ currentIndexes.puzzle + 1 }}/{{ puzzleImages.length }}</div>
+              <button class="slide-nav prev" @click="prevSlide('puzzle')">&lt;</button>
+              <button class="slide-nav next" @click="nextSlide('puzzle')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -109,9 +126,13 @@
           <div class="interest-image">
             <div class="slideshow-container">
               <div v-for="(image, index) in physicsImages" :key="'physics-'+index" class="slide" :class="{ active: currentIndexes.physics === index }">
-                <img :src="image" alt="玄學研究" />
+                <img :src="image" :alt="'玄學研究 ' + (index + 1)" 
+                     :class="getImageRotationClass('physics', index)" 
+                     @click="openLightbox('physics', index)" />
               </div>
               <div class="slide-counter">{{ currentIndexes.physics + 1 }}/{{ physicsImages.length }}</div>
+              <button class="slide-nav prev" @click="prevSlide('physics')">&lt;</button>
+              <button class="slide-nav next" @click="nextSlide('physics')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -121,6 +142,19 @@
         </div>
       </div>
     </section>
+
+    <!-- 圖片放大檢視元件 -->
+    <div v-if="lightbox.show" class="lightbox" @click="closeLightbox">
+      <div class="lightbox-content" @click.stop>
+        <img :src="lightbox.image" :alt="lightbox.alt" :class="getImageRotationClass(lightbox.type, lightbox.index)" />
+        <button class="lightbox-close" @click="closeLightbox">✕</button>
+        <div class="lightbox-nav">
+          <button class="lightbox-prev" @click.stop="lightboxPrev">&lt;</button>
+          <div class="lightbox-counter">{{ lightbox.index + 1 }}/{{ getImagesArray(lightbox.type).length }}</div>
+          <button class="lightbox-next" @click.stop="lightboxNext">&gt;</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -170,6 +204,91 @@ const currentIndexes = ref({
   physics: 0
 })
 
+// 圖片放大檢視狀態
+const lightbox = ref({
+  show: false,
+  image: '',
+  alt: '',
+  type: '',
+  index: 0
+})
+
+// 獲取指定類型的圖片陣列
+const getImagesArray = (type) => {
+  const imageArrays = {
+    calligraphy: calligraphyImages,
+    drum: drumImages,
+    draw: drawImages,
+    puzzle: puzzleImages,
+    physics: physicsImages
+  }
+  return imageArrays[type] || []
+}
+
+// 開啟圖片放大檢視
+const openLightbox = (type, index) => {
+  // 在開啟lightbox前暫停所有輪播
+  pauseAllSlideshows()
+  
+  const images = getImagesArray(type)
+  if (images && images.length > 0) {
+    lightbox.value = {
+      show: true,
+      image: images[index],
+      alt: `${type} image ${index + 1}`,
+      type: type,
+      index: index
+    }
+    
+    // 在lightbox模式下關閉頁面滾動
+    document.body.style.overflow = 'hidden'
+  }
+}
+
+// 關閉圖片放大檢視
+const closeLightbox = () => {
+  lightbox.value.show = false
+  document.body.style.overflow = ''
+  // 關閉lightbox後重新開始所有輪播
+  startSlideshow()
+}
+
+// lightbox中顯示上一張圖片
+const lightboxPrev = () => {
+  const images = getImagesArray(lightbox.value.type)
+  if (images && images.length > 0) {
+    lightbox.value.index = (lightbox.value.index - 1 + images.length) % images.length
+    lightbox.value.image = images[lightbox.value.index]
+    lightbox.value.alt = `${lightbox.value.type} image ${lightbox.value.index + 1}`
+  }
+}
+
+// lightbox中顯示下一張圖片
+const lightboxNext = () => {
+  const images = getImagesArray(lightbox.value.type)
+  if (images && images.length > 0) {
+    lightbox.value.index = (lightbox.value.index + 1) % images.length
+    lightbox.value.image = images[lightbox.value.index]
+    lightbox.value.alt = `${lightbox.value.type} image ${lightbox.value.index + 1}`
+  }
+}
+
+// 顯示上一張輪播圖片
+const prevSlide = (type) => {
+  const images = getImagesArray(type)
+  if (images && images.length > 0) {
+    currentIndexes.value[type] = (currentIndexes.value[type] - 1 + images.length) % images.length
+  }
+}
+
+// 顯示下一張輪播圖片
+const nextSlide = (type) => {
+  const images = getImagesArray(type)
+  if (images && images.length > 0) {
+    currentIndexes.value[type] = (currentIndexes.value[type] + 1) % images.length
+  }
+}
+
 // 定義一個間隔時間（毫秒）
 const intervalTime = 3000
 let slideshowIntervals = {}
@@ -178,36 +297,99 @@ let slideshowIntervals = {}
 const startSlideshow = () => {
   // 為每個類別建立獨立的輪播計時器
   slideshowIntervals.calligraphy = setInterval(() => {
-    currentIndexes.value.calligraphy = (currentIndexes.value.calligraphy + 1) % calligraphyImages.length
+    if (!lightbox.value.show) { // 只有在lightbox不顯示時才自動輪播
+      currentIndexes.value.calligraphy = (currentIndexes.value.calligraphy + 1) % calligraphyImages.length
+    }
   }, intervalTime)
   
   slideshowIntervals.drum = setInterval(() => {
-    currentIndexes.value.drum = (currentIndexes.value.drum + 1) % drumImages.length
+    if (!lightbox.value.show) {
+      currentIndexes.value.drum = (currentIndexes.value.drum + 1) % drumImages.length
+    }
   }, intervalTime)
   
   slideshowIntervals.draw = setInterval(() => {
-    currentIndexes.value.draw = (currentIndexes.value.draw + 1) % drawImages.length
+    if (!lightbox.value.show) {
+      currentIndexes.value.draw = (currentIndexes.value.draw + 1) % drawImages.length
+    }
   }, intervalTime)
   
   slideshowIntervals.puzzle = setInterval(() => {
-    currentIndexes.value.puzzle = (currentIndexes.value.puzzle + 1) % puzzleImages.length
+    if (!lightbox.value.show) {
+      currentIndexes.value.puzzle = (currentIndexes.value.puzzle + 1) % puzzleImages.length
+    }
   }, intervalTime)
   
   slideshowIntervals.physics = setInterval(() => {
-    currentIndexes.value.physics = (currentIndexes.value.physics + 1) % physicsImages.length
+    if (!lightbox.value.show) {
+      currentIndexes.value.physics = (currentIndexes.value.physics + 1) % physicsImages.length
+    }
   }, intervalTime)
 }
 
-// 在元件掛載時啟動輪播
-onMounted(() => {
-  startSlideshow()
-})
-
-// 在元件卸載前清除計時器
-onBeforeUnmount(() => {
+// 暫停所有輪播
+const pauseAllSlideshows = () => {
   Object.values(slideshowIntervals).forEach(interval => {
     clearInterval(interval)
   })
+}
+
+// 根據圖片類型和索引返回適當的旋轉類別
+const getImageRotationClass = (type, index) => {
+  // 預設所有圖片不需要旋轉
+  const rotations = {
+    // 書法圖片的旋轉
+    calligraphy: {
+      0: 'rotate-90', // 第一張圖片需要旋轉90度
+      2: 'rotate-270', // 第三張圖片需要旋轉270度
+      4: 'rotate-90', // 第五張圖片需要旋轉90度
+    },
+    // 爵士鼓圖片的旋轉
+    drum: {
+      1: 'rotate-90', // 第二張圖片需要旋轉90度
+    },
+    // 繪畫圖片的旋轉
+    draw: {
+      2: 'rotate-270', // 第三張圖片需要旋轉270度
+    },
+    // 拼圖圖片的旋轉
+    puzzle: {
+      0: 'rotate-90', // 第一張圖片需要旋轉90度
+      3: 'rotate-270', // 第四張圖片需要旋轉270度
+    },
+    // 物理研究圖片的旋轉
+    physics: {} // 物理研究圖片不需要旋轉
+  }
+  
+  // 檢查是否有特定圖片需要旋轉
+  if (rotations[type] && rotations[type][index]) {
+    return `${rotations[type][index]} rotated`
+  }
+  
+  return '' // 沒有指定旋轉的圖片返回空字符串
+}
+
+// 監聽ESC鍵關閉放大檢視
+const handleKeyDown = (e) => {
+  if (e.key === 'Escape' && lightbox.value.show) {
+    closeLightbox()
+  } else if (e.key === 'ArrowLeft' && lightbox.value.show) {
+    lightboxPrev()
+  } else if (e.key === 'ArrowRight' && lightbox.value.show) {
+    lightboxNext()
+  }
+}
+
+// 在元件掛載時啟動輪播和鍵盤事件監聽
+onMounted(() => {
+  startSlideshow()
+  window.addEventListener('keydown', handleKeyDown)
+})
+
+// 在元件卸載前清除計時器和事件監聽器
+onBeforeUnmount(() => {
+  pauseAllSlideshows()
+  window.removeEventListener('keydown', handleKeyDown)
 })
 </script>
 
@@ -294,6 +476,9 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 300px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slide {
@@ -304,6 +489,9 @@ onBeforeUnmount(() => {
   height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slide.active {
@@ -353,5 +541,158 @@ onBeforeUnmount(() => {
   .interest-image {
     margin: 0 auto;
   }
+}
+
+.rotate-90, .rotate-270 {
+  width: auto !important;
+  height: auto !important;
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-270 {
+  transform: rotate(270deg);
+}
+
+/* 確保旋轉圖片的容器適應旋轉內容 */
+.slide img.rotated {
+  object-fit: contain; /* 確保旋轉後圖片完整顯示 */
+  max-height: 100%;
+  max-width: 100%;
+}
+
+/* 輪播控制按鈕 */
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  opacity: 0;
+  z-index: 10;
+}
+
+.slideshow-container:hover .slide-nav {
+  opacity: 0.8;
+}
+
+.slide-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.slide-nav.prev {
+  left: 10px;
+}
+
+.slide-nav.next {
+  right: 10px;
+}
+
+/* 圖片放大檢視樣式 */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 36px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.lightbox-counter {
+  color: white;
+  font-size: 18px;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* 使滑鼠指針顯示為可點擊 */
+.slide img {
+  cursor: pointer;
+}
+
+/* 調整放大檢視中的旋轉圖片樣式 */
+.lightbox-content .rotate-90,
+.lightbox-content .rotate-270 {
+  max-height: 80vh;
+  max-width: 80vw;
 }
 </style>
