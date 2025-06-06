@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#f5f5f5"/>
+  <!-- Drum set outline -->
+  <ellipse cx="100" cy="80" rx="60" ry="20" stroke="#333" stroke-width="2" fill="#ddd"/>
+  <ellipse cx="100" cy="80" rx="50" ry="15" stroke="#333" stroke-width="1" fill="#eee"/>
+  <ellipse cx="65" cy="120" rx="25" ry="25" stroke="#333" stroke-width="2" fill="#ddd"/>
+  <ellipse cx="135" cy="120" rx="25" ry="25" stroke="#333" stroke-width="2" fill="#ddd"/>
+  <ellipse cx="100" cy="150" rx="40" ry="15" stroke="#333" stroke-width="2" fill="#ddd"/>
+  <!-- Cymbals -->
+  <ellipse cx="45" cy="60" rx="15" ry="5" stroke="#333" stroke-width="1" fill="#f0d090" transform="rotate(-10,45,60)"/>
+  <ellipse cx="155" cy="60" rx="15" ry="5" stroke="#333" stroke-width="1" fill="#f0d090" transform="rotate(10,155,60)"/>
+  <!-- Sticks -->
+  <line x1="85" y1="50" x2="115" y2="65" stroke="#333" stroke-width="2"/>
+  <line x1="115" y1="50" x2="85" y2="65" stroke="#333" stroke-width="2"/>
+  <!-- Text -->
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">爵士鼓</text>
+</svg>
