@@ -10,7 +10,7 @@
           
           <div class="info-group">
             <h3>學校</h3>
-            <p>國立臺灣大學</p>
+            <p>中原大學</p>
           </div>
           
           <div class="info-group">
