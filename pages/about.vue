@@ -104,20 +104,19 @@
           </div>
         </div>
 
-        <!-- 物理研究 -->
+        <!-- 玄學研究 -->
         <div class="interest-item">
           <div class="interest-image">
             <div class="slideshow-container">
               <div v-for="(image, index) in physicsImages" :key="'physics-'+index" class="slide" :class="{ active: currentIndexes.physics === index }">
-                <img :src="image" alt="物理研究" />
+                <img :src="image" alt="玄學研究" />
               </div>
               <div class="slide-counter">{{ currentIndexes.physics + 1 }}/{{ physicsImages.length }}</div>
             </div>
           </div>
           <div class="interest-description">
-            <h3>物理研究</h3>
-            <p>最近投入研究物理學相關的課題，探索自然界的奧秘。</p>
-            <p>透過實驗和理論分析，嘗試理解和解釋各種物理現象。</p>
+            <h3>玄學研究</h3>
+            <p>最近投入研究玄學相關的課題，探索自然界的奧秘。</p>
           </div>
         </div>
       </div>
