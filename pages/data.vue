@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>各項資料</h1>
+    <h1>各項學習筆記</h1>
     <p>這個頁面收集了我撰寫的各種筆記與資料文件</p>
 
     <div class="content-sections">

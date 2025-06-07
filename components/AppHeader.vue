@@ -9,7 +9,7 @@
           <li><NuxtLink to="/">首頁</NuxtLink></li>
           <li><NuxtLink to="/about">自我介紹</NuxtLink></li>
           <li><NuxtLink to="/project">期末專題網頁介紹</NuxtLink></li>
-          <li><NuxtLink to="/data">各項資料</NuxtLink></li>
+          <li><NuxtLink to="/data">各項學習筆記</NuxtLink></li>
         </ul>
       </nav>
     </div>
