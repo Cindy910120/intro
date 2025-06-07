@@ -78,18 +78,16 @@
           </div>
 
           <div class="info-group">
-            <h3>參加過的活動</h3><!-- 活動圖片展示 -->
-            <div class="activities-gallery">
-              <div class="activity-item">
-                <div class="interest-image">
-                  <div class="slideshow-container">
-                    <div v-for="(image, index) in activityImages" :key="'activity-'+index" class="slide" :class="{ active: currentIndexes.activities === index }">
+            <h3>參加過的活動</h3><!-- 活動圖片展示 -->            <div class="activities-gallery">
+              <div class="activity-item">                <div class="activity-image-compact">
+                  <div class="activity-slideshow-container">
+                    <div v-for="(image, index) in activityImages" :key="'activity-'+index" class="activity-slide" :class="{ active: currentIndexes.activities === index }">
                       <img :src="image.src" :alt="image.alt" 
                            @click="openLightbox('activities', index)" />
                     </div>
-                    <div class="slide-counter">{{ currentIndexes.activities + 1 }}/{{ activityImages.length }}</div>
-                    <button class="slide-nav prev" @click="prevSlide('activities')">&lt;</button>
-                    <button class="slide-nav next" @click="nextSlide('activities')">&gt;</button>
+                    <div class="activity-slide-counter">{{ currentIndexes.activities + 1 }}/{{ activityImages.length }}</div>
+                    <button class="activity-slide-nav prev" @click="prevSlide('activities')">&lt;</button>
+                    <button class="activity-slide-nav next" @click="nextSlide('activities')">&gt;</button>
                   </div>
                 </div>
                 <div class="activity-description">
