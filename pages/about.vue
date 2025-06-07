@@ -81,48 +81,12 @@
         </div>
       </div>
     </section>
-
-    <!-- 新增：教育背景時間線 -->
-    <section class="section education-section">
-      <h1>教育背景</h1>
-      
-      <div class="timeline">
-        <!-- 教育經歷1 (待填寫) -->
-        <div class="timeline-item">
-          <div class="timeline-date">
-            <!-- 日期 (待填寫) -->
-          </div>
-          <div class="timeline-content">
-            <h3><!-- 學校/學位 (待填寫) --></h3>
-            <p><!-- 相關描述 (待填寫) --></p>
-            <ul>
-              <!-- 相關課程或成就 (待填寫) -->
-            </ul>
-          </div>
-        </div>
-        
-        <!-- 教育經歷2 (待填寫) -->
-        <div class="timeline-item">
-          <!-- 內容 (待填寫) -->
-        </div>
-      </div>
-    </section>
-
     <!-- 新增：未來目標與願景 -->
     <section class="section goals-section">
       <h1>未來目標</h1>
       
       <div class="goals-container">
         <!-- 目標與願景內容 (待填寫) -->
-      </div>
-    </section>
-
-    <!-- 新增：證照與技能認證 -->
-    <section class="section certificates-section">
-      <h1>證照與認證</h1>
-      
-      <div class="certificates-container">
-        <!-- 證照與認證內容 (待填寫) -->
       </div>
     </section>
 
@@ -249,10 +213,15 @@ const calligraphyImages = [
   '/images/interests/calligraphy/IMG_20250528_171833.jpg',
   '/images/interests/calligraphy/IMG_20250528_171841.jpg',
   '/images/interests/calligraphy/IMG_20250528_171851.jpg',
+  '/images/interests/calligraphy/IMG_20200113_194926.jpg',
+  '/images/interests/calligraphy/received_515809348583753.jpg',
+  '/images/interests/calligraphy/received_660991897398830.jpg',
 ]
 
 const drumImages = [
   '/images/interests/drum/IMG_20220219_141637.jpg',
+  '/images/interests/drum/IMG_20210925_130702.jpg',
+  '/images/interests/drum/IMG_20220223_191419.jpg',
 ]
 
 const drawImages = [
@@ -260,6 +229,7 @@ const drawImages = [
   '/images/interests/draw/IMG_20241002_195803.jpg',
   '/images/interests/draw/IMG_20241002_200011.jpg',
   '/images/interests/draw/IMG_20241002_200044.jpg',
+  '/images/interests/draw/IMG_20240417_220815.jpg'
 ]
 
 const puzzleImages = [
@@ -268,6 +238,10 @@ const puzzleImages = [
   '/images/interests/puzzle/IMG_20220523_160018.jpg',
   '/images/interests/puzzle/IMG_20220523_211711.jpg',
   '/images/interests/puzzle/IMG_20240327_084401.jpg',
+  '/images/interests/puzzle/IMG_20250211_204604.jpg',
+  '/images/interests/puzzle/IMG_20250211_204632.jpg',
+  '/images/interests/puzzle/IMG_20240908_174112.jpg',
+  '/images/interests/puzzle/IMG_20240120_215049.jpg'
 ]
 
 const physicsImages = [
@@ -277,6 +251,12 @@ const physicsImages = [
 
 // 活動圖片數據
 const activityImages = [
+  {
+    src: '/images/activitive/CACS.jpg',
+    alt: 'CACS研討會',
+    title: 'CACS研討會',
+    description: '2024/11 參加CACS研討會，發表論文並交流學術經驗'
+  },
   {
     src: '/images/activitive/TDU.jpg',
     alt: 'TDU International Workshop',
