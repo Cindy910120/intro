@@ -1721,14 +1721,16 @@ onBeforeUnmount(() => {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: #fff;
 }
 
 .carousel-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 350px;
   overflow: hidden;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
 }
 
 .photo-slide {
@@ -1742,6 +1744,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px;
 }
 
 .photo-slide.active {
@@ -1749,10 +1752,12 @@ onBeforeUnmount(() => {
 }
 
 .photo-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   object-position: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .photo-indicator {
@@ -1837,9 +1842,13 @@ onBeforeUnmount(() => {
   .popup-content {
     padding: 1.5rem;
   }
+    .carousel-container {
+    height: 280px;
+    padding: 5px;
+  }
   
-  .carousel-container {
-    height: 250px;
+  .photo-slide {
+    padding: 5px;
   }
   
   .dating-info h3,
