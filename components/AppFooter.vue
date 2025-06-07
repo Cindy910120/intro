@@ -33,10 +33,14 @@
   width: 100%;
   background-color: #f8f9fa;
   color: #333;
-  padding: 2.5rem 0 0 0;
-  margin-top: 3rem;
+  padding: 3.5rem 0 2rem 0;
+  margin-top: 0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
   font-family: "LXGW WenKai Mono TC", monospace;
+  min-height: 18vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .footer-content {
@@ -107,5 +111,46 @@
   background-color: #f0f0f0;
   font-size: 1.1rem;
   margin-top: 1.5rem;
+}
+
+/* 響應式設計 */
+@media (min-width: 769px) {
+  .footer {
+    min-height: 17vh;
+    padding: 4rem 0 2rem 0;
+  }
+  
+  .footer-content {
+    padding: 0 3rem;
+  }
+  
+  .footer-section {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    min-height: auto;
+    padding: 2rem 0 1rem 0;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+  
+  .footer-section {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.3rem;
+  }
+  
+  .footer-section p, .footer-section li {
+    font-size: 1rem;
+  }
 }
 </style>
