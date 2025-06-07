@@ -439,6 +439,7 @@ const puzzleImages = [
 const physicsImages = [
   '/images/interests/physics/img-1950542225_1745635199325.jpg',
   '/images/interests/physics/img1657701570_1745568794007.jpeg',
+  '/images/interests/physics/螢幕擷取畫面 2025-06-07 182911.png',
 ]
 
 // 活動圖片數據
@@ -1416,6 +1417,7 @@ onBeforeUnmount(() => {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
 }
 
 .activity-slideshow-container {
@@ -1427,6 +1429,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   background-color: #f8f9fa;
+  border-radius: 8px;
 }
 
 .activity-slide {
@@ -1447,11 +1450,14 @@ onBeforeUnmount(() => {
 }
 
 .activity-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   object-position: center;
   cursor: pointer;
+  display: block;
 }
 
 .activity-slide-counter {
