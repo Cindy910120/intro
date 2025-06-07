@@ -12,14 +12,64 @@
             <h3>學校</h3>
             <p>中原大學</p>
           </div>
-          
-          <div class="info-group">
+            <div class="info-group">
             <h3>學習內容</h3>
             <p>主修電機工程，大學曾修習企管、財金、國貿等科系的課程。</p>
-            <p>熟悉 Vue.js、Nuxt.js、C++、Python 、MATLAB、MATLAB等程式語言，對於 PX4 飛控系統有相關研究經驗。</p>
+            <p>熟悉 Vue.js、Nuxt.js、C++、Python 、MATLAB等程式語言，對於 PX4 飛控系統有相關研究經驗。</p>
             <p>研討會論文：<a href="https://ieeexplore.ieee.org/document/10773309" target="_blank">Quaternion-Based Attitude Tracking Control Design for UAVs</a></p>
-          </div>          <div class="info-group">
-            <h3>參加過的活動</h3>              <!-- 活動圖片展示 -->
+          </div>
+            <div class="info-group">
+            <h3 class="traits-title">個人特質</h3>
+            <div class="personality-traits">
+              <div class="trait-item trait-responsible" data-aos="fade-up" data-aos-delay="100">
+                <div class="trait-icon">🎯</div>
+                <div class="trait-content">
+                  <h4>認真負責</h4>
+                  <p>我會在事情遇到挫折時尋求問題並致力解決它們。雖然實際通過時間利直到成果可算，我會盡力完成每一項任務，確保學習的有效性和成果的品質。</p>
+                </div>
+                <div class="trait-decoration"></div>
+              </div>
+              
+              <div class="trait-item trait-learning" data-aos="fade-up" data-aos-delay="200">
+                <div class="trait-icon">📚</div>
+                <div class="trait-content">
+                  <h4>樂於學習</h4>
+                  <p>我總是樂於探究新的知識和技能，並且願意踏入時間和精力去學習。不僅在本科系的課程中，我也願意跨領域地學習，例如參與數位音樂名師專題、銀行實務管理、企業危機等課程，這些不同領域的學習經歷讓我能夠應用自己的視野，並且提供了更多的思考角度和解決問題的方法。</p>
+                </div>
+                <div class="trait-decoration"></div>
+              </div>
+              
+              <div class="trait-item trait-active" data-aos="fade-up" data-aos-delay="300">
+                <div class="trait-icon">⚡</div>
+                <div class="trait-content">
+                  <h4>做事積極</h4>
+                  <p>我對待工作和學習都非常積極主動，我會主動承擔責任，積極提出問題和解決方案，並且樂於承擔責任。</p>
+                </div>
+                <div class="trait-decoration"></div>
+              </div>
+              
+              <div class="trait-item trait-communication" data-aos="fade-up" data-aos-delay="400">
+                <div class="trait-icon">🤝</div>
+                <div class="trait-content">
+                  <h4>溝通合作</h4>
+                  <p>我期待加不同背景，已有兩張學員證書。三張學長的證書，能運用在未來所學到的能力與人達成傾向的合作與溝通。</p>
+                </div>
+                <div class="trait-decoration"></div>
+              </div>
+              
+              <div class="trait-item trait-analysis" data-aos="fade-up" data-aos-delay="500">
+                <div class="trait-icon">🔍</div>
+                <div class="trait-content">
+                  <h4>資訊處理</h4>
+                  <p>我擅長蒐集各種資訊並加以分析，以便更好地理解問題並找到解決方案。</p>
+                </div>
+                <div class="trait-decoration"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <h3>參加過的活動</h3><!-- 活動圖片展示 -->
             <div class="activities-gallery">
               <div class="activity-item">
                 <div class="interest-image">
@@ -53,7 +103,7 @@
 
     <!-- 新增：專案經歷 -->
     <section class="section projects-section">
-      <h1>專案經歷</h1>
+      <h1>專題經歷</h1>
       
       <div class="projects-container">
         <!-- 專案1 (待填寫) -->
@@ -81,15 +131,6 @@
         </div>
       </div>
     </section>
-    <!-- 新增：未來目標與願景 -->
-    <section class="section goals-section">
-      <h1>未來目標</h1>
-      
-      <div class="goals-container">
-        <!-- 目標與願景內容 (待填寫) -->
-      </div>
-    </section>
-
     <!-- 第二個區域：個人興趣 -->
     <section class="section interests-section">
       <h1>個人興趣</h1>
@@ -205,6 +246,39 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+// 简单的AOS效果实现
+const handleScroll = () => {
+  const elements = document.querySelectorAll('[data-aos]')
+  elements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top
+    const windowHeight = window.innerHeight
+    
+    if (elementTop < windowHeight * 0.8) {
+      element.style.opacity = '1'
+      element.style.transform = 'translateY(0) scale(1)'
+      element.classList.add('aos-animate')
+    }
+  })
+}
+
+// 初始化AOS效果
+const initAOS = () => {
+  const elements = document.querySelectorAll('[data-aos]')
+  elements.forEach((element, index) => {
+    const delay = element.getAttribute('data-aos-delay') || 0
+    element.style.opacity = '0'
+    element.style.transform = 'translateY(30px) scale(0.9)'
+    element.style.transition = `all 0.6s ease ${delay}ms`
+    
+    // 添加一个小延迟以触发动画
+    setTimeout(() => {
+      handleScroll()
+    }, 100)
+  })
+  
+  window.addEventListener('scroll', handleScroll)
+}
 
 // 定義各類型圖片路徑
 const calligraphyImages = [
@@ -445,6 +519,7 @@ const handleKeyDown = (e) => {
 
 // 在元件掛載時啟動輪播和鍵盤事件監聽
 onMounted(() => {
+  initAOS()
   startSlideshow()
   window.addEventListener('keydown', handleKeyDown)
 })
@@ -453,6 +528,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   pauseAllSlideshows()
   window.removeEventListener('keydown', handleKeyDown)
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -513,6 +589,297 @@ onBeforeUnmount(() => {
 .info-group li {
   margin-bottom: 0.5rem;
   line-height: 1.5;
+}
+
+/* 個人特質樣式 */
+.traits-title {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease-in-out infinite;
+  font-size: 1.4rem !important;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem !important;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.personality-traits {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.trait-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+  transform: translateY(0);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.trait-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 3px;
+  background: linear-gradient(45deg, transparent, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: subtract;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  transition: all 0.4s ease;
+}
+
+.trait-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.trait-item:hover::before {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+  background-size: 400% 400%;
+  animation: borderGlow 2s ease infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.trait-icon {
+  font-size: 2.5rem;
+  min-width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.trait-item:hover .trait-icon {
+  transform: rotate(360deg) scale(1.1);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+}
+
+.trait-content {
+  flex: 1;
+}
+
+.trait-content h4 {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.trait-item:hover .trait-content h4 {
+  color: #667eea;
+  transform: translateX(5px);
+}
+
+.trait-content p {
+  margin: 0;
+  line-height: 1.7;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.trait-item:hover .trait-content p {
+  color: #333;
+}
+
+.trait-decoration {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  opacity: 0.1;
+  transition: all 0.3s ease;
+}
+
+.trait-item:hover .trait-decoration {
+  opacity: 0.3;
+  transform: rotate(180deg);
+}
+
+/* 不同特質的主題色彩 */
+.trait-responsible {
+  background: linear-gradient(135deg, #ffeef0 0%, #fff5f5 100%);
+}
+
+.trait-responsible .trait-icon {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.trait-responsible .trait-decoration {
+  background: radial-gradient(circle, #ff6b6b, transparent);
+}
+
+.trait-learning {
+  background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+}
+
+.trait-learning .trait-icon {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.trait-learning .trait-decoration {
+  background: radial-gradient(circle, #4ecdc4, transparent);
+}
+
+.trait-active {
+  background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+}
+
+.trait-active .trait-icon {
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  box-shadow: 0 4px 15px rgba(255, 234, 167, 0.4);
+}
+
+.trait-active .trait-decoration {
+  background: radial-gradient(circle, #ffeaa7, transparent);
+}
+
+.trait-communication {
+  background: linear-gradient(135deg, #e6f3ff 0%, #f0f8ff 100%);
+}
+
+.trait-communication .trait-icon {
+  background: linear-gradient(135deg, #45b7d1 0%, #2980b9 100%);
+  box-shadow: 0 4px 15px rgba(69, 183, 209, 0.3);
+}
+
+.trait-communication .trait-decoration {
+  background: radial-gradient(circle, #45b7d1, transparent);
+}
+
+.trait-analysis {
+  background: linear-gradient(135deg, #f0e6ff 0%, #f8f0ff 100%);
+}
+
+.trait-analysis .trait-icon {
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  box-shadow: 0 4px 15px rgba(162, 155, 254, 0.3);
+}
+
+.trait-analysis .trait-decoration {
+  background: radial-gradient(circle, #a29bfe, transparent);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .trait-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .trait-icon {
+    align-self: center;
+  }
+  
+  .traits-title {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* AOS动画类 */
+.aos-animate {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 额外的动画装饰 */
+.trait-item::after {
+  content: '✨';
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all 0.4s ease;
+  animation: sparkle 3s infinite;
+}
+
+.trait-item:hover::after {
+  opacity: 1;
+  transform: rotate(360deg) scale(1.2);
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(180deg);
+  }
+}
+
+/* 悬停时的特殊效果 */
+.trait-item:hover {
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 标题的额外效果 */
+.traits-title::after {
+  content: '💫';
+  margin-left: 10px;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .interests-container {
