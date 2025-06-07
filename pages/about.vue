@@ -397,6 +397,7 @@
           <p><strong>年齡：</strong>21歲</p>
           <p><strong>星座：</strong>天秤(但自認為是射手+雙魚)</p>
           <p><strong>學歷：</strong>世新大學公共關係暨廣告學系在讀</p>
+          <p><strong>工作：</strong>外商PD，預計七月辭職去打工換宿哈哈哈</p>
           <p><strong>興趣：</strong>一生摯愛打籃球、音樂祭、偶爾會跑山上看星星、出去玩</p>
           <p><strong>個性：</strong>爆肝人、邏輯人、微衝動、直接(情緒都在臉上)、熱情</p>
         </div>
