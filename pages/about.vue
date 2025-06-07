@@ -1023,7 +1023,7 @@ onBeforeUnmount(() => {
 .slideshow-container {
   position: relative;
   width: 100%;
-  height: 750px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   align-items: center;
