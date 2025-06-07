@@ -102,8 +102,39 @@
       </div>    </section>    <!-- 新增：專案經歷 -->
     <section class="section projects-section">
       <h1>專題經歷</h1>
-      
-      <div class="projects-container">        <!-- 畢業專題：四軸無人機軌跡追蹤與飛行控制設計 -->
+      <div class="projects-container">       
+        <div class="project-item">
+          <div class="project-title">
+            <h3>資訊科技與社會關懷期末報告</h3>
+            <span class="project-date">專題</span>
+          </div>
+          <div class="project-team">
+            <p><strong>指導老師：</strong>王佳盈</p>
+            <p><strong>成員：</strong>林芊蓉、王語婕、林敬玲</p>
+          </div>
+          <p class="project-description">
+            首次踏足寶貝中心時，在廚房實作看到了一些可以改進的地方。我們發現在製作飲料的過程中，同學們加入冰塊時，無法變通磅秤讀數，堅持要剛好符合規定的重量，又或者有些同學無法判讀數字，造成作業上的不便。
+        　　為了解決這個問題，我們構想製作一個結合燈號的磅秤，讓他們可以更輕鬆的工作，也不需讓機構的老師時刻監督不會看數字的同學。
+        　　我們以3D列印技術製作磅秤外殼，結合Arduino esp32及手機操作磅秤，使用者可以輕鬆更改設定，不需更改程式。
+            磅秤基本上延續去年的設計，保留主結構及LCD螢幕顯示方式，板子則由Arduino UNO改用esp32，讓使用者使用手機的藍芽功能連接到esp32，更直觀的直接輸入所需重量及誤差值，不需使用去年的旋鈕方式更改重量設定，
+　　        我們也重新更改了磅秤的外殼設計，將磅秤體積縮小，更加方便使用與攜帶，也將開蓋設計更改，避免了原版設計的外殼會割傷手的可能。
+          </p>
+          <div class="project-tech">
+           <span class="tech-tag">服務學習</span>
+            <span class="tech-tag">Arduino</span>
+            <span class="tech-tag">產品設計</span>
+          </div>
+          <div class="project-documents">
+            <h4>相關文件：</h4>
+            <div class="document-links">
+              <a href="/documents/資訊科技與社會關懷期末報告.pdf" target="_blank" class="document-link">
+                <span class="document-icon">📊</span>
+                專題簡報 (PDF)
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 畢業專題：四軸無人機軌跡追蹤與飛行控制設計 -->
         <div class="project-item">
           <div class="project-title">
             <h3>四軸無人機軌跡追蹤與飛行控制設計</h3>
