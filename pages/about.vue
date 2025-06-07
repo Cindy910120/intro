@@ -6,7 +6,7 @@
       
       <div class="profile-container">
         <div class="profile-text">
-          <h2>林芊蓉</h2>
+          <h2>姓名 : 林芊蓉</h2>
           
           <div class="info-group">
             <h3>學校</h3>
@@ -15,57 +15,41 @@
           
           <div class="info-group">
             <h3>學習內容</h3>
-            <p>主修電機工程，專注於嵌入式系統開發與網頁前端技術。</p>
-            <p>熟悉 Vue.js、Nuxt.js、C++、Python 等程式語言，對於機器人控制與 PX4 飛控系統有相關研究經驗。</p>
-          </div>
-          
-          <div class="info-group">
-            <h3>參加過的活動</h3>
+            <p>主修電機工程，大學曾修習企管、財金、國貿等科系的課程。</p>
+            <p>熟悉 Vue.js、Nuxt.js、C++、Python 、MATLAB、MATLAB等程式語言，對於 PX4 飛控系統有相關研究經驗。</p>
+            <p>研討會論文：<a href="https://ieeexplore.ieee.org/document/10773309" target="_blank">Quaternion-Based Attitude Tracking Control Design for UAVs</a></p>
+          </div>          <div class="info-group">
+            <h3>參加過的活動</h3>              <!-- 活動圖片展示 -->
+            <div class="activities-gallery">
+              <div class="activity-item">
+                <div class="interest-image">
+                  <div class="slideshow-container">
+                    <div v-for="(image, index) in activityImages" :key="'activity-'+index" class="slide" :class="{ active: currentIndexes.activities === index }">
+                      <img :src="image.src" :alt="image.alt" 
+                           @click="openLightbox('activities', index)" />
+                    </div>
+                    <div class="slide-counter">{{ currentIndexes.activities + 1 }}/{{ activityImages.length }}</div>
+                    <button class="slide-nav prev" @click="prevSlide('activities')">&lt;</button>
+                    <button class="slide-nav next" @click="nextSlide('activities')">&gt;</button>
+                  </div>
+                </div>
+                <div class="activity-description">
+                  <h4>{{ activityImages[currentIndexes.activities]?.title }}</h4>
+                  <p>{{ activityImages[currentIndexes.activities]?.description }}</p>
+                </div>
+              </div>
+            </div>
+            
             <ul>
-              <li>2024 </li>
-              <li>2024 </li>
-              <li>2023 </li>
-              <li>2023 </li>
+              <li>2024/11 CACS研討會</li>
+              <li>112-1學期 修習「資訊科技與輔具應用」運用自己的所學參與校外的服務學習</li>
+              <li>112/7/30 ~ 112/8/5 參與TDU International Workshop</li>
+              <li>111-2學期 參加綠基會活動</li>
+              <li>2021/8 參加卡內基(帶領大學部)學長結業第三次</li>
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- 新增：專業技能展示區 -->
-    <section class="section skills-section">
-      <h1>專業技能</h1>
-      
-      <div class="skills-container">
-        <div class="skill-category">
-          <h3>前端開發</h3>
-          <div class="skill-items">
-            <!-- 前端技能內容 (待填寫) -->
-            <div class="skill-item">
-              <div class="skill-name">HTML/CSS</div>
-              <div class="skill-bar">
-                <div class="skill-level" style="width: 90%"></div>
-              </div>
-            </div>
-            <!-- 更多前端技能 (待填寫) -->
-          </div>
-        </div>
-        
-        <div class="skill-category">
-          <h3>嵌入式系統</h3>
-          <div class="skill-items">
-            <!-- 嵌入式系統技能內容 (待填寫) -->
-          </div>
-        </div>
-        
-        <div class="skill-category">
-          <h3>程式語言</h3>
-          <div class="skill-items">
-            <!-- 程式語言技能內容 (待填寫) -->
-          </div>
-        </div>
-      </div>
-    </section>
+      </div>    </section>
 
     <!-- 新增：專案經歷 -->
     <section class="section projects-section">
@@ -146,20 +130,18 @@
     <section class="section interests-section">
       <h1>個人興趣</h1>
       
-      <div class="interests-container">
-        <!-- 書法 -->
+      <div class="interests-container">        <!-- 書法 -->
         <div class="interest-item">
-          <div class="interest-image">
-            <div class="slideshow-container">
-              <div v-for="(image, index) in calligraphyImages" :key="'cal-'+index" class="slide" :class="{ active: currentIndexes.calligraphy === index }">
+          <div class="activity-image-compact">
+            <div class="activity-slideshow-container">
+              <div v-for="(image, index) in calligraphyImages" :key="'cal-'+index" class="activity-slide" :class="{ active: currentIndexes.calligraphy === index }">
                 <img :src="image" :alt="'書法作品 ' + (index + 1)" 
-                     :class="getImageRotationClass('calligraphy', index)"
                      @click="openLightbox('calligraphy', index)" />
               </div>
-              <div class="slide-counter">{{ currentIndexes.calligraphy + 1 }}/{{ calligraphyImages.length }}</div>
+              <div class="activity-slide-counter">{{ currentIndexes.calligraphy + 1 }}/{{ calligraphyImages.length }}</div>
               <!-- 添加左右切換按鈕 -->
-              <button class="slide-nav prev" @click="prevSlide('calligraphy')">&lt;</button>
-              <button class="slide-nav next" @click="nextSlide('calligraphy')">&gt;</button>
+              <button class="activity-slide-nav prev" @click="prevSlide('calligraphy')">&lt;</button>
+              <button class="activity-slide-nav next" @click="nextSlide('calligraphy')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -167,19 +149,17 @@
             <p>從小學習書法已有十年，擅長楷書。曾在書法比賽中獲獎，也會在閒暇時間練習書寫，筆墨之間的寧靜時光。</p>
           </div>
         </div>
-        
-        <!-- 爵士鼓 -->
+          <!-- 爵士鼓 -->
         <div class="interest-item">
-          <div class="interest-image">
-            <div class="slideshow-container">
-              <div v-for="(image, index) in drumImages" :key="'drum-'+index" class="slide" :class="{ active: currentIndexes.drum === index }">
+          <div class="activity-image-compact">
+            <div class="activity-slideshow-container">
+              <div v-for="(image, index) in drumImages" :key="'drum-'+index" class="activity-slide" :class="{ active: currentIndexes.drum === index }">
                 <img :src="image" :alt="'爵士鼓演奏 ' + (index + 1)" 
-                     :class="getImageRotationClass('drum', index)" 
                      @click="openLightbox('drum', index)" />
               </div>
-              <div class="slide-counter">{{ currentIndexes.drum + 1 }}/{{ drumImages.length }}</div>
-              <button class="slide-nav prev" @click="prevSlide('drum')">&lt;</button>
-              <button class="slide-nav next" @click="nextSlide('drum')">&gt;</button>
+              <div class="activity-slide-counter">{{ currentIndexes.drum + 1 }}/{{ drumImages.length }}</div>
+              <button class="activity-slide-nav prev" @click="prevSlide('drum')">&lt;</button>
+              <button class="activity-slide-nav next" @click="nextSlide('drum')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -187,20 +167,17 @@
             <p>大學開始學習爵士鼓，現已有三年經驗。喜歡透過節奏表達自我，釋放壓力。</p>
             <p>曾參與校內樂團表演，擅長演奏流行音樂與爵士樂風格的曲目。</p>
           </div>
-        </div>
-
-        <!-- 繪畫 -->
+        </div>        <!-- 繪畫 -->
         <div class="interest-item">
-          <div class="interest-image">
-            <div class="slideshow-container">
-              <div v-for="(image, index) in drawImages" :key="'draw-'+index" class="slide" :class="{ active: currentIndexes.draw === index }">
+          <div class="activity-image-compact">
+            <div class="activity-slideshow-container">
+              <div v-for="(image, index) in drawImages" :key="'draw-'+index" class="activity-slide" :class="{ active: currentIndexes.draw === index }">
                 <img :src="image" :alt="'繪畫作品 ' + (index + 1)" 
-                     :class="getImageRotationClass('draw', index)" 
                      @click="openLightbox('draw', index)" />
               </div>
-              <div class="slide-counter">{{ currentIndexes.draw + 1 }}/{{ drawImages.length }}</div>
-              <button class="slide-nav prev" @click="prevSlide('draw')">&lt;</button>
-              <button class="slide-nav next" @click="nextSlide('draw')">&gt;</button>
+              <div class="activity-slide-counter">{{ currentIndexes.draw + 1 }}/{{ drawImages.length }}</div>
+              <button class="activity-slide-nav prev" @click="prevSlide('draw')">&lt;</button>
+              <button class="activity-slide-nav next" @click="nextSlide('draw')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -208,20 +185,17 @@
             <p>喜歡透過繪畫表達創意與想法，擅長素描和水彩畫。</p>
             <p>閒暇時會畫一些生活中的風景和物件，記錄生活中的美好瞬間。</p>
           </div>
-        </div>
-
-        <!-- 拼圖 -->
+        </div>        <!-- 拼圖 -->
         <div class="interest-item">
-          <div class="interest-image">
-            <div class="slideshow-container">
-              <div v-for="(image, index) in puzzleImages" :key="'puzzle-'+index" class="slide" :class="{ active: currentIndexes.puzzle === index }">
+          <div class="activity-image-compact">
+            <div class="activity-slideshow-container">
+              <div v-for="(image, index) in puzzleImages" :key="'puzzle-'+index" class="activity-slide" :class="{ active: currentIndexes.puzzle === index }">
                 <img :src="image" :alt="'拼圖作品 ' + (index + 1)" 
-                     :class="getImageRotationClass('puzzle', index)" 
                      @click="openLightbox('puzzle', index)" />
               </div>
-              <div class="slide-counter">{{ currentIndexes.puzzle + 1 }}/{{ puzzleImages.length }}</div>
-              <button class="slide-nav prev" @click="prevSlide('puzzle')">&lt;</button>
-              <button class="slide-nav next" @click="nextSlide('puzzle')">&gt;</button>
+              <div class="activity-slide-counter">{{ currentIndexes.puzzle + 1 }}/{{ puzzleImages.length }}</div>
+              <button class="activity-slide-nav prev" @click="prevSlide('puzzle')">&lt;</button>
+              <button class="activity-slide-nav next" @click="nextSlide('puzzle')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -229,20 +203,17 @@
             <p>享受拼圖帶來的挑戰與完成時的成就感。</p>
             <p>常常選擇千片以上的複雜拼圖，透過耐心和專注力一步步完成。</p>
           </div>
-        </div>
-
-        <!-- 玄學研究 -->
+        </div>        <!-- 玄學研究 -->
         <div class="interest-item">
-          <div class="interest-image">
-            <div class="slideshow-container">
-              <div v-for="(image, index) in physicsImages" :key="'physics-'+index" class="slide" :class="{ active: currentIndexes.physics === index }">
+          <div class="activity-image-compact">
+            <div class="activity-slideshow-container">
+              <div v-for="(image, index) in physicsImages" :key="'physics-'+index" class="activity-slide" :class="{ active: currentIndexes.physics === index }">
                 <img :src="image" :alt="'玄學研究 ' + (index + 1)" 
-                     :class="getImageRotationClass('physics', index)" 
                      @click="openLightbox('physics', index)" />
               </div>
-              <div class="slide-counter">{{ currentIndexes.physics + 1 }}/{{ physicsImages.length }}</div>
-              <button class="slide-nav prev" @click="prevSlide('physics')">&lt;</button>
-              <button class="slide-nav next" @click="nextSlide('physics')">&gt;</button>
+              <div class="activity-slide-counter">{{ currentIndexes.physics + 1 }}/{{ physicsImages.length }}</div>
+              <button class="activity-slide-nav prev" @click="prevSlide('physics')">&lt;</button>
+              <button class="activity-slide-nav next" @click="nextSlide('physics')">&gt;</button>
             </div>
           </div>
           <div class="interest-description">
@@ -256,7 +227,7 @@
     <!-- 圖片放大檢視元件 -->
     <div v-if="lightbox.show" class="lightbox" @click="closeLightbox">
       <div class="lightbox-content" @click.stop>
-        <img :src="lightbox.image" :alt="lightbox.alt" :class="getImageRotationClass(lightbox.type, lightbox.index)" />
+        <img :src="lightbox.image" :alt="lightbox.alt" />
         <button class="lightbox-close" @click="closeLightbox">✕</button>
         <div class="lightbox-nav">
           <button class="lightbox-prev" @click.stop="lightboxPrev">&lt;</button>
@@ -282,7 +253,6 @@ const calligraphyImages = [
 
 const drumImages = [
   '/images/interests/drum/IMG_20220219_141637.jpg',
-  '/images/interests/drum/IMG_20220223_191419.jpg',
 ]
 
 const drawImages = [
@@ -305,13 +275,42 @@ const physicsImages = [
   '/images/interests/physics/img1657701570_1745568794007.jpeg',
 ]
 
+// 活動圖片數據
+const activityImages = [
+  {
+    src: '/images/activitive/TDU.jpg',
+    alt: 'TDU International Workshop',
+    title: 'TDU International Workshop',
+    description: '112/7/30 ~ 112/8/5 參與TDU International Workshop，參與無人機相關課程與實作'
+  },
+  {
+    src: '/images/activitive/資訊科技輔具.jpg',
+    alt: '資訊科技與輔具應用',
+    title: '資訊科技與輔具應用',
+    description: '112-1學期修習課程，運用所學參與校外服務學習'
+  },
+  {
+    src: '/images/activitive/綠基會.jpg',
+    alt: '綠基會活動',
+    title: '綠基會活動',
+    description: '111-2學期參加綠基會活動，修習關於電力相關課程實作'
+  },
+  {
+    src: '/images/activitive/卡內基.jpg',
+    alt: '卡內基訓練',
+    title: '卡內基訓練',
+    description: '2021/8 參加卡內基訓練，提升領導與溝通能力'
+  }
+]
+
 // 儲存每個類別當前顯示的圖片索引
 const currentIndexes = ref({
   calligraphy: 0,
   drum: 0,
   draw: 0,
   puzzle: 0,
-  physics: 0
+  physics: 0,
+  activities: 0
 })
 
 // 圖片放大檢視狀態
@@ -330,7 +329,8 @@ const getImagesArray = (type) => {
     drum: drumImages,
     draw: drawImages,
     puzzle: puzzleImages,
-    physics: physicsImages
+    physics: physicsImages,
+    activities: activityImages.map(item => item.src)
   }
   return imageArrays[type] || []
 }
@@ -435,6 +435,12 @@ const startSlideshow = () => {
       currentIndexes.value.physics = (currentIndexes.value.physics + 1) % physicsImages.length
     }
   }, intervalTime)
+  
+  slideshowIntervals.activities = setInterval(() => {
+    if (!lightbox.value.show) {
+      currentIndexes.value.activities = (currentIndexes.value.activities + 1) % activityImages.length
+    }
+  }, intervalTime)
 }
 
 // 暫停所有輪播
@@ -444,40 +450,7 @@ const pauseAllSlideshows = () => {
   })
 }
 
-// 根據圖片類型和索引返回適當的旋轉類別
-const getImageRotationClass = (type, index) => {
-  // 預設所有圖片不需要旋轉
-  const rotations = {
-    // 書法圖片的旋轉
-    calligraphy: {
-      0: 'rotate-90', // 第一張圖片需要旋轉90度
-      2: 'rotate-270', // 第三張圖片需要旋轉270度
-      4: 'rotate-90', // 第五張圖片需要旋轉90度
-    },
-    // 爵士鼓圖片的旋轉
-    drum: {
-      1: 'rotate-90', // 第二張圖片需要旋轉90度
-    },
-    // 繪畫圖片的旋轉
-    draw: {
-      2: 'rotate-270', // 第三張圖片需要旋轉270度
-    },
-    // 拼圖圖片的旋轉
-    puzzle: {
-      0: 'rotate-90', // 第一張圖片需要旋轉90度
-      3: 'rotate-270', // 第四張圖片需要旋轉270度
-    },
-    // 物理研究圖片的旋轉
-    physics: {} // 物理研究圖片不需要旋轉
-  }
-  
-  // 檢查是否有特定圖片需要旋轉
-  if (rotations[type] && rotations[type][index]) {
-    return `${rotations[type][index]} rotated`
-  }
-  
-  return '' // 沒有指定旋轉的圖片返回空字符串
-}
+
 
 // 監聽ESC鍵關閉放大檢視
 const handleKeyDown = (e) => {
@@ -584,7 +557,7 @@ onBeforeUnmount(() => {
 .slideshow-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 750px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -617,13 +590,14 @@ onBeforeUnmount(() => {
 
 .slide-counter {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.6);
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .interest-description {
@@ -644,7 +618,7 @@ onBeforeUnmount(() => {
 /* 響應式設計 */
 @media (max-width: 768px) {
   .interest-item {
-    flex-direction: column;
+  flex-direction: column;
     text-align: center;
   }
   
@@ -653,28 +627,9 @@ onBeforeUnmount(() => {
   }
 }
 
-.rotate-90, .rotate-270 {
-  width: auto !important;
-  height: auto !important;
-  max-height: 300px;
-  max-width: 300px;
-}
-
-.rotate-90 {
-  transform: rotate(90deg);
-}
-
-.rotate-180 {
-  transform: rotate(180deg);
-}
-
-.rotate-270 {
-  transform: rotate(270deg);
-}
-
-/* 確保旋轉圖片的容器適應旋轉內容 */
-.slide img.rotated {
-  object-fit: contain; /* 確保旋轉後圖片完整顯示 */
+/* 確保圖片完整顯示 */
+.slide img {
+  object-fit: contain;
   max-height: 100%;
   max-width: 100%;
 }
@@ -688,9 +643,9 @@ onBeforeUnmount(() => {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 45px;
+  height: 45px;
+  font-size: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -799,63 +754,7 @@ onBeforeUnmount(() => {
   cursor: pointer;
 }
 
-/* 調整放大檢視中的旋轉圖片樣式 */
-.lightbox-content .rotate-90,
-.lightbox-content .rotate-270 {
-  max-height: 80vh;
-  max-width: 80vw;
-}
-
 /* 新增的樣式 */
-/* 專業技能區塊樣式 */
-.skills-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.skill-category {
-  margin-bottom: 1.5rem;
-}
-
-.skill-category h3 {
-  color: #34495e;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 0.5rem;
-}
-
-.skill-items {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.skill-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.skill-name {
-  flex: 0 0 120px;
-  font-weight: 600;
-}
-
-.skill-bar {
-  flex: 1;
-  height: 10px;
-  background-color: #eee;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.skill-level {
-  height: 100%;
-  background: linear-gradient(90deg, #41b883, #35495e);
-  border-radius: 5px;
-}
-
 /* 專案經歷樣式 */
 .projects-container {
   display: flex;
@@ -969,25 +868,146 @@ onBeforeUnmount(() => {
   background-color: #34495e;
 }
 
-/* 響應式調整 */
+/* 活動圖片展示樣式 - 緊湊格式 */
+.activities-gallery {
+  margin: 1rem 0 2rem 0;
+}
+
+.activity-item {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.activity-image-compact {
+  flex: 0 0 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activity-slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+}
+
+.activity-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-slide.active {
+  opacity: 1;
+}
+
+.activity-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+
+.activity-slide-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.activity-slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  opacity: 0;
+  z-index: 10;
+}
+
+.activity-slideshow-container:hover .activity-slide-nav {
+  opacity: 0.8;
+}
+
+.activity-slide-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.activity-slide-nav.prev {
+  left: 8px;
+}
+
+.activity-slide-nav.next {
+  right: 8px;
+}
+
+.activity-description {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.activity-description h4 {
+  color: #41b883;
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.activity-description p {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 響應式設計 */
 @media (max-width: 768px) {
-  .project-title {
+  .activity-item {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    text-align: center;
+    gap: 1rem;
   }
   
-  .skill-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .skill-name {
-    margin-bottom: 0.5rem;
-  }
-  
-  .skill-bar {
+  .activity-image-compact {
+    margin: 0 auto;
+    flex: none;
     width: 100%;
+    max-width: 350px;
+  }
+  
+  .activity-description {
+    padding-left: 0;
+    text-align: center;
   }
 }
 </style>
