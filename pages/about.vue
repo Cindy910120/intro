@@ -99,35 +99,121 @@
             </ul>
           </div>
         </div>
-      </div>    </section>
-
-    <!-- 新增：專案經歷 -->
+      </div>    </section>    <!-- 新增：專案經歷 -->
     <section class="section projects-section">
       <h1>專題經歷</h1>
       
-      <div class="projects-container">
-        <!-- 專案1 (待填寫) -->
+      <div class="projects-container">        <!-- 畢業專題：四軸無人機軌跡追蹤與飛行控制設計 -->
         <div class="project-item">
           <div class="project-title">
-            <h3><!-- 專案名稱 (待填寫) --></h3>
-            <span class="project-date"><!-- 日期 (待填寫) --></span>
+            <h3>四軸無人機軌跡追蹤與飛行控制設計</h3>
+            <span class="project-date">大學畢業專題</span>
+          </div>
+          <div class="project-team">
+            <p><strong>指導老師：</strong>游仁德</p>
+            <p><strong>成員：</strong>林芊蓉</p>
           </div>
           <p class="project-description">
-            <!-- 專案描述 (待填寫) -->
-          </p>
-          <div class="project-tech">
-            <!-- 使用技術標籤 (待填寫) -->
+            隨著科技進步，無人機技術成為引人注目的發展領域。本研究的動機在於深入了解無人
+            機的基本運作內容，探討其在不同行業的應用潛力。首先，理解無人機的基本原理有助於深
+            入了解其飛行能力、操控性以及在各種環境中的適應性。其次，研究無人機在不同行業中的
+            應用案例有助於揭示其在解決現實問題、提高效率和降低成本方面的實際效益。同時，隨著
+            人工智慧算法的發展，無人機在自主性和智能性方面的應用成為研究的重要方向。 
+            本研究的目的在於深入了解無人機的運動方式，透過運動方程式建模實現穩定的飛行狀
+            態，並在仿真平台上模擬數據。研究將聚焦於內迴路和外迴路的控制系統，內迴路控制飛行
+            器的姿態，外迴路負責整體運動方程。已有的研究成果和算法將被借鑑，特別是基於特殊正
+            交群SO(3)的姿態表示。此外，研究還將關注無人機的編程和開發，探討如何利用PX4仿真
+            平台實現無人機的自動化控制和任務執行，進一步推動該技術的發展。
+          </p>          <div class="project-tech">
+            <span class="tech-tag">PX4飛控系統</span>
+            <span class="tech-tag">MATLAB/Simulink</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">控制理論</span>
+            <span class="tech-tag">無人機技術</span>
+          </div>
+          <div class="project-documents">
+            <h4>相關文件：</h4>
+            <div class="document-links">
+              <a href="/documents/四軸無人機專題論文.pdf" target="_blank" class="document-link">
+                <span class="document-icon">📄</span>
+                專題論文 (PDF)
+              </a>
+              <a href="/documents/四軸無人機簡報.pdf" target="_blank" class="document-link">
+                <span class="document-icon">📊</span>
+                專題海報 (PDF)
+              </a>
+            </div>
           </div>
         </div>
         
-        <!-- 專案2 (待填寫) -->
+        <!-- 專題：電腦架 -->
         <div class="project-item">
-          <!-- 專案內容 (待填寫) -->
+          <div class="project-title">
+            <h3>電腦架設計專題</h3>
+            <span class="project-date">專題作品</span>
+          </div>
+          <div class="project-team">
+            <p><strong>指導老師：</strong>廖裕評 </p>
+            <p><strong>成員：</strong>林芊蓉、黃芷宸</p>
+          </div>
+          <p class="project-description">
+            現今長期使用電腦，已經成為人們生活的一部分，人們選擇電腦架主要為三個原因，分
+            別為增加筆記型電腦散熱空間、增加桌面利用空間與減少姿勢不良困擾，先來說第一點，長
+            期使用電腦，會使得電腦溫度升高，如果沒有適當的散熱方式，當CPU 溫度太高，將會觸
+            發降低效能以避免損壞處理器的機制，使用電腦架能始的電腦更容易散熱。再來，由於使用
+            了電腦架，桌子的使用空間會比把電腦放在桌上使用時的空間大，我們可以更有效的運用桌
+            子去做其他事情。最後，長時間坐在電腦桌前用筆記型電腦工作，肩頸會不自覺的就開始痠
+            痛，其實是因為螢幕高度與正常平視的角度不同，在使用筆記型電腦時，脖子都會有稍微需
+            要低下來的動作，長期下來便導致肩頸方面的困擾。因此有一個適合自己且方便的電腦架是
+            很重要的。
+          </p>          <div class="project-tech">
+            <span class="tech-tag">微處理機</span>
+          </div>
+          <div class="project-documents">
+            <h4>相關文件：</h4>
+            <div class="document-links">
+              <a href="/documents/電腦架設計專題報告.pdf" target="_blank" class="document-link">
+                <span class="document-icon">📄</span>
+                專題報告 (PDF)
+              </a>
+            </div>
+          </div>
         </div>
         
-        <!-- 專案3 (待填寫) -->
+        <!-- 專題：磅秤與杯墊 -->
         <div class="project-item">
-          <!-- 專案內容 (待填寫) -->
+          <div class="project-title">
+            <h3>智能磅秤與杯墊系統</h3>
+            <span class="project-date">專題作品</span>
+          </div>
+          <div class="project-team">
+            <p><strong>指導老師：</strong>王佳盈  </p>
+            <p><strong>成員：</strong>林芊蓉、張智翔、蔡秉霖 </p>
+          </div>
+          <p class="project-description">
+            在參與課程接觸服務學習後，我們深刻體會到如何運用所學知識來協助他人。透過與中
+            心的互動，我們了解到他們的需求，並提出了一個設計方案：製作一個磅秤與杯墊，以使他
+            們的工作更輕鬆 
+            了解他們的需求後，我們需要設計一個能讓他們方便觀察、使用的輔具，所設計的杯墊
+            貼和他們所使用的玻璃杯與馬克杯，可以使杯子更不易滑落，相比原本的杯墊，比較不容易
+            在上菜的時候產生意外。至於我們設計的磅秤，我們經過多次與中心老師的溝通和確認，設
+            計了易於辨識的數字顯示方式。此外，我們還加上LED，以紅綠燈的方式提示使用者何時
+            停止稱重，即使無法辨識數字或有困惑的使用者也能透過LED二次確認，或直接得知何時
+            停止稱重。 
+          </p>          <div class="project-tech">
+            <span class="tech-tag">服務學習</span>
+            <span class="tech-tag">Arduino</span>
+            <span class="tech-tag">產品設計</span>
+          </div>
+          <div class="project-documents">
+            <h4>相關文件：</h4>
+            <div class="document-links">
+              <a href="/documents/智能磅秤與杯墊系統簡報.pdf" target="_blank" class="document-link">
+                <span class="document-icon">📊</span>
+                專題簡報 (PDF)
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1128,6 +1214,25 @@ onBeforeUnmount(() => {
   font-size: 0.9rem;
 }
 
+.project-team {
+  background-color: #e8f4f8;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #41b883;
+}
+
+.project-team p {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.project-team strong {
+  color: #41b883;
+  font-weight: 600;
+}
+
 .project-tech {
   display: flex;
   flex-wrap: wrap;
@@ -1141,6 +1246,53 @@ onBeforeUnmount(() => {
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.9rem;
+}
+
+.project-documents {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+}
+
+.project-documents h4 {
+  margin: 0 0 0.8rem 0;
+  color: #007bff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.document-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.document-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background-color: white;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+}
+
+.document-link:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.document-icon {
+  font-size: 1.2rem;
 }
 
 /* 教育背景時間線樣式 */
