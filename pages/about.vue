@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <!-- 彈跳視窗觸發按鈕 - 固定在右側 -->
+    <div class="popup-trigger-container">
+      <button class="popup-trigger-btn" @click="openPopup" title="徵男友資訊">
+        <span class="trigger-icon">💕</span>
+        <span class="trigger-text">幫徵男友</span>
+      </button>
+    </div>
+
     <!-- 第一個區域：自我介紹 -->
     <section class="section intro-section">
       <h1>自我介紹</h1>
@@ -358,12 +366,105 @@
           <button class="lightbox-next" @click.stop="lightboxNext">&gt;</button>
         </div>
       </div>
-    </div>
+    </div>    <!-- PopupModal 組件 -->
+    <PopupModal 
+      v-model="showPopup"
+      title="徵男友"
+      :show-footer="true"
+      confirm-text="我有興趣 💕"
+      cancel-text="下次再說"
+      @confirm="handlePopupConfirm"
+    >
+      <div class="popup-content">
+        <!-- 照片輪播區域 -->
+        <div class="photo-carousel">
+          <div class="carousel-container">
+            <div 
+              v-for="(photo, index) in popupPhotos" 
+              :key="index"
+              class="photo-slide"
+              :class="{ active: currentPhotoIndex === index }"
+            >
+              <img :src="photo.src" :alt="photo.alt" />
+            </div>
+            <div class="photo-indicator">
+              {{ currentPhotoIndex + 1 }} / {{ popupPhotos.length }}
+            </div>
+          </div>
+        </div>        <div class="dating-info">
+          <h3>💖 關於我</h3>
+          <p><strong>綽號：</strong>世新金冬天</p>
+          <p><strong>年齡：</strong>21歲</p>
+          <p><strong>星座：</strong>天秤(但自認為是射手+雙魚)</p>
+          <p><strong>學歷：</strong>世新大學公共關係暨廣告學系在讀</p>
+          <p><strong>興趣：</strong>一生摯愛打籃球、音樂祭、偶爾會跑山上看星星、出去玩</p>
+          <p><strong>個性：</strong>爆肝人、邏輯人、微衝動、直接(情緒都在臉上)、熱情</p>
+        </div>
+        
+        <div class="contact-section">
+          <h3>📧 聯絡方式</h3>
+          <p><strong>ig：</strong><a href="https://www.instagram.com/im__yannnnnnn?igsh=MTJ1cWVveTNsMXE4Nw=="target="_blank">查看ig</a></p>
+        </div>
+        
+        <div class="requirements">
+          <h3>💕 理想型</h3>
+          <p>對未來有想像、有目標，你如果要軟爛也要軟爛的合理。喜歡熱情的人，可以浪漫一點，我沒體驗過</p>
+        </div>
+      </div>
+    </PopupModal>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import PopupModal from '@/components/PopupModal.vue'
+
+// PopupModal 相關狀態
+const showPopup = ref(false)
+const currentPhotoIndex = ref(0)
+let photoCarouselInterval = null
+
+// 彈跳視窗照片陣列
+const popupPhotos = [
+  { src: '/images/popup/865798.jpg', alt: '個人照片 1' },
+  { src: '/images/popup/865799_0.jpg', alt: '個人照片 2' },
+  { src: '/images/popup/865800_0.jpg', alt: '個人照片 3' }
+]
+
+// PopupModal 相關方法
+const openPopup = () => {
+  showPopup.value = true
+  startPhotoCarousel()
+}
+
+const handlePopupConfirm = () => {
+  showPopup.value = false
+  stopPhotoCarousel()
+  // 跳轉到IG頁面
+  window.open('https://www.instagram.com/im__yannnnnnn?igsh=MTJ1cWVveTNsMXE4Nw==', '_blank')
+}
+
+// 照片輪播功能
+const startPhotoCarousel = () => {
+  photoCarouselInterval = setInterval(() => {
+    currentPhotoIndex.value = (currentPhotoIndex.value + 1) % popupPhotos.length
+  }, 3000) // 每3秒切換一張照片
+}
+
+const stopPhotoCarousel = () => {
+  if (photoCarouselInterval) {
+    clearInterval(photoCarouselInterval)
+    photoCarouselInterval = null
+  }
+}
+
+// 監聽彈跳視窗關閉
+watch(showPopup, (newValue) => {
+  if (!newValue) {
+    stopPhotoCarousel()
+    currentPhotoIndex.value = 0 // 重置照片索引
+  }
+})
 
 // 简单的AOS效果实现
 const handleScroll = () => {
@@ -491,8 +592,7 @@ const lightbox = ref({
   show: false,
   image: '',
   alt: '',
-  type: '',
-  index: 0
+  type: '',  index: 0
 })
 
 // 獲取指定類型的圖片陣列
@@ -623,8 +723,6 @@ const pauseAllSlideshows = () => {
   })
 }
 
-
-
 // 監聽ESC鍵關閉放大檢視
 const handleKeyDown = (e) => {
   if (e.key === 'Escape' && lightbox.value.show) {
@@ -646,6 +744,7 @@ onMounted(() => {
 // 在元件卸載前清除計時器和事件監聽器
 onBeforeUnmount(() => {
   pauseAllSlideshows()
+  stopPhotoCarousel() // 清除照片輪播計時器
   window.removeEventListener('keydown', handleKeyDown)
   window.removeEventListener('scroll', handleScroll)
 })
@@ -981,7 +1080,7 @@ onBeforeUnmount(() => {
   }
 }
 
-/* 悬停时的特殊效果 */
+/* 懸停時的特殊效果 */
 .trait-item:hover {
   box-shadow: 
     0 12px 40px rgba(0, 0, 0, 0.15),
@@ -989,7 +1088,7 @@ onBeforeUnmount(() => {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* 标题的额外效果 */
+/* 標題的額外效果 */
 .traits-title::after {
   content: '💫';
   margin-left: 10px;
@@ -1529,6 +1628,233 @@ onBeforeUnmount(() => {
 
 /* 響應式設計 */
 @media (max-width: 768px) {
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .activity-image-compact {
+    margin: 0 auto;
+    flex: none;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .activity-description {
+    padding-left: 0;
+    text-align: center;
+  }
+}
+
+/* PopupModal 樣式 */
+.popup-trigger-container {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.popup-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: heartbeat 2s infinite;
+}
+
+.popup-trigger-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+  background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+}
+
+.popup-trigger-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.trigger-icon {
+  font-size: 1.2rem;
+  animation: heartPulse 1.5s infinite;
+}
+
+.trigger-text {
+  font-family: "LXGW WenKai Mono TC", monospace;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.7);
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* 彈跳視窗內容樣式 */
+.popup-content {
+  padding: 2rem;
+  color: #2c3e50;
+}
+
+/* 照片輪播樣式 */
+.photo-carousel {
+  margin-bottom: 2rem;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+}
+
+.photo-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-slide.active {
+  opacity: 1;
+}
+
+.photo-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.photo-indicator {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 內容區塊樣式 */
+.dating-info, .contact-section, .requirements {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 100%);
+  border-radius: 12px;
+  border-left: 4px solid #ff69b4;
+  transition: all 0.3s ease;
+}
+
+.dating-info:hover, .contact-section:hover, .requirements:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+}
+
+.dating-info h3, .contact-section h3, .requirements h3 {
+  color: #ff1493;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.dating-info p, .contact-section p, .requirements p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.dating-info strong, .contact-section strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.contact-section a {
+  color: #ff1493;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.contact-section a:hover {
+  background: rgba(255, 20, 147, 0.1);
+  text-decoration: underline;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .popup-trigger-container {
+    top: auto;
+    bottom: 2rem;
+    right: 1rem;
+    transform: none;
+  }
+  
+  .popup-trigger-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .trigger-text {
+    display: none;
+  }
+  
+  .popup-content {
+    padding: 1.5rem;
+  }
+  
+  .carousel-container {
+    height: 250px;
+  }
+  
+  .dating-info h3,
+  .contact-section h3,
+  .requirements h3 {
+    font-size: 1.1rem;
+  }
+  
+  .dating-info,
+  .contact-section,
+  .requirements {
+    padding: 1rem;
+  }
+  
   .activity-item {
     flex-direction: column;
     text-align: center;
