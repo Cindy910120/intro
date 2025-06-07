@@ -367,7 +367,7 @@
     </div>    <!-- PopupModal 組件 -->
     <PopupModal 
       v-model="showPopup"
-      title="徵男友"
+      title="幫徵男友"
       :show-footer="true"
       confirm-text="我有興趣 💕"
       cancel-text="下次再說"
@@ -407,7 +407,7 @@
         
         <div class="requirements">
           <h3>💕 理想型</h3>
-          <p>對未來有想像、有目標，你如果要軟爛也要軟爛的合理。喜歡熱情的人，可以浪漫一點，我沒體驗過</p>
+          <p>帥的我會怕，醜的也會怕，請你長得合宜適中。對未來有想像、有目標，你如果要軟爛也要軟爛的合理。喜歡熱情的人，可以浪漫一點，我沒體驗過</p>
         </div>
       </div>
     </PopupModal>
