@@ -15,7 +15,7 @@
           </div>
             <div class="info-group">
             <h3>學習內容</h3>
-            <p>主修電機工程，大學曾修習企管、財金、國貿等科系的課程。</p>
+            <p>主修電機工程，大學曾修習企管、財金、國貿...等科系的課程。</p>
             <p>熟悉 Vue.js、Nuxt.js、C++、Python 、MATLAB等程式語言，對於 PX4 飛控系統有相關研究經驗。</p>
             <p>研討會論文：<a href="https://ieeexplore.ieee.org/document/10773309" target="_blank">Quaternion-Based Attitude Tracking Control Design for UAVs</a></p>
           </div>
