@@ -389,7 +389,10 @@ watch(isVisible, (newValue) => {
 @media (max-width: 768px) {
   .popup-modal {
     width: 95%;
+    max-width: none;
     margin: 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
   }
   
   .modal-content {
@@ -398,14 +401,124 @@ watch(isVisible, (newValue) => {
   
   .modal-title {
     font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .modal-body {
+    padding: 1rem 0;
   }
   
   .modal-footer {
     flex-direction: column;
+    gap: 0.8rem;
   }
   
   .action-button {
     width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .close-button {
+    width: 35px;
+    height: 35px;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .deco-circle {
+    opacity: 0.3;
+  }
+  
+  .circle-1 {
+    width: 60px;
+    height: 60px;
+    top: 10px;
+    right: 60px;
+  }
+  
+  .circle-2 {
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  .circle-3 {
+    width: 30px;
+    height: 30px;
+    top: 40%;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-modal {
+    width: 98%;
+    margin: 0.5rem;
+    border-radius: 12px;
+  }
+  
+  .modal-content {
+    padding: 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .modal-body {
+    padding: 0.8rem 0;
+  }
+  
+  .action-button {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .close-button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .title-decoration {
+    scale: 0.8;
+  }
+  
+  /* 簡化裝飾元素 */
+  .circle-2,
+  .circle-3 {
+    display: none;
+  }
+  
+  .circle-1 {
+    width: 40px;
+    height: 40px;
+    opacity: 0.2;
+  }
+}
+
+/* 橫屏手機優化 */
+@media (max-width: 768px) and (orientation: landscape) {
+  .popup-modal {
+    max-height: 85vh;
+    margin: 0.5rem;
+  }
+  
+  .modal-content {
+    padding: 1rem 1.5rem;
+  }
+  
+  .modal-footer {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .action-button {
+    width: auto;
+    flex: 1;
   }
 }
 

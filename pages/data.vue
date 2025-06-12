@@ -617,10 +617,33 @@ onMounted(async () => {
 @media (max-width: 768px) {
   .data-header {
     padding: 3rem 1rem;
+    min-height: 60vh;
   }
   
   .data-title {
     font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .data-description {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .title-decoration {
+    scale: 0.8;
+  }
+  
+  .decoration-line {
+    width: 60px;
+    height: 2px;
+  }
+  
+  .data-content {
+    padding: 2rem 1rem;
+  }
+  
+  .data-section {
+    margin-bottom: 3rem;
   }
   
   .data-section-title {
@@ -628,14 +651,32 @@ onMounted(async () => {
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
+    margin-bottom: 2rem;
   }
   
   .section-icon {
     font-size: 2rem;
   }
   
+  .data-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .data-card {
+    padding: 1.5rem;
+  }
+  
+  .data-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .data-card p {
+    font-size: 0.9rem;
+  }
+  
   .card-hover-effect:hover {
-    transform: translateY(-8px) scale(1.01);
+    transform: translateY(-5px) scale(1.01);
   }
   
   .floating-books .book {
@@ -645,19 +686,105 @@ onMounted(async () => {
   .code-rain .code-line {
     font-size: 1.2rem;
   }
+  
+  /* 浮動背景優化 */
+  .floating-books,
+  .code-rain {
+    opacity: 0.3;
+  }
+  
+  .floating-books .book,
+  .code-rain .code-line {
+    animation-duration: 15s;
+  }
 }
 
 @media (max-width: 480px) {
+  .data-header {
+    padding: 2rem 0.5rem;
+    min-height: 50vh;
+  }
+  
+  .data-title {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+  
   .data-description {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
   }
   
   .title-decoration {
-    scale: 0.8;
+    scale: 0.6;
+    margin: 1rem 0;
   }
   
   .decoration-line {
     width: 40px;
+    height: 2px;
+  }
+  
+  .data-content {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .data-section {
+    margin-bottom: 2rem;
+  }
+  
+  .data-section-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-icon {
+    font-size: 1.5rem;
+  }
+  
+  .data-grid {
+    gap: 1rem;
+  }
+  
+  .data-card {
+    padding: 1rem;
+  }
+  
+  .data-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .data-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  
+  .data-card .card-icon {
+    font-size: 2rem;
+  }
+  
+  /* 簡化背景動畫 */
+  .floating-books,
+  .code-rain {
+    display: none;
+  }
+}
+
+/* ===== 橫屏手機優化 ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .data-header {
+    min-height: 40vh;
+    padding: 1.5rem 1rem;
+  }
+  
+  .data-title {
+    font-size: 2.5rem;
+  }
+  
+  .floating-books,
+  .code-rain {
+    opacity: 0.2;
   }
 }
 </style>

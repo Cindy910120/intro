@@ -1647,49 +1647,157 @@ onMounted(async () => {
 }
 
 @media (max-width: 768px) {
+  .project-hero {
+    min-height: 80vh;
+    padding: 2rem 1rem;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
   .project-title {
     font-size: clamp(2rem, 6vw, 3rem);
     flex-direction: column;
     gap: 0.5rem;
   }
   
+  .rocket-interactive-area {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .interactive-rocket {
+    font-size: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .overview-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .section-title-large {
+    font-size: 2rem;
+  }
+  
   .overview-stats {
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+  
+  .preview-frame {
+    transform: perspective(800px) rotateY(-5deg) rotateX(3deg);
+  }
+  
+  .preview-hint {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .reset-rotation-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
   }
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .feature-card {
+    padding: 1.5rem;
   }
   
   .highlights-showcase {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .highlight-item {
+    padding: 1.5rem;
   }
   
   .tech-category {
     min-width: auto;
-    padding: 2rem;
+    padding: 1.5rem;
   }
   
   .cta-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+  }
+  
+  .primary-cta-button,
+  .secondary-cta-button {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .cta-features {
+    flex-direction: column;
+    gap: 1rem;
   }
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .project-hero {
-    min-height: 80vh;
+    min-height: 70vh;
+    padding: 1rem 0.5rem;
+  }
+  
+  .hero-content {
+    padding: 0.5rem;
+  }
+  
+  .project-title {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+  
+  .rocket-interactive-area {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .interactive-rocket {
+    font-size: 0.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     flex-direction: column;
     gap: 0.5rem;
+    padding: 0 1rem;
+  }
+  
+  .section-title-large {
+    font-size: 1.8rem;
   }
   
   .overview-stats {
@@ -1701,11 +1809,72 @@ onMounted(async () => {
   }
   
   .feature-card {
-    padding: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .project-card-icon {
+    font-size: 2rem;
   }
   
   .highlight-item {
+    padding: 1rem;
+  }
+  
+  .highlight-icon {
+    font-size: 2rem;
+  }
+  
+  .tech-category {
+    padding: 1rem;
+  }
+  
+  .tech-item {
+    padding: 0.8rem;
+  }
+  
+  .tech-logo {
+    width: 40px;
+    height: 40px;
+    font-size: 0.8rem;
+  }
+  
+  .tech-progress {
+    width: 80px;
+  }
+  
+  .stat-card {
     padding: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+  }
+  
+  .cta-container {
+    padding: 0 1rem;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+  }
+  
+  .cta-description {
+    font-size: 1rem;
+  }
+  
+  .primary-cta-button,
+  .secondary-cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .feature-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 }
 </style>

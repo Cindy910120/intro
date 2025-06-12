@@ -1581,6 +1581,15 @@ onBeforeUnmount(() => {
   margin: 2rem 0;
 }
 
+/* 手機版興趣區域優化 */
+@media (max-width: 768px) {
+  .interests-section {
+    padding: 2rem 0;
+    margin: 1rem 0;
+    border-radius: var(--border-radius-md, 15px);
+  }
+}
+
 .interests-section .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -1817,6 +1826,8 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(5px);
   animation: lightboxFadeIn 0.3s ease;
 }
+
+
 
 @keyframes lightboxFadeIn {
   from {
@@ -2081,31 +2092,141 @@ onBeforeUnmount(() => {
   padding-top: 1.5rem;
 }
 
-/* 響應式設計 */
-@media (max-width: 768px) {
-  .photo-carousel {
-    height: 250px;
+/* ===== 詳細的手機版響應式調整 ===== */
+@media (max-width: 480px) {
+  /* 導航相關調整 */
+  .section-header h1 {
+    font-size: 2rem;
   }
   
-  .info-card {
-    padding: 1.5rem;
+  .section-subtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
   }
   
-  .info-card h3 {
+  /* 個人資料區域 */
+  .profile-container {
+    padding: 1rem;
+  }
+  
+  .info-group h3 {
     font-size: 1.2rem;
   }
   
-  .dating-info,
-  .contact-section,
-  .requirements {
-    margin-bottom: 1.5rem;
+  /* 興趣卡片極小屏幕優化 */
+  .interest-card {
+    padding: 1rem;
   }
   
-  .photo-indicator {
-    bottom: 0.5rem;
-    right: 0.5rem;
-    padding: 0.3rem 0.8rem;
-    font-size: 0.8rem;
+  .interest-image-container {
+    height: 180px;
+  }
+  
+  .interest-title {
+    font-size: 1.2rem;
+  }
+  
+  .interest-details p {
+    font-size: 0.9rem;
+  }
+  
+  /* 專題卡片極小屏幕 */
+  .project-card {
+    padding: 1rem;
+  }
+  
+  .project-title-group h2 {
+    font-size: 1.2rem;
+  }
+  
+  .project-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  /* 活動卡片極小屏幕 */
+  .activity-image-container {
+    height: 150px;
+  }
+  
+  .activity-title {
+    font-size: 1.1rem;
+  }
+  
+  .activity-list li {
+    font-size: 0.85rem;
+  }
+  
+  /* 學術成果極小屏幕 */
+  .academic-title-group h2 {
+    font-size: 1.3rem;
+  }
+  
+  .academic-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* 彈出視窗按鈕調整 */
+  .popup-trigger-btn {
+    width: 50px;
+    height: 50px;
+    right: 1rem;
+    bottom: 1rem;
+  }
+  
+  .trigger-text {
+    font-size: 8px;
+  }
+  
+  /* 個人特質調整 */
+  .trait-item {
+    padding: 1rem;
+  }
+  
+  .trait-content h4 {
+    font-size: 1.1rem;
+  }
+  
+  .trait-content p {
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== 橫屏手機優化 ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .interest-image-container,
+  .activity-image-container {
+    height: 160px;
+  }
+  
+  .project-card {
+    padding: 1.2rem;
+  }
+  
+  .section-header h1 {
+    font-size: 2.2rem;
+  }
+}
+
+/* ===== 平板響應式 ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .interest-card {
+    grid-template-columns: 250px 1fr;
+    gap: 1.5rem;
+  }
+  
+  .activity-card {
+    grid-template-columns: 250px 1fr;
+  }
+  
+  .project-header {
+    gap: 1.2rem;
+  }
+  
+  .project-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
   }
 }
 </style>

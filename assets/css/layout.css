@@ -600,3 +600,96 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+/* ===== 全局響應式調整 ===== */
+@media (max-width: 768px) {
+  /* 全局字體調整 */
+  html {
+    font-size: 14px;
+  }
+  
+  body {
+    line-height: 1.5;
+  }
+  
+  /* 全局容器調整 */
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg {
+    padding: 0 var(--space-md);
+    max-width: 100%;
+  }
+  
+  /* 全局間距調整 */
+  .section {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+  }
+  
+  /* 隱藏/顯示類別 */
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 極小屏幕字體調整 */
+  html {
+    font-size: 13px;
+  }
+  
+  /* 極小屏幕容器調整 */
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg {
+    padding: 0 var(--space-sm);
+  }
+  
+  /* 極小屏幕間距調整 */
+  .section {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+  
+  .show-desktop {
+    display: block !important;
+  }
+}
+
+/* ===== 觸控設備優化 ===== */
+@media (hover: none) and (pointer: coarse) {
+  /* 觸控設備的按鈕調整 */
+  .btn,
+  .nav-link,
+  .action-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* 觸控設備的懸停效果調整 */
+  .card:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* ===== 高密度屏幕優化 ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* 高密度屏幕的圖像和邊框調整 */
+  .border,
+  .card {
+    border-width: 0.5px;
+  }
+}

@@ -99,3 +99,77 @@
   --shadow-lg: 0 8px 25px var(--shadow-heavy);
   --shadow-xl: 0 12px 40px var(--shadow-heavy);
 }
+
+/* ===== 響應式變數調整 ===== */
+@media (max-width: 768px) {
+  :root {
+    /* 手機版間距調整 */
+    --space-xs: 0.2rem;
+    --space-sm: 0.4rem;
+    --space-md: 0.8rem;
+    --space-lg: 1.2rem;
+    --space-xl: 1.6rem;
+    --space-2xl: 2.4rem;
+    --space-3xl: 3.2rem;
+    
+    /* 手機版字體大小調整 */
+    --text-xs: 0.7rem;
+    --text-sm: 0.8rem;
+    --text-base: 0.9rem;
+    --text-lg: 1rem;
+    --text-xl: 1.1rem;
+    --text-2xl: 1.3rem;
+    --text-3xl: 1.6rem;
+    --text-4xl: 2rem;
+    
+    /* 手機版圓角調整 */
+    --radius-sm: 3px;
+    --radius-md: 6px;
+    --radius-lg: 9px;
+    --radius-xl: 12px;
+    
+    /* 手機版陰影調整 */
+    --shadow-sm: 0 1px 3px var(--shadow-light);
+    --shadow-md: 0 3px 8px var(--shadow-medium);
+    --shadow-lg: 0 6px 20px var(--shadow-heavy);
+    --shadow-xl: 0 10px 30px var(--shadow-heavy);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    /* 極小屏幕間距調整 */
+    --space-md: 0.6rem;
+    --space-lg: 1rem;
+    --space-xl: 1.4rem;
+    --space-2xl: 2rem;
+    --space-3xl: 2.8rem;
+    
+    /* 極小屏幕字體調整 */
+    --text-xs: 0.65rem;
+    --text-sm: 0.75rem;
+    --text-base: 0.85rem;
+    --text-lg: 0.95rem;
+    --text-xl: 1.05rem;
+    --text-2xl: 1.2rem;
+    --text-3xl: 1.5rem;
+    --text-4xl: 1.8rem;
+  }
+}
+
+/* ===== 響應式輔助變數 ===== */
+:root {
+  /* RGB 色彩值供 rgba() 使用 */
+  --color-primary-rgb: 52, 152, 219;
+  --color-secondary-rgb: 44, 62, 80;
+  --color-accent-rgb: 231, 76, 60;
+  --text-primary-rgb: 44, 62, 80;
+  --text-secondary-rgb: 52, 73, 94;
+  --primary-color-rgb: var(--color-primary-rgb);
+  
+  /* 斷點變數 */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+}
