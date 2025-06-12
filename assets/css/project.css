@@ -2,18 +2,25 @@
 /* 專門處理專題介紹頁面的複雜布局和動畫效果 */
 
 /* ===== 專題頁面容器 ===== */
-.project-page-container {
+.project-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-2xl);
   position: relative;
   min-height: 100vh;
-  background: var(--gradient-secondary);
+  background: var(--color-bg-gradient);
   overflow-x: hidden;
+  transition: background 0.3s ease;
+}
+
+.project-container.project-page {
+  border-radius: var(--border-radius-lg);
+  margin-top: var(--space-lg);
+  box-shadow: var(--shadow-xl);
 }
 
 /* ===== 動態背景裝飾 ===== */
-.background-decoration {
+.project-background {
   position: absolute;
   top: 0;
   left: 0;

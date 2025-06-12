@@ -104,9 +104,9 @@
 }
 
 .personality-traits {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
-  grid-template-columns: 1fr;
 }
 
 .trait-item {
@@ -293,40 +293,37 @@
 }
 
 .interests-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: var(--space-xl);
   margin-top: var(--space-lg);
 }
 
-.interest-item {
+/* 新的興趣卡片樣式 - 左圖右字 */
+.interest-card {
+  display: flex;
   background: var(--background-primary);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
   transition: all var(--transition-base) ease;
+  min-height: 250px;
 }
 
-.interest-item:hover {
+.interest-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-xl);
 }
 
-.interest-header {
-  padding: var(--space-lg);
-  background: var(--gradient-primary);
-  color: white;
-}
-
-.interest-header h3 {
-  margin: 0;
-  font-size: var(--text-xl);
-  font-weight: 600;
-}
-
-.interest-slideshow {
+.interest-image-section {
+  flex: 0 0 40%;
   position: relative;
-  height: 250px;
+}
+
+.interest-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -342,25 +339,77 @@
   opacity: 1;
 }
 
-.interest-slide img {
+.interest-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   cursor: pointer;
+  transition: transform var(--transition-base) ease;
 }
 
-.interest-description {
-  padding: var(--space-lg);
+.interest-img:hover {
+  transform: scale(1.05);
 }
 
-.interest-description p {
-  margin: 0;
+.slide-counter {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  z-index: 5;
+}
+
+.interest-content {
+  flex: 1;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.interest-icon {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-md);
+}
+
+.interest-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.interest-details p {
+  margin-bottom: var(--space-sm);
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
+.interest-details p:last-of-type {
+  margin-bottom: var(--space-md);
+}
+
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.tag {
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--primary-color);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
 /* ===== 燈箱效果 ===== */
-.lightbox-overlay {
+.lightbox {
   position: fixed;
   top: 0;
   left: 0;
@@ -371,12 +420,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-base) ease;
-}
-
-.lightbox-overlay.active {
   opacity: 1;
   visibility: visible;
 }
@@ -390,7 +433,7 @@
   justify-content: center;
 }
 
-.lightbox-image {
+.lightbox-content img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -407,40 +450,70 @@
   font-size: var(--text-2xl);
   cursor: pointer;
   padding: var(--space-sm);
+  z-index: 15;
 }
 
-.lightbox-nav {
+/* 燈箱透明側邊按鈕 - 與小圖按鈕保持一致的樣式 */
+.lightbox-nav-side {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  padding: var(--space-md) var(--space-lg);
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-full);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  transition: all var(--transition-base) ease;
+  z-index: 15;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-nav-side:hover {
+  opacity: 1;
+  background: var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-nav-side.prev-side {
+  left: -25px;
+}
+
+.lightbox-nav-side.next-side {
+  right: -25px;
+}
+
+.lightbox-nav-side .nav-arrow {
   font-size: var(--text-xl);
+  font-weight: bold;
+  user-select: none;
+  pointer-events: none;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-md);
-  transition: background var(--transition-base) ease;
-}
-
-.lightbox-nav:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.lightbox-nav.prev {
-  left: -80px;
-}
-
-.lightbox-nav.next {
-  right: -80px;
+  font-size: var(--text-base);
+  font-weight: 500;
+  z-index: 15;
 }
 
 /* ===== 響應式設計 ===== */
 @media (min-width: 768px) {
-  .personality-traits {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   .profile-container {
     flex-direction: row;
     align-items: flex-start;
@@ -474,27 +547,260 @@
     align-self: center;
   }
   
-  .interests-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
+  /* 興趣卡片在小螢幕上改為上下排列 */
+  .interest-card {
+    flex-direction: column;
+    min-height: auto;
   }
   
-  .activity-slide-nav {
+  .interest-image-section {
+    flex: 0 0 200px;
+    height: 200px;
+  }
+  
+  .interest-content {
+    padding: var(--space-lg);
+  }
+  
+  /* 活動卡片在小螢幕上也改為上下排列 */
+  .activity-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .activity-image-section {
+    flex: 0 0 200px;
+    height: 200px;
+  }
+  
+  .activity-content {
+    padding: var(--space-lg);
+  }
+    .activity-slide-nav {
     padding: var(--space-xs) var(--space-sm);
     font-size: var(--text-base);
   }
-  
-  .lightbox-nav {
-    position: fixed;
-    top: auto;
-    bottom: var(--space-lg);
+    /* lightbox 按鈕在小螢幕上的調整 - 與小圖按鈕保持一致 */
+  .lightbox-nav-side {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
   }
   
-  .lightbox-nav.prev {
-    left: var(--space-lg);
+  .lightbox-nav-side.prev-side {
+    left: -20px;
   }
   
-  .lightbox-nav.next {
-    right: var(--space-lg);
+  .lightbox-nav-side.next-side {
+    right: -20px;
   }
+  
+  .lightbox-nav-side .nav-arrow {
+    font-size: var(--text-base);
+  }
+  
+  .lightbox-counter {
+    bottom: -40px;
+    font-size: var(--text-sm);
+    padding: var(--space-xs) var(--space-sm);
+  }
+}
+
+/* ===== 興趣區域新樣式 ===== */
+/* 透明側邊切換按鈕 */
+.slide-nav-side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-full);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  transition: all var(--transition-base) ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.slide-nav-side:hover {
+  opacity: 1;
+  background: var(--color-primary);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.prev-side {
+  left: -25px;
+}
+
+.next-side {
+  right: -25px;
+}
+
+.nav-arrow {
+  font-size: var(--text-xl);
+  font-weight: bold;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 在小螢幕上調整按鈕位置 */
+@media (max-width: 768px) {
+  .slide-nav-side {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+  
+  .prev-side {
+    left: -20px;
+  }
+  
+  .next-side {
+    right: -20px;
+  }
+  
+  .nav-arrow {
+    font-size: var(--text-lg);
+  }
+}
+
+/* 主題適配 */
+@media (prefers-color-scheme: dark) {
+  .slide-nav-side {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .slide-nav-side:hover {
+    background: var(--color-primary);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: white;
+  }
+}
+
+/* ===== 活動區域樣式 ===== */
+/* 與興趣卡片相同的左圖右字佈局 */
+.activity-card {
+  display: flex;
+  background: var(--background-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) ease;
+  min-height: 250px;
+  margin-top: var(--space-lg);
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.activity-image-section {
+  flex: 0 0 40%;
+  position: relative;
+}
+
+.activity-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.activity-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--transition-base) ease;
+}
+
+.activity-slide.active {
+  opacity: 1;
+}
+
+.activity-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform var(--transition-base) ease;
+}
+
+.activity-img:hover {
+  transform: scale(1.05);
+}
+
+.activity-content {
+  flex: 1;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.activity-icon {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-md);
+}
+
+.activity-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.activity-details p {
+  margin-bottom: var(--space-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.activity-list {
+  margin-top: var(--space-md);
+}
+
+.activity-list h5 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.activity-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-list li {
+  padding: var(--space-xs) 0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--text-sm);
+}
+
+.activity-list li:last-child {
+  border-bottom: none;
+}
+
+.activity-list li:before {
+  content: '•';
+  color: var(--primary-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-right: var(--space-sm);
 }

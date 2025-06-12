@@ -1,5 +1,5 @@
 <template>
-  <div class="project-container">
+  <div class="project-container project-page">
     <!-- 動態背景裝飾 -->
     <div class="project-background">
       <div class="floating-shape shape-1"></div>

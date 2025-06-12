@@ -22,7 +22,7 @@
 /* 按鈕類型 */
 .btn-primary {
   background: var(--gradient-primary);
-  color: white;
+  color: var(--color-text-white);
   box-shadow: var(--shadow-md);
 }
 
@@ -33,7 +33,7 @@
 
 .btn-secondary {
   background: var(--gradient-secondary);
-  color: white;
+  color: var(--color-text-white);
   box-shadow: var(--shadow-md);
 }
 
@@ -44,18 +44,18 @@
 
 .btn-outline {
   background: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .btn-outline:hover {
-  background: var(--primary-color);
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-white);
 }
 
 .btn-ghost {
   background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   backdrop-filter: blur(10px);
 }
 
@@ -200,6 +200,43 @@
 .btn-group .btn-base:last-child {
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   border-right: none;
+}
+
+/* ===== 首頁特殊按鈕樣式 ===== */
+.home-link-button {
+  display: inline-block;
+  padding: var(--space-md) var(--space-xl);
+  margin: var(--space-sm);
+  background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+  color: var(--color-text-white);
+  text-decoration: none;
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-link-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.home-link-button:hover::before {
+  left: 100%;
+}
+
+.home-link-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-xl);
 }
 
 /* 響應式按鈕 */

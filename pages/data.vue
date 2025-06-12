@@ -1,5 +1,5 @@
 <template>
-  <div class="data-container">
+  <div class="data-container data-page">
     <h1 class="data-title">技術學習筆記集</h1>
     <p class="data-description">這裡收集了我在學習過程中整理的各項技術筆記與學習心得，涵蓋開發工具使用、飛控系統研究等領域</p>
 

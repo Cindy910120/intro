@@ -2,31 +2,64 @@
 /* 統一定義所有設計系統的變數 */
 
 :root {
-  /* 主色調系統 */
-  --primary-color: #41b883;
-  --primary-hover: #369970;
-  --secondary-color: #ff6b6b;
-  --secondary-hover: #ff5252;
-  --accent-color: #667eea;
-  --accent-hover: #5a6fd8;
+  /* 主題色調系統 - 可通過主題切換動態更改 */
+  --color-primary: #3498db;
+  --color-primary-dark: #2980b9;
+  --color-primary-light: #5dade2;
+  --color-secondary: #2c3e50;
+  --color-accent: #e74c3c;
+  
+  /* 衍生色調 */
+  --color-success: #27ae60;
+  --color-warning: #f39c12;
+  --color-danger: #e74c3c;
+  --color-info: #3498db;
+  
+  /* 背景色系統 */
+  --color-bg-primary: var(--color-primary);
+  --color-bg-secondary: var(--color-secondary);
+  --color-bg-gradient: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --color-bg-light: #f8f9fa;
+  --color-bg-white: #ffffff;
+  
+  /* 文字色系統 */
+  --color-text-primary: #2c3e50;
+  --color-text-secondary: #34495e;
+  --color-text-muted: #666;
+  --color-text-light: #999;
+  --color-text-white: #ffffff;
+  --color-text-themed: var(--color-primary);
+  
+  /* 邊框和陰影 */
+  --color-border: #e9ecef;
+  --color-border-light: #f1f3f4;
+  --color-white: #ffffff;
+  
+  /* 舊有變數保持兼容性 */
+  --primary-color: var(--color-primary);
+  --primary-hover: var(--color-primary-dark);
+  --secondary-color: var(--color-secondary);
+  --secondary-hover: var(--color-accent);
+  --accent-color: var(--color-accent);
+  --accent-hover: var(--color-primary-dark);
   
   /* 中性色調 */
-  --text-primary: #2c3e50;
-  --text-secondary: #34495e;
-  --text-muted: #666;
-  --text-light: #999;
-  --background-primary: #ffffff;
-  --background-secondary: #f8f9fa;
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --text-muted: var(--color-text-muted);
+  --text-light: var(--color-text-light);
+  --background-primary: var(--color-bg-white);
+  --background-secondary: var(--color-bg-light);
   --background-accent: #f0f2f5;
-  --border-color: #e9ecef;
+  --border-color: var(--color-border);
   --shadow-light: rgba(0, 0, 0, 0.05);
   --shadow-medium: rgba(0, 0, 0, 0.1);
   --shadow-heavy: rgba(0, 0, 0, 0.15);
   
   /* 漸層色調 */
-  --gradient-primary: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-  --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-accent: linear-gradient(45deg, #ff0844, #ffb199);
+  --gradient-primary: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+  --gradient-secondary: var(--color-bg-gradient);
+  --gradient-accent: linear-gradient(45deg, var(--color-accent), var(--color-primary-light));
   --gradient-pink: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
   
   /* 間距系統 */
