@@ -346,12 +346,12 @@
 }
 
 .home-link-button:nth-child(1) {
-  background: var(--gradient-primary);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  background: var(--gradient-secondary);
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
 }
 
 .home-link-button:nth-child(1):hover {
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
 }
 
 .home-link-button:nth-child(2) {

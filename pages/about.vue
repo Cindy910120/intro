@@ -1006,10 +1006,10 @@ onBeforeUnmount(() => {
 
 @keyframes heartbeat {
   0%, 100% {
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
   }
   50% {
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.7);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.7);
   }
 }
 
@@ -1024,7 +1024,7 @@ onBeforeUnmount(() => {
 
 /* 特質標題的特殊動畫 */
 .traits-title {
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+  background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #4facfe, #00f2fe);
   background-size: 400% 400%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -1121,7 +1121,7 @@ onBeforeUnmount(() => {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #6366F1, #8B5CF6);
+  background: linear-gradient(90deg, #667eea, #764ba2);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1136,8 +1136,8 @@ onBeforeUnmount(() => {
 }
 
 .paper-publication {
-  border: 2px solid rgba(99, 102, 241, 0.2);
-  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.02) 100%);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(102, 126, 234, 0.02) 100%);
 }
 
 .academic-status {
@@ -1145,7 +1145,7 @@ onBeforeUnmount(() => {
 }
 
 .status-badge.conference {
-  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
 }
 
@@ -1163,7 +1163,7 @@ onBeforeUnmount(() => {
   justify-content: center;
   width: 70px;
   height: 70px;
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(102, 126, 234, 0.1);
   border-radius: 15px;
   flex-shrink: 0;
 }
@@ -1187,7 +1187,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(102, 126, 234, 0.05);
   border-radius: 12px;
 }
 
@@ -1600,7 +1600,7 @@ onBeforeUnmount(() => {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(45deg, var(--color-primary, #3498db), var(--color-accent, #e74c3c));
+  background: linear-gradient(45deg, #667eea, #f093fb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
