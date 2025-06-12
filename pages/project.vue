@@ -17,13 +17,14 @@
     
     <!-- Hero 區域 -->
     <div class="project-hero animate-on-scroll">
-      <div class="hero-content">
-        <h1 class="project-title">
+      <div class="hero-content">        <h1 class="project-title">
           <span class="title-word glow-text">期末</span>
           <span class="title-word glow-text">專題</span>
           <span class="title-word glow-text">網頁</span>
           <span class="title-word glow-text">介紹</span>
-          <span class="title-emoji">🚀</span>
+          <div class="rocket-interactive-area" @mousemove="handleRocketMouseMove" @mouseleave="handleRocketMouseLeave">
+            <span class="title-emoji interactive-rocket" ref="rocketRef">🚀</span>
+          </div>
         </h1>
         <div class="project-title-underline"></div>
         <p class="hero-subtitle animate-fade-in">
@@ -345,6 +346,7 @@ import { onMounted, ref, nextTick } from 'vue'
 
 const particlesCanvas = ref(null)
 const previewFrame = ref(null)
+const rocketRef = ref(null)
 
 // 旋轉相關狀態
 const isRotating = ref(false)
@@ -352,6 +354,11 @@ const rotationX = ref(-10)
 const rotationY = ref(5)
 const lastMouseX = ref(0)
 const lastMouseY = ref(0)
+
+// 火箭互動狀態
+const rocketPosition = ref({ x: 0, y: 0 })
+const isRocketHovered = ref(false)
+let rocketAnimationId = null
 
 // 粒子系統
 let particles = []
@@ -567,6 +574,56 @@ const resetRotation = () => {
   }
 }
 
+// 火箭互動動畫
+const handleRocketMouseMove = (event) => {
+  if (!rocketRef.value) return
+  
+  const rect = event.currentTarget.getBoundingClientRect()
+  const mouseX = event.clientX - rect.left
+  const mouseY = event.clientY - rect.top
+  
+  // 檢查滑鼠是否在火箭下方
+  const rocketRect = rocketRef.value.getBoundingClientRect()
+  const containerRect = event.currentTarget.getBoundingClientRect()
+  const rocketX = rocketRect.left - containerRect.left + rocketRect.width / 2
+  const rocketY = rocketRect.top - containerRect.top + rocketRect.height / 2
+  
+  const distanceFromRocket = Math.sqrt(
+    Math.pow(mouseX - rocketX, 2) + Math.pow(mouseY - rocketY, 2)
+  )
+  
+  // 如果滑鼠靠近火箭下方，讓火箭上升
+  if (mouseY > rocketY && distanceFromRocket < 60) {
+    isRocketHovered.value = true
+    const intensity = Math.max(0, 1 - distanceFromRocket / 60)
+    rocketPosition.value.y = -20 * intensity
+    rocketPosition.value.x = (mouseX - rocketX) * 0.1
+  } else {
+    isRocketHovered.value = false
+  }
+  
+  updateRocketPosition()
+}
+
+const handleRocketMouseLeave = () => {
+  isRocketHovered.value = false
+  updateRocketPosition()
+}
+
+const updateRocketPosition = () => {
+  if (!rocketRef.value) return
+  
+  if (isRocketHovered.value) {
+    // 滑鼠靠近時上升
+    rocketRef.value.style.transform = `translate(${rocketPosition.value.x}px, ${rocketPosition.value.y}px) rotate(-10deg) scale(1.1)`
+    rocketRef.value.style.filter = 'drop-shadow(0 10px 20px rgba(255, 100, 100, 0.5))'
+  } else {
+    // 滑鼠離開時自然掉落更多
+    rocketRef.value.style.transform = 'translate(0px, 25px) rotate(8deg) scale(1)'
+    rocketRef.value.style.filter = 'drop-shadow(0 5px 10px rgba(255, 255, 255, 0.2))'
+  }
+}
+
 onMounted(async () => {
   await nextTick()
   
@@ -578,6 +635,11 @@ onMounted(async () => {
   // 設置預覽框架初始旋轉
   if (previewFrame.value) {
     previewFrame.value.style.transform = `perspective(1000px) rotateX(${rotationX.value}deg) rotateY(${rotationY.value}deg)`
+  }
+  
+  // 初始化火箭位置
+  if (rocketRef.value) {
+    updateRocketPosition()
   }
   
   // 添加全局滑鼠事件監聽器
@@ -596,6 +658,9 @@ onMounted(async () => {
   const cleanup = () => {
     if (animationId) {
       cancelAnimationFrame(animationId)
+    }
+    if (rocketAnimationId) {
+      cancelAnimationFrame(rocketAnimationId)
     }
     document.removeEventListener('mousemove', handleGlobalMouseMove)
     document.removeEventListener('mouseup', handleGlobalMouseUp)
@@ -674,6 +739,59 @@ onMounted(async () => {
 .title-emoji {
   font-size: 1.2em;
   animation: rocketLaunch 2s ease-in-out infinite;
+}
+
+/* ===== 火箭互動區域 ===== */
+.rocket-interactive-area {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  /* 可視化互動區域 - 開發時可以取消註解查看範圍 */
+  /* border: 2px dashed rgba(255, 255, 255, 0.3); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.interactive-rocket {
+  font-size: 1.2em;
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(0px, 10px) rotate(5deg) scale(1);
+  filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.2));
+  animation: none; /* 覆蓋原本的rocketLaunch動畫 */
+}
+
+.interactive-rocket:hover {
+  animation: rocketHover 0.5s ease-in-out infinite alternate;
+}
+
+/* 為火箭添加粒子軌跡效果 */
+.rocket-interactive-area::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  width: 3px;
+  height: 30px;
+  background: linear-gradient(to bottom, 
+    rgba(255, 100, 100, 0.8) 0%,
+    rgba(255, 150, 0, 0.6) 50%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.rocket-interactive-area:hover::after {
+  opacity: 1;
+  animation: rocketTrail 0.3s ease-in-out infinite;
 }
 
 .project-title-underline {
@@ -1437,6 +1555,24 @@ onMounted(async () => {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   25% { transform: translateY(-10px) rotate(5deg); }
   75% { transform: translateY(-5px) rotate(-5deg); }
+}
+
+@keyframes rocketHover {
+  0% { transform: translate(0px, -20px) rotate(-10deg) scale(1.1); }
+  100% { transform: translate(0px, -25px) rotate(-15deg) scale(1.15); }
+}
+
+@keyframes rocketTrail {
+  0% { 
+    height: 30px; 
+    opacity: 0.8;
+    transform: translateX(-50%) scaleY(1);
+  }
+  100% { 
+    height: 45px; 
+    opacity: 0.4;
+    transform: translateX(-50%) scaleY(1.2);
+  }
 }
 
 @keyframes underlineGrow {
