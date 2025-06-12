@@ -30,6 +30,7 @@ export default defineNuxtPlugin(async () => {
       apiKey: firebaseConfig.apiKey ? '***HIDDEN***' : 'MISSING'
     })
   }
+
   // Initialize Firebase
   try {
     const app = initializeApp(firebaseConfig)
@@ -59,12 +60,5 @@ export default defineNuxtPlugin(async () => {
   } catch (error) {
     console.error('Firebase initialization error:', error)
     throw error
-  }
-        auth,
-        db,
-        storage,
-        analytics
-      }
-    }
   }
 })
