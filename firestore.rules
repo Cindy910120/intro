@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 測試集合 - 完全開放（僅測試用）
+    match /test_basic/{document} {
+      allow read, write: if true;
+    }
+    
+    match /test_connection/{document} {
+      allow read, write: if true;
+    }
+    
+    match /test_simple/{document} {
+      allow read, write: if true;
+    }
+    
+    // 遊戲紀錄 - 允許所有操作（測試用）
+    match /game_records/{document} {
+      allow read, write: if true;
+    }
+    
+    // 其他集合的默認規則
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -7,8 +7,7 @@
       <nav class="nav-section">
         <button class="mobile-menu-toggle" @click="toggleMobileMenu" aria-label="切換導航選單">
           ☰
-        </button>
-        <ul class="nav-list" :class="{ 'mobile-active': isMobileMenuOpen }">
+        </button>        <ul class="nav-list" :class="{ 'mobile-active': isMobileMenuOpen }">
           <li><NuxtLink to="/" class="nav-link" @click="closeMobileMenu">首頁</NuxtLink></li>
           <li><NuxtLink to="/about" class="nav-link" @click="closeMobileMenu">自我介紹</NuxtLink></li>
           <li><NuxtLink to="/project" class="nav-link" @click="closeMobileMenu">期末專題</NuxtLink></li>
