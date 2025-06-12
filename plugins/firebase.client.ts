@@ -7,6 +7,12 @@ import { getAnalytics, isSupported } from 'firebase/analytics'
 export default defineNuxtPlugin(async () => {
   const config = useRuntimeConfig()
 
+  // 檢查必要的 Firebase 配置
+  if (!config.public.firebaseApiKey) {
+    console.error('Firebase API Key is missing')
+    throw new Error('Firebase configuration is incomplete: API Key is missing')
+  }
+
   const firebaseConfig = {
     apiKey: config.public.firebaseApiKey,
     authDomain: config.public.firebaseAuthDomain,
@@ -15,6 +21,14 @@ export default defineNuxtPlugin(async () => {
     messagingSenderId: config.public.firebaseMessagingSenderId,
     appId: config.public.firebaseAppId,
     measurementId: config.public.firebaseMeasurementId as string
+  }
+
+  // 在開發環境中輸出配置以進行調試（生產環境請移除）
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Firebase Config:', {
+      ...firebaseConfig,
+      apiKey: firebaseConfig.apiKey ? '***HIDDEN***' : 'MISSING'
+    })
   }
 
   // Initialize Firebase
