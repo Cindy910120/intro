@@ -2,7 +2,7 @@
 /* 統一定義所有設計系統的變數 */
 
 :root {
-  /* 主題色調系統 - 可通過主題切換動態更改 */
+  /* 主題色調系統 */
   --color-primary: #3498db;
   --color-primary-dark: #2980b9;
   --color-primary-light: #5dade2;

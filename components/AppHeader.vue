@@ -11,16 +11,12 @@
           <li><NuxtLink to="/project" class="nav-link">期末專題網頁介紹</NuxtLink></li>
           <li><NuxtLink to="/data" class="nav-link">技術學習筆記</NuxtLink></li>
         </ul>
-        <div class="nav-controls">
-          <ThemeToggle />
-        </div>
       </nav>
     </div>
   </header>
 </template>
 
 <script setup>
-import ThemeToggle from './ThemeToggle.vue'
 </script>
 
 <style scoped>
