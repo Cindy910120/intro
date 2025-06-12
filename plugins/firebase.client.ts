@@ -30,25 +30,36 @@ export default defineNuxtPlugin(async () => {
       apiKey: firebaseConfig.apiKey ? '***HIDDEN***' : 'MISSING'
     })
   }
-
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig)
+  try {
+    const app = initializeApp(firebaseConfig)
 
-  // Initialize Firebase services
-  const auth = getAuth(app)
-  const db = getFirestore(app)
-  const storage = getStorage(app)
-  
-  // Initialize Analytics only if supported (client-side)
-  let analytics = null
-  if (process.client && await isSupported()) {
-    analytics = getAnalytics(app)
+    // Initialize Firebase services
+    const auth = getAuth(app)
+    const db = getFirestore(app)
+    const storage = getStorage(app)
+    
+    // Initialize Analytics only if supported (client-side)
+    let analytics = null
+    if (process.client && await isSupported()) {
+      analytics = getAnalytics(app)
+    }
+
+    return {
+      provide: {
+        firebase: {
+          app,
+          auth,
+          db,
+          storage,
+          analytics
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Firebase initialization error:', error)
+    throw error
   }
-
-  return {
-    provide: {
-      firebase: {
-        app,
         auth,
         db,
         storage,
