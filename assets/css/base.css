@@ -1,0 +1,49 @@
+/* ===== 基礎重置樣式 ===== */
+/* 全局基礎設定和重置 */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "LXGW WenKai Mono TC", monospace;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* 基礎元素重置 */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

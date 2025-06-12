@@ -1,0 +1,588 @@
+/* ===== 圖片樣式系統 ===== */
+/* 提供各種圖片處理、佈局、效果的樣式類別 */
+
+/* ===== 基礎圖片樣式 ===== */
+.image-responsive {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-fluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-fixed {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ===== 圖片適應方式 ===== */
+.image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.image-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.image-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.image-scale-down {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  object-position: center;
+}
+
+.image-none {
+  object-fit: none;
+  object-position: center;
+}
+
+/* ===== 圖片位置 ===== */
+.image-center {
+  object-position: center;
+}
+
+.image-top {
+  object-position: top;
+}
+
+.image-bottom {
+  object-position: bottom;
+}
+
+.image-left {
+  object-position: left;
+}
+
+.image-right {
+  object-position: right;
+}
+
+.image-top-left {
+  object-position: top left;
+}
+
+.image-top-right {
+  object-position: top right;
+}
+
+.image-bottom-left {
+  object-position: bottom left;
+}
+
+.image-bottom-right {
+  object-position: bottom right;
+}
+
+/* ===== 圖片圓角 ===== */
+.image-rounded-none {
+  border-radius: 0;
+}
+
+.image-rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.image-rounded {
+  border-radius: var(--radius-md);
+}
+
+.image-rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.image-rounded-xl {
+  border-radius: var(--radius-xl);
+}
+
+.image-rounded-full {
+  border-radius: var(--radius-full);
+}
+
+.image-circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* ===== 圖片陰影效果 ===== */
+.image-shadow-none {
+  box-shadow: none;
+}
+
+.image-shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.image-shadow {
+  box-shadow: var(--shadow-md);
+}
+
+.image-shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.image-shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* ===== 圖片邊框 ===== */
+.image-border {
+  border: 2px solid var(--border-color);
+}
+
+.image-border-primary {
+  border: 2px solid var(--primary-color);
+}
+
+.image-border-secondary {
+  border: 2px solid var(--secondary-color);
+}
+
+.image-border-white {
+  border: 2px solid white;
+}
+
+.image-border-thick {
+  border: 4px solid var(--border-color);
+}
+
+/* ===== 圖片尺寸 ===== */
+.image-xs {
+  width: 2rem;
+  height: 2rem;
+}
+
+.image-sm {
+  width: 3rem;
+  height: 3rem;
+}
+
+.image-md {
+  width: 4rem;
+  height: 4rem;
+}
+
+.image-lg {
+  width: 6rem;
+  height: 6rem;
+}
+
+.image-xl {
+  width: 8rem;
+  height: 8rem;
+}
+
+.image-2xl {
+  width: 12rem;
+  height: 12rem;
+}
+
+/* 正方形圖片 */
+.image-square-sm {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.image-square-md {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.image-square-lg {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.image-square-xl {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* 矩形圖片 */
+.image-rect-16-9 {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.image-rect-4-3 {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.image-rect-3-2 {
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.image-rect-2-1 {
+  aspect-ratio: 2/1;
+  object-fit: cover;
+}
+
+/* ===== 圖片容器 ===== */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.image-container-full {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+/* ===== 圖片懸停效果 ===== */
+.image-hover-zoom {
+  transition: transform var(--transition-base) ease;
+  cursor: pointer;
+}
+
+.image-hover-zoom:hover {
+  transform: scale(1.05);
+}
+
+.image-hover-zoom-lg {
+  transition: transform var(--transition-base) ease;
+  cursor: pointer;
+}
+
+.image-hover-zoom-lg:hover {
+  transform: scale(1.1);
+}
+
+.image-hover-brightness {
+  transition: filter var(--transition-base) ease;
+  cursor: pointer;
+}
+
+.image-hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+.image-hover-blur {
+  transition: filter var(--transition-base) ease;
+  cursor: pointer;
+}
+
+.image-hover-blur:hover {
+  filter: blur(2px);
+}
+
+.image-hover-grayscale {
+  transition: filter var(--transition-base) ease;
+  cursor: pointer;
+}
+
+.image-hover-grayscale:hover {
+  filter: grayscale(100%);
+}
+
+.image-hover-lift {
+  transition: all var(--transition-base) ease;
+  cursor: pointer;
+}
+
+.image-hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== 圖片濾鏡效果 ===== */
+.image-grayscale {
+  filter: grayscale(100%);
+}
+
+.image-sepia {
+  filter: sepia(100%);
+}
+
+.image-blur {
+  filter: blur(5px);
+}
+
+.image-brightness {
+  filter: brightness(1.2);
+}
+
+.image-contrast {
+  filter: contrast(1.2);
+}
+
+.image-saturate {
+  filter: saturate(1.5);
+}
+
+.image-invert {
+  filter: invert(100%);
+}
+
+/* ===== 圖片遮罩效果 ===== */
+.image-overlay {
+  position: relative;
+}
+
+.image-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity var(--transition-base) ease;
+}
+
+.image-overlay:hover::after {
+  opacity: 1;
+}
+
+.image-overlay-dark::after {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.image-overlay-light::after {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.image-overlay-primary::after {
+  background: rgba(65, 184, 131, 0.3);
+}
+
+.image-overlay-gradient::after {
+  background: var(--gradient-primary);
+  opacity: 0.3;
+}
+
+/* ===== 圖片載入狀態 ===== */
+.image-loading {
+  background-color: var(--background-secondary);
+  background-image: linear-gradient(90deg, var(--background-secondary) 0px, rgba(255, 255, 255, 0.5) 40px, var(--background-secondary) 80px);
+  background-size: 200px;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.image-placeholder {
+  background-color: var(--background-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ===== 圖片網格佈局 ===== */
+.image-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.image-grid-sm {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-sm);
+}
+
+.image-grid-lg {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+.image-grid-fixed-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.image-grid-fixed-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.image-grid-fixed-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ===== 圖片輪播容器 ===== */
+.image-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.image-carousel-container {
+  display: flex;
+  transition: transform var(--transition-base) ease;
+}
+
+.image-carousel-slide {
+  min-width: 100%;
+  height: 100%;
+}
+
+.image-carousel-nav {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.image-carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background var(--transition-base) ease;
+}
+
+.image-carousel-dot.active {
+  background: white;
+}
+
+/* ===== 圖片特殊效果 ===== */
+.image-glow {
+  filter: drop-shadow(0 0 10px var(--primary-color));
+}
+
+.image-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.image-pulse {
+  animation: pulse 2s infinite;
+}
+
+.image-rotate {
+  transition: transform var(--transition-base) ease;
+}
+
+.image-rotate:hover {
+  transform: rotate(5deg);
+}
+
+.image-flip {
+  transition: transform var(--transition-base) ease;
+}
+
+.image-flip:hover {
+  transform: scaleX(-1);
+}
+
+/* ===== 響應式圖片調整 ===== */
+@media (max-width: 640px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+  
+  .image-grid-fixed-3,
+  .image-grid-fixed-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .image-square-lg,
+  .image-square-xl {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .image-xl,
+  .image-2xl {
+    width: 4rem;
+    height: 4rem;
+  }
+  
+  /* 手機版圖片調整 */
+  .sm-image-full {
+    width: 100%;
+    height: auto;
+  }
+  
+  .sm-image-center {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .image-grid-fixed-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* 平板版圖片調整 */
+  .md-image-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  /* 桌面版圖片調整 */
+  .lg-image-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .lg-image-grid-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ===== 無障礙設計 ===== */
+.image-alt-text {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 圖片載入失敗時的處理 */
+img[alt]:after {
+  content: attr(alt);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-secondary);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-align: center;
+}

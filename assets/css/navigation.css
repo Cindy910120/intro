@@ -1,0 +1,203 @@
+/* ===== 導航系統樣式 ===== */
+/* 專門處理網站導航相關的樣式 */
+
+/* ===== 主導航容器 ===== */
+.navbar {
+  width: 100%;
+  background-color: var(--background-primary);
+  padding: var(--space-lg) 0;
+  box-shadow: var(--shadow-sm);
+  min-height: 9vh;
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.site-title {
+  flex: 0 0 30%;
+  text-align: left;
+}
+
+.site-title-text {
+  margin: 0;
+  font-size: var(--text-2xl);
+  background: var(--gradient-accent);
+  background-size: 100% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 4s ease infinite;
+}
+
+/* ===== 導航菜單 ===== */
+nav {
+  flex: 0 0 70%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+}
+
+.nav-list li {
+  text-align: center;
+  flex: 1;
+}
+
+/* ===== 導航鏈接樣式 ===== */
+.nav-link {
+  text-decoration: none;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  padding: var(--space-sm);
+  background: linear-gradient(45deg, #ff6b6b, #5f27cd, #48dbfb);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s linear infinite;
+  transition: all var(--transition-base) ease;
+}
+
+.nav-link:hover {
+  animation: gradient 1s linear infinite;
+}
+
+/* ===== 活動狀態樣式 ===== */
+.nav-link.router-link-active {
+  position: relative;
+  font-weight: 900;
+  background: var(--gradient-accent);
+  background-size: 100% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-link.router-link-active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-sm);
+}
+
+/* ===== 響應式導航 ===== */
+@media (min-width: 769px) {
+  .navbar {
+    min-height: 11vh;
+    padding: var(--space-xl) 0;
+  }
+  
+  .site-title-text {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    min-height: auto;
+    padding: var(--space-lg) 0;
+  }
+  
+  .site-title-text {
+    font-size: 1.8rem;
+  }
+  
+  .header-container {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .site-title, nav {
+    flex: none;
+  }
+  
+  .nav-list {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+  
+  .nav-list li {
+    flex: none;
+  }
+  
+  .nav-link.router-link-active::after {
+    width: 20px;
+    height: 2px;
+  }
+}
+
+/* ===== 移動端菜單切換 ===== */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: var(--text-xl);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.mobile-menu-toggle:hover {
+  color: var(--primary-color);
+}
+
+@media (max-width: 480px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .nav-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background-primary);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+  
+  .nav-list.active {
+    display: flex;
+  }
+  
+  .nav-list li {
+    width: 100%;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: var(--space-md);
+    text-align: center;
+    border-radius: var(--radius-md);
+  }
+  
+  .nav-link:hover {
+    background: var(--background-secondary);
+  }
+}

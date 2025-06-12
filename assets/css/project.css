@@ -1,0 +1,540 @@
+/* ===== 專題頁面樣式系統 ===== */
+/* 專門處理專題介紹頁面的複雜布局和動畫效果 */
+
+/* ===== 專題頁面容器 ===== */
+.project-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-2xl);
+  position: relative;
+  min-height: 100vh;
+  background: var(--gradient-secondary);
+  overflow-x: hidden;
+}
+
+/* ===== 動態背景裝飾 ===== */
+.background-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-shape {
+  position: absolute;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 80px;
+  height: 80px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.shape-3 {
+  width: 60px;
+  height: 60px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+.shape-4 {
+  width: 100px;
+  height: 100px;
+  top: 30%;
+  right: 30%;
+  animation-delay: 1s;
+}
+
+/* ===== 專題標題區域 ===== */
+.header-section {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+  position: relative;
+  z-index: 1;
+}
+
+.animated-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.title-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: titleReveal 0.8s ease forwards;
+}
+
+.title-word:nth-child(1) { animation-delay: 0.1s; }
+.title-word:nth-child(2) { animation-delay: 0.2s; }
+.title-word:nth-child(3) { animation-delay: 0.3s; }
+.title-word:nth-child(4) { animation-delay: 0.4s; }
+
+.title-emoji {
+  display: inline-block;
+  font-size: 4rem;
+  animation: rocketLaunch 2s ease-in-out infinite;
+  margin-left: var(--space-md);
+}
+
+.title-underline {
+  width: 200px;
+  height: 4px;
+  background: var(--gradient-accent);
+  margin: var(--space-lg) auto;
+  border-radius: var(--radius-sm);
+  transform: scaleX(0);
+  animation: underlineGrow 1s ease forwards 0.6s;
+}
+
+/* ===== 專題介紹卡片 ===== */
+.project-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+  position: relative;
+  z-index: 1;
+}
+
+.intro-card {
+  background: var(--background-primary);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base) cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base) ease;
+  z-index: -1;
+}
+
+.intro-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  color: white;
+}
+
+.intro-card:hover::before {
+  opacity: 1;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-lg);
+  display: block;
+  transition: transform var(--transition-base) ease;
+}
+
+.intro-card:hover .card-icon {
+  transform: scale(1.2) rotate(360deg);
+}
+
+.intro-card h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+  transition: color var(--transition-base) ease;
+}
+
+.intro-card:hover h2 {
+  color: white;
+}
+
+.intro-card p {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  transition: color var(--transition-base) ease;
+}
+
+.intro-card:hover p {
+  color: white;
+}
+
+/* ===== 專題亮點區域 ===== */
+.project-highlights {
+  margin-bottom: var(--space-3xl);
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  text-align: center;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2xl);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.highlight-text {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+.highlight-item {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all var(--transition-base) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-item::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: transform var(--transition-slow) ease;
+}
+
+.highlight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.highlight-item:hover::before {
+  transform: rotate(45deg) translate(100%, 100%);
+}
+
+.highlight-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-lg);
+  display: block;
+  transition: transform var(--transition-base) ease;
+}
+
+.highlight-item:hover .highlight-icon {
+  transform: scale(1.2);
+}
+
+.highlight-item h3 {
+  color: white;
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+
+.highlight-item p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* ===== 技術棧展示 ===== */
+.tech-stack {
+  margin-bottom: var(--space-3xl);
+  position: relative;
+  z-index: 1;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.tech-item {
+  background: var(--background-primary);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) ease;
+  position: relative;
+}
+
+.tech-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: var(--shadow-xl);
+}
+
+.tech-logo {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--space-md);
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  color: white;
+}
+
+.tech-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.tech-description {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ===== 專題連結區域 ===== */
+.project-links {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--space-3xl);
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.project-link {
+  display: block;
+  padding: var(--space-xl);
+  background: var(--gradient-pink);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left var(--transition-slow) ease;
+}
+
+.project-link:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.project-link:hover::before {
+  left: 100%;
+}
+
+.link-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+.link-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.link-description {
+  font-size: var(--text-sm);
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== 動畫關鍵幀 ===== */
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rocketLaunch {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-5deg);
+  }
+}
+
+@keyframes underlineGrow {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.7;
+  }
+}
+
+/* ===== 滾動動畫 ===== */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 響應式設計 ===== */
+@media (max-width: 768px) {
+  .project-page-container {
+    padding: var(--space-lg);
+  }
+  
+  .animated-title {
+    font-size: 2.5rem;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .title-emoji {
+    font-size: 3rem;
+    margin-left: 0;
+  }
+  
+  .project-intro {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .intro-card {
+    padding: var(--space-lg);
+  }
+  
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+  
+  .links-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .floating-shape {
+    opacity: 0.5;
+  }
+  
+  .shape-1, .shape-3 {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .shape-2, .shape-4 {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: var(--text-2xl);
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .highlight-icon {
+    font-size: 2rem;
+  }
+}

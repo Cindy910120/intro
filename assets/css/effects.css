@@ -1,0 +1,407 @@
+/* ===== 特殊效果和動畫背景系統 ===== */
+/* 提供複雜的背景動畫、形狀動畫和特殊視覺效果 */
+
+/* ===== 動態背景系統 ===== */
+.page-container {
+  position: relative;
+  width: 100%;
+  min-height: 67vh;
+  overflow: hidden;
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 50%, #f7f1ff 100%);
+  animation: backgroundShift 30s ease-in-out infinite;
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== 背景形狀基礎類 ===== */
+.shape {
+  position: absolute;
+  border-radius: var(--radius-full);
+  opacity: 0.2;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ===== 圓形背景元素 ===== */
+.bg-circle-lg {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--primary-color), transparent);
+  top: -100px;
+  left: -100px;
+  animation: float 20s infinite;
+}
+
+.bg-circle-md {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--text-secondary), transparent);
+  bottom: -50px;
+  right: -50px;
+  animation: float 15s infinite reverse;
+}
+
+.bg-circle-sm {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, var(--secondary-color), transparent);
+  top: 60%;
+  left: 80%;
+  animation: pulse 8s infinite;
+}
+
+/* ===== 方形背景元素 ===== */
+.bg-square-lg {
+  width: 150px;
+  height: 150px;
+  background: var(--primary-color);
+  border-radius: var(--radius-lg);
+  top: 40%;
+  left: 20px;
+  animation: rotate 25s infinite;
+}
+
+.bg-square-md {
+  width: 100px;
+  height: 100px;
+  background: var(--gradient-secondary);
+  border-radius: var(--radius-md);
+  top: 10%;
+  right: 25%;
+  animation: bounce 12s infinite;
+}
+
+/* ===== 三角形背景元素 ===== */
+.bg-triangle-lg {
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 150px solid rgba(65, 184, 131, 0.2);
+  border-radius: 0;
+  right: 15%;
+  top: 30%;
+  animation: float 18s infinite;
+}
+
+.bg-triangle-sm {
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 90px solid rgba(255, 107, 107, 0.3);
+  border-radius: 0;
+  left: 10%;
+  bottom: 30%;
+  animation: wiggle 10s infinite;
+}
+
+/* ===== 矩形背景元素 ===== */
+.bg-rect-lg {
+  width: 200px;
+  height: 100px;
+  background: rgba(53, 73, 94, 0.2);
+  border-radius: var(--radius-lg);
+  top: 70%;
+  right: 30%;
+  animation: rotate 30s infinite reverse;
+}
+
+.bg-rect-sm {
+  width: 120px;
+  height: 60px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  bottom: 20%;
+  left: 35%;
+  animation: float 22s infinite;
+}
+
+/* ===== 六邊形背景元素 ===== */
+.bg-hexagon {
+  width: 100px;
+  height: 100px;
+  background: rgba(102, 126, 234, 0.3);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+  top: 20%;
+  left: 60%;
+  animation: spin 35s infinite;
+}
+
+/* ===== 星形背景元素 ===== */
+.bg-star {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-color);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  bottom: 40%;
+  right: 10%;
+  animation: sparkle 8s infinite;
+}
+
+/* ===== 浮動點背景 ===== */
+.floating-dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.floating-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: var(--radius-full);
+  animation: floatDot 15s infinite linear;
+}
+
+.floating-dot:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 15s;
+}
+
+.floating-dot:nth-child(2) {
+  left: 30%;
+  animation-delay: 3s;
+  animation-duration: 18s;
+}
+
+.floating-dot:nth-child(3) {
+  left: 50%;
+  animation-delay: 6s;
+  animation-duration: 12s;
+}
+
+.floating-dot:nth-child(4) {
+  left: 70%;
+  animation-delay: 9s;
+  animation-duration: 20s;
+}
+
+.floating-dot:nth-child(5) {
+  left: 90%;
+  animation-delay: 12s;
+  animation-duration: 16s;
+}
+
+/* ===== 主要內容容器 ===== */
+.main-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) 0;
+  min-height: 60vh;
+}
+
+/* ===== 首頁專用樣式 ===== */
+.home-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleGlow 4s ease-in-out infinite alternate;
+}
+
+.home-subtitle {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+  opacity: 0.8;
+}
+
+.home-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.home-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-2xl);
+  background: var(--gradient-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  transition: all var(--transition-base) ease;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  min-width: 280px;
+}
+
+.home-link-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left var(--transition-slow);
+}
+
+.home-link-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+}
+
+.home-link-button:hover::before {
+  left: 100%;
+}
+
+.home-link-button:nth-child(2) {
+  background: var(--gradient-secondary);
+}
+
+.home-link-button:nth-child(3) {
+  background: var(--gradient-pink);
+}
+
+/* ===== 複雜動畫關鍵幀 ===== */
+@keyframes backgroundShift {
+  0%, 100% {
+    background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 50%, #f7f1ff 100%);
+  }
+  25% {
+    background: linear-gradient(120deg, #f7f1ff 0%, #fdfbfb 50%, #e8f5e8 100%);
+  }
+  50% {
+    background: linear-gradient(120deg, #e8f5e8 0%, #f7f1ff 50%, #fff0f5 100%);
+  }
+  75% {
+    background: linear-gradient(120deg, #fff0f5 0%, #e8f5e8 50%, #fdfbfb 100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-20px) translateX(15px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+@keyframes floatDot {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(102, 126, 234, 0.5), 0 0 40px rgba(255, 107, 107, 0.3);
+  }
+}
+
+/* ===== 響應式設計 ===== */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .home-links {
+    gap: var(--space-md);
+  }
+  
+  .home-link-button {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--text-base);
+    min-width: 240px;
+  }
+  
+  /* 減少動畫複雜度 */
+  .bg-circle-lg,
+  .bg-circle-md {
+    animation-duration: 30s;
+  }
+  
+  .bg-square-lg,
+  .bg-square-md {
+    animation-duration: 40s;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-links {
+    flex-direction: row;
+    gap: var(--space-xl);
+  }
+}

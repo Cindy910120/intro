@@ -1,0 +1,500 @@
+/* ===== 個人資料頁面樣式系統 ===== */
+/* 專門處理關於我們/個人資料頁面的複雜布局和交互效果 */
+
+/* ===== 彈出窗口觸發按鈕 ===== */
+.popup-trigger-container {
+  position: fixed;
+  top: 50%;
+  right: var(--space-lg);
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.popup-trigger-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-pink);
+  border: none;
+  border-radius: var(--radius-full);
+  color: white;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base) ease;
+  animation: pulse 3s infinite;
+}
+
+.popup-trigger-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-xl);
+}
+
+.trigger-icon {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-xs);
+}
+
+.trigger-text {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ===== 個人資料區塊 ===== */
+.intro-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.profile-text {
+  flex: 1;
+}
+
+.profile-text h2 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}
+
+.info-group {
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--background-secondary);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.info-group h3 {
+  color: var(--primary-color);
+  margin-bottom: var(--space-md);
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.info-group p {
+  margin-bottom: var(--space-sm);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.info-group a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-base) ease;
+}
+
+.info-group a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* ===== 個人特質展示 ===== */
+.traits-title {
+  margin-bottom: var(--space-lg);
+}
+
+.personality-traits {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: 1fr;
+}
+
+.trait-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--background-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.trait-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.trait-icon {
+  font-size: var(--text-2xl);
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--background-secondary);
+}
+
+.trait-content h4 {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.trait-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.trait-decoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: var(--gradient-primary);
+  opacity: 0.05;
+  border-radius: var(--radius-full);
+  transform: translate(50%, -50%);
+}
+
+/* 特質類型變體 */
+.trait-responsible .trait-icon {
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.trait-learning .trait-icon {
+  background: rgba(65, 184, 131, 0.1);
+}
+
+.trait-active .trait-icon {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.trait-communication .trait-icon {
+  background: rgba(255, 193, 7, 0.1);
+}
+
+.trait-analysis .trait-icon {
+  background: rgba(156, 39, 176, 0.1);
+}
+
+/* ===== 活動圖片展示 ===== */
+.activities-gallery {
+  margin: var(--space-lg) 0;
+}
+
+.activity-item {
+  background: var(--background-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.activity-image-compact {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.activity-slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.activity-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--transition-base) ease;
+}
+
+.activity-slide.active {
+  opacity: 1;
+}
+
+.activity-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  cursor: pointer;
+  transition: transform var(--transition-base) ease;
+}
+
+.activity-slide img:hover {
+  transform: scale(1.05);
+}
+
+.activity-slide-counter {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+
+.activity-slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  font-size: var(--text-lg);
+  transition: background var(--transition-base) ease;
+}
+
+.activity-slide-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.activity-slide-nav.prev {
+  left: var(--space-sm);
+}
+
+.activity-slide-nav.next {
+  right: var(--space-sm);
+}
+
+.activity-description {
+  padding: var(--space-lg);
+}
+
+.activity-description h4 {
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.activity-description p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== 興趣愛好展示 ===== */
+.interests-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.interest-item {
+  background: var(--background-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) ease;
+}
+
+.interest-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.interest-header {
+  padding: var(--space-lg);
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.interest-header h3 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.interest-slideshow {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.interest-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--transition-base) ease;
+}
+
+.interest-slide.active {
+  opacity: 1;
+}
+
+.interest-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.interest-description {
+  padding: var(--space-lg);
+}
+
+.interest-description p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== 燈箱效果 ===== */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base) ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: var(--text-2xl);
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  font-size: var(--text-xl);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-base) ease;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-nav.prev {
+  left: -80px;
+}
+
+.lightbox-nav.next {
+  right: -80px;
+}
+
+/* ===== 響應式設計 ===== */
+@media (min-width: 768px) {
+  .personality-traits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .profile-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup-trigger-container {
+    right: var(--space-md);
+  }
+  
+  .popup-trigger-btn {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .trigger-icon {
+    font-size: var(--text-base);
+  }
+  
+  .trigger-text {
+    font-size: 10px;
+  }
+  
+  .trait-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .trait-icon {
+    align-self: center;
+  }
+  
+  .interests-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .activity-slide-nav {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-base);
+  }
+  
+  .lightbox-nav {
+    position: fixed;
+    top: auto;
+    bottom: var(--space-lg);
+  }
+  
+  .lightbox-nav.prev {
+    left: var(--space-lg);
+  }
+  
+  .lightbox-nav.next {
+    right: var(--space-lg);
+  }
+}

@@ -1,0 +1,117 @@
+/* ===== 主要樣式導入文件 ===== */
+/* 統一導入所有模組化的 CSS 文件，建立完整的設計系統 */
+
+/* 1. 基礎變數和重置樣式 */
+@import './variables.css';
+@import './base.css';
+
+/* 2. 色彩系統 */
+@import './colors.css';
+
+/* 3. 字體系統 */
+@import './typography.css';
+
+/* 4. 按鈕系統 */
+@import './buttons.css';
+
+/* 5. 卡片系統 */
+@import './cards.css';
+
+/* 6. 布局系統 */
+@import './layout.css';
+
+/* 7. 動畫系統 */
+@import './animations.css';
+
+/* 8. 圖片系統 */
+@import './images.css';
+
+/* 9. 特殊效果和動畫背景 */
+@import './effects.css';
+
+/* 10. 導航系統 */
+@import './navigation.css';
+
+/* 11. 個人資料頁面 */
+@import './profile.css';
+
+/* 12. 專案頁面 */
+@import './project.css';
+
+/* 13. 工具類 */
+@import './utilities.css';
+
+/* ===== 額外的全局樣式 ===== */
+/* 這裡可以添加一些特定的全局樣式，不屬於任何特定模組 */
+
+/* 導航樣式系統 */
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  padding: var(--space-sm);
+  background: linear-gradient(45deg, #ff6b6b, #5f27cd, #48dbfb);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s linear infinite;
+  transition: all var(--transition-base) ease;
+}
+
+.nav-link:hover {
+  animation: gradient 1s linear infinite;
+}
+
+.nav-link-active {
+  position: relative;
+  font-weight: 900;
+  background: var(--gradient-accent);
+  background-size: 100% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-sm);
+}
+
+/* 表單樣式系統 */
+.form-input {
+  width: 100%;
+  padding: var(--space-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--text-base);
+  transition: all var(--transition-base) ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(65, 184, 131, 0.1);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* 全局響應式調整 */
+@media (max-width: 768px) {
+  .nav-link-active::after {
+    width: 20px;
+    height: 2px;
+  }
+}

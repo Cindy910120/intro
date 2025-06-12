@@ -1,76 +1,93 @@
 <template>
-  <div class="container">
-    <h1>各項學習筆記</h1>
-    <p>這個頁面收集了我撰寫的各種筆記與資料文件</p>
+  <div class="data-container">
+    <h1 class="data-title">技術學習筆記集</h1>
+    <p class="data-description">這裡收集了我在學習過程中整理的各項技術筆記與學習心得，涵蓋開發工具使用、飛控系統研究等領域</p>
 
-    <div class="content-sections">
+    <div class="data-content-sections">
       <!-- GitHub 區域 -->
-      <div class="content-section">
-        <h2>GitHub 筆記</h2>
-        <div class="card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/HkuPMjWGxg')">
-          <div class="card-thumbnail github">
-            <img src="/images/github-logo.svg" alt="GitHub Logo" class="fallback-img" />
+      <div class="data-content-section">
+        <h2 class="data-section-title">開發工具學習筆記</h2>
+        <div class="data-cards-grid">
+          <div class="data-card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/HkuPMjWGxg')">
+            <div class="data-card-thumbnail github">
+              <img src="/images/github-logo.svg" alt="GitHub Logo" class="data-card-img" />
+            </div>
+            <div class="data-card-content">
+              <h3>GitHub 版本控制完整指南</h3>
+              <p class="data-card-description">
+                涵蓋 Git 基本指令、分支管理策略、團隊協作流程、衝突解決等實務開發必備技能的完整教學
+              </p>
+              <div class="data-card-footer">
+                <span class="data-view-link">點擊查看全文</span>
+              </div>
+            </div>
           </div>
-          <div class="card-content">
-            <h3>GitHub 入門指南</h3>
-            <p class="card-description">
-              包含 Git 基本指令、分支管理、協作流程等重要概念的詳細說明...
-            </p>
-            <div class="card-footer">
-              <span class="view-link">點擊查看全文</span>
+
+          <div class="data-card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/HkFd81DQxl')">
+            <div class="data-card-thumbnail development">
+              <div class="data-icon-placeholder">📚</div>
+            </div>
+            <div class="data-card-content">
+              <h3>PX4程式開發學習筆記</h3>
+              <p class="data-card-description">
+                整理程式設計相關的學習心得、技術要點及實務經驗分享
+              </p>
+              <div class="data-card-footer">
+                <span class="data-view-link">點擊查看全文</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- PX4 區域 -->
-      <div class="content-section">
-        <h2>PX4 學習筆記</h2>
-        <div class="cards-grid">
+      <div class="data-content-section">
+        <h2 class="data-section-title">PX4 飛控系統學習筆記</h2>
+        <div class="data-cards-grid">
           <!-- PX4 文檔 1 -->
-          <div class="card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/Hyunr2JS2')">
-            <div class="card-thumbnail px4">
-              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="fallback-img" />
+          <div class="data-card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/Hyunr2JS2')">
+            <div class="data-card-thumbnail px4">
+              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="data-card-img" />
             </div>
-            <div class="card-content">
-              <h3>PX4 環境設置</h3>
-              <p class="card-description">
-                PX4 開發環境的安裝與配置指南...
+            <div class="data-card-content">
+              <h3>PX4 開發環境建置指南</h3>
+              <p class="data-card-description">
+                詳細介紹PX4開發環境的安裝配置流程，包含工具鏈設置、編譯環境準備及常見問題排解
               </p>
-              <div class="card-footer">
-                <span class="view-link">點擊查看全文</span>
+              <div class="data-card-footer">
+                <span class="data-view-link">點擊查看全文</span>
               </div>
             </div>
           </div>
 
           <!-- PX4 文檔 2 -->
-          <div class="card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/SyBNddx-lx')">
-            <div class="card-thumbnail px4">
-              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="fallback-img" />
+          <div class="data-card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/SyBNddx-lx')">
+            <div class="data-card-thumbnail px4">
+              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="data-card-img" />
             </div>
-            <div class="card-content">
-              <h3>PX4 模擬器使用</h3>
-              <p class="card-description">
-                如何使用 Gazebo 和 SITL 進行 PX4 飛行控制模擬...
+            <div class="data-card-content">
+              <h3>PX4 SITL模擬器實戰教學</h3>
+              <p class="data-card-description">
+                深入探討如何使用Gazebo進行PX4飛行控制模擬，涵蓋SITL配置、場景設定及飛行測試實務
               </p>
-              <div class="card-footer">
-                <span class="view-link">點擊查看全文</span>
+              <div class="data-card-footer">
+                <span class="data-view-link">點擊查看全文</span>
               </div>
             </div>
           </div>
 
           <!-- PX4 文檔 3 -->
-          <div class="card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/B1v8Si-zll')">
-            <div class="card-thumbnail px4">
-              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="fallback-img" />
+          <div class="data-card" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/B1v8Si-zll')">
+            <div class="data-card-thumbnail px4">
+              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="data-card-img" />
             </div>
-            <div class="card-content">
-              <h3>認識PX4</h3>
-              <p class="card-description">
-                認識飛行控制器功能與應用開發指南...
+            <div class="data-card-content">
+              <h3>PX4飛控系統架構深度解析</h3>
+              <p class="data-card-description">
+                深入了解PX4飛行控制器的核心架構、模組功能及無人機應用開發的關鍵技術要點
               </p>
-              <div class="card-footer">
-                <span class="view-link">點擊查看全文</span>
+              <div class="data-card-footer">
+                <span class="data-view-link">點擊查看全文</span>
               </div>
             </div>
           </div>
@@ -90,120 +107,5 @@ const openLink = (url) => {
 </script>
 
 <style scoped>
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-h1 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  color: #34495e;
-  margin: 2rem 0 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #eee;
-}
-
-p {
-  font-size: 1.2em;
-  line-height: 1.5;
-}
-
-.content-sections {
-  margin-top: 2rem;
-}
-
-.content-section {
-  margin-bottom: 3rem;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  height: 100%;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-}
-
-.card-thumbnail {
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.card-thumbnail.github {
-  background: linear-gradient(135deg, #2b3137 0%, #24292e 100%);
-}
-
-.card-thumbnail.px4 {
-  background: linear-gradient(135deg, #0094D6 0%, #00557D 100%);
-}
-
-.fallback-img {
-  max-width: 50%;
-  max-height: 50%;
-  object-fit: contain;
-}
-
-.card-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-h3 {
-  margin: 0 0 1rem 0;
-  color: #2c3e50;
-  font-size: 1.3rem;
-}
-
-.card-description {
-  margin: 0;
-  color: #666;
-  font-size: 1rem;
-  line-height: 1.5;
-  flex: 1;
-}
-
-.card-footer {
-  margin-top: 1.5rem;
-  text-align: right;
-}
-
-.view-link {
-  color: #41b883;
-  font-weight: 600;
-}
-
-.view-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  .cards-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* 數據頁面樣式已移至模組化 CSS 系統，僅保留特定頁面的補充樣式 */
 </style>
