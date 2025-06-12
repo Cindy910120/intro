@@ -55,12 +55,14 @@
   --shadow-light: rgba(0, 0, 0, 0.05);
   --shadow-medium: rgba(0, 0, 0, 0.1);
   --shadow-heavy: rgba(0, 0, 0, 0.15);
-  
-  /* 漸層色調 */
-  --gradient-primary: linear-gradient(45deg, var(--color-primary), var(--color-accent));
-  --gradient-secondary: var(--color-bg-gradient);
-  --gradient-accent: linear-gradient(45deg, var(--color-accent), var(--color-primary-light));
-  --gradient-pink: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    /* 漸層色調 - 重新設計協調配色 */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-pink: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  --gradient-warm: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  --gradient-cool: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --gradient-sunset: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
   
   /* 間距系統 */
   --space-xs: 0.25rem;
