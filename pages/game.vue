@@ -85,20 +85,25 @@
             開始測試
           </button>
         </div>
-      </div>
-
-      <!-- 遊戲3: 數字接龍 -->
+      </div>      <!-- 遊戲3: 數字接龍 -->
       <div v-if="currentGame === 2" class="number-game game-content">
         <div class="game-info">
           <h3>🔢 數字接龍</h3>
           <p>按順序點擊數字 1-25！</p>
           <div class="game-stats">
-            <span>時間: {{ numberGame.time }}s</span>
-            <span>進度: {{ numberGame.current }}/25</span>
-            <button @click="resetNumberGame" class="reset-btn">重新開始</button>
+            <span v-if="numberGame.isPlaying">時間: {{ numberGame.time }}s</span>
+            <span v-if="numberGame.isPlaying">進度: {{ numberGame.current }}/25</span>
+            <button @click="numberGame.isPlaying ? resetNumberGame() : startNumberGame()" class="reset-btn">
+              {{ numberGame.isPlaying ? '重新開始' : '開始遊戲' }}
+            </button>
           </div>
         </div>
-        <div class="number-board">          <div
+        <div v-if="!numberGame.isPlaying && !numberGame.gameCompleted" class="waiting-message">
+          <div class="waiting-icon">🎯</div>
+          <div class="waiting-text">點擊「開始遊戲」開始挑戰！</div>
+        </div>
+        <div v-else class="number-board">
+          <div
             v-for="(number, index) in numberGame.numbers"
             :key="index"
             @click="clickNumber(number)"
@@ -107,13 +112,13 @@
               wrong: number.wrong 
             }]"
           >
-            {{ number.value }}
+            {{ numberGame.isPlaying || number.clicked ? number.value : '?' }}
           </div>
         </div>
-        <div v-if="numberGame.current > 25" class="victory-message">
+        <div v-if="numberGame.gameCompleted" class="victory-message">
           🎉 完成！用時 {{ numberGame.time }} 秒
         </div>
-      </div>      <!-- 遊戲4: 顏色匹配 -->
+      </div><!-- 遊戲4: 顏色匹配 -->
       <div v-if="currentGame === 3" class="color-game game-content">
         <div class="game-info">
           <h3>🎨 顏色匹配</h3>
@@ -366,7 +371,9 @@ const numberGame = reactive({
   current: 1,
   time: 0,
   timer: null,
-  startTime: null
+  startTime: null,
+  isPlaying: false,
+  gameCompleted: false
 })
 
 const initNumberGame = () => {
@@ -380,25 +387,42 @@ const initNumberGame = () => {
   numberGame.current = 1
   numberGame.time = 0
   numberGame.startTime = null
+  numberGame.isPlaying = false
+  numberGame.gameCompleted = false
   clearInterval(numberGame.timer)
 }
 
-const clickNumber = (number) => {
-  if (number.clicked) return
+const startNumberGame = () => {
+  numberGame.isPlaying = true
+  numberGame.gameCompleted = false
+  numberGame.current = 1
+  numberGame.time = 0
+  numberGame.startTime = Date.now()
   
-  if (!numberGame.startTime) {
-    numberGame.startTime = Date.now()
-    numberGame.timer = setInterval(() => {
-      numberGame.time = Math.floor((Date.now() - numberGame.startTime) / 1000)
-    }, 100)
-  }
+  // 重置所有數字的狀態
+  numberGame.numbers.forEach(number => {
+    number.clicked = false
+    number.wrong = false
+  })
+  
+  numberGame.timer = setInterval(() => {
+    numberGame.time = Math.floor((Date.now() - numberGame.startTime) / 1000)
+  }, 100)
+}
+
+const clickNumber = (number) => {
+  if (number.clicked || !numberGame.isPlaying) return
   
   if (number.value === numberGame.current) {
     number.clicked = true
     numberGame.current++
-      if (numberGame.current > 25) {
+    
+    if (numberGame.current > 25) {
       clearInterval(numberGame.timer)
-        // 儲存遊戲紀錄
+      numberGame.isPlaying = false
+      numberGame.gameCompleted = true
+      
+      // 儲存遊戲紀錄
       saveCurrentGameRecord({
         gameName: '數字接龍',
         score: 0, // 數字接龍不計分數，主要看時間
@@ -416,6 +440,7 @@ const clickNumber = (number) => {
 }
 
 const resetNumberGame = () => {
+  clearInterval(numberGame.timer)
   initNumberGame()
 }
 
@@ -876,20 +901,31 @@ onUnmounted(() => {
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
+  font-size: 1.2rem;
 }
 
 .number-cell:hover {
   background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
 }
 
 .number-cell.clicked {
   background: #51cf66;
   color: white;
+  transform: scale(1.1);
 }
 
 .number-cell.wrong {
   background: #ff6b6b;
   animation: shake 0.5s ease;
+}
+
+/* 隱藏狀態的數字格子樣式 */
+.number-game:not(.playing) .number-cell:not(.clicked) {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
 }
 
 @keyframes bounce {
