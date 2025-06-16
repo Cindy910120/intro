@@ -13,89 +13,158 @@
           @input="onPlayerNameChange"
         />
       </div>
-    </div>
-
-    <!-- 檢視模式切換按鈕 -->
-    <div class="mode-toggle-section">
-      <button
-        @click="toggleViewMode"
-        :class="['mode-toggle-btn', `btn-${viewMode}`]"
-      >
-        <div class="btn-icon">
-          {{ viewMode === 'personal' ? '👤' : '🌟' }}
-        </div>
-        <div class="btn-content">
-          <div class="btn-title">{{ viewMode === 'personal' ? '個人紀錄' : '全球排行' }}</div>
-          <div class="btn-subtitle">{{ viewMode === 'personal' ? '我的成績' : '頂尖玩家' }}</div>
-        </div>
-        <div class="btn-indicator">
-          <div :class="['indicator-dot', `dot-${viewMode}`]"></div>
-        </div>
-      </button>
-    </div>
-
-    <!-- 最佳紀錄展示 -->
-    <div v-if="!isLoading && getBestRecord" :class="['best-record-card', `best-${viewMode}`]">
+    </div>    <!-- 個人最佳紀錄展示 -->
+    <div v-if="!isPersonalLoading && getPersonalBest" class="best-record-card best-personal">
       <div class="best-header">
-        <div class="best-crown">{{ viewMode === 'personal' ? '⭐' : '👑' }}</div>
+        <div class="best-crown">⭐</div>
         <div class="best-title">
-          <div class="title-main">{{ viewMode === 'personal' ? '個人最佳' : '全球冠軍' }}</div>
-          <div class="title-sub">{{ viewMode === 'personal' ? 'Personal Best' : 'Global Champion' }}</div>
+          <div class="title-main">個人最佳</div>
+          <div class="title-sub">Personal Best</div>
         </div>
       </div>
       <div class="best-content">
         <div class="player-info">
-          <div class="player-name">{{ getBestRecord.playerName }}</div>
-          <div v-if="getBestRecord.playerName === playerName && viewMode === 'global'" class="self-badge">YOU</div>
+          <div class="player-name">{{ getPersonalBest.playerName }}</div>
         </div>
         <div class="score-display">
-          <template v-if="getBestRecord.gameType === 'memory'">
-            <div class="score-value">{{ getBestRecord.moves }}</div>
+          <template v-if="getPersonalBest.gameType === 'memory'">
+            <div class="score-value">{{ getPersonalBest.moves }}</div>
             <div class="score-unit">步</div>
           </template>
-          <template v-else-if="getBestRecord.gameType === 'reaction'">
-            <div class="score-value">{{ getBestRecord.time }}</div>
+          <template v-else-if="getPersonalBest.gameType === 'reaction'">
+            <div class="score-value">{{ getPersonalBest.time }}</div>
             <div class="score-unit">ms</div>
           </template>
-          <template v-else-if="getBestRecord.gameType === 'number'">
-            <div class="score-value">{{ getBestRecord.time }}</div>
+          <template v-else-if="getPersonalBest.gameType === 'number'">
+            <div class="score-value">{{ getPersonalBest.time }}</div>
             <div class="score-unit">秒</div>
           </template>
           <template v-else>
-            <div class="score-value">{{ getBestRecord.score }}</div>
+            <div class="score-value">{{ getPersonalBest.score }}</div>
             <div class="score-unit">分</div>
           </template>
         </div>
-        <div class="record-time">{{ formatDate(getBestRecord.completedAt) }}</div>
+        <div class="record-time">{{ formatDate(getPersonalBest.completedAt) }}</div>
       </div>
     </div>
 
-    <!-- 紀錄排行榜 -->
-    <div :class="['records-section', `records-${viewMode}`]">
+    <!-- 個人紀錄排行榜 -->
+    <div class="records-section records-personal">
       <div class="section-header">
-        <div class="header-icon">{{ viewMode === 'personal' ? '📊' : '🏆' }}</div>
-        <div class="header-title">紀錄排行</div>
-        <div class="header-count">({{ filteredRecords.length }})</div>
+        <div class="header-icon">👤</div>
+        <div class="header-title">個人紀錄</div>
+        <div class="header-count">({{ personalRecords.length }})</div>
       </div>
 
       <!-- 載入中狀態 -->
-      <div v-if="isLoading" class="loading-state">
+      <div v-if="isPersonalLoading" class="loading-state">
         <div class="loading-spinner"></div>
-        <div class="loading-text">載入紀錄中...</div>
+        <div class="loading-text">載入個人紀錄中...</div>
       </div>
 
       <!-- 空狀態 -->
-      <div v-else-if="filteredRecords.length === 0" class="empty-state">
+      <div v-else-if="personalRecords.length === 0" class="empty-state">
         <div class="empty-icon">🎯</div>
-        <div class="empty-text">還沒有紀錄</div>
+        <div class="empty-text">還沒有個人紀錄</div>
         <div class="empty-hint">開始遊戲創造第一個紀錄吧！</div>
       </div>
 
-      <!-- 紀錄列表 -->
+      <!-- 個人紀錄列表 -->
       <div v-else class="records-list">
         <div
-          v-for="(record, index) in filteredRecords"
-          :key="`${record.id}-${index}`"
+          v-for="(record, index) in personalRecords"
+          :key="`personal-${record.id}-${index}`"
+          class="record-card my-record"
+        >
+          <div class="rank-badge">
+            <div v-if="index < 3" class="medal">{{ ['🥇', '🥈', '🥉'][index] }}</div>
+            <div v-else class="rank-num">{{ index + 1 }}</div>
+          </div>
+          
+          <div class="record-content">
+            <div class="record-player">{{ record.playerName }}</div>
+            <div class="record-score">
+              <template v-if="record.gameType === 'memory'">
+                <span class="score-main">{{ record.moves }}步</span>
+              </template>
+              <template v-else-if="record.gameType === 'reaction'">
+                <span class="score-main">{{ record.time }}ms</span>
+              </template>
+              <template v-else-if="record.gameType === 'number'">
+                <span class="score-main">{{ formatTime(record.time) }}</span>
+              </template>
+              <template v-else>
+                <span class="score-main">{{ record.score }}分</span>
+              </template>
+            </div>
+            <div class="record-date">{{ formatDate(record.completedAt) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 全球最佳紀錄展示 -->
+    <div v-if="!isGlobalLoading && getGlobalBest" class="best-record-card best-global">
+      <div class="best-header">
+        <div class="best-crown">👑</div>
+        <div class="best-title">
+          <div class="title-main">全球冠軍</div>
+          <div class="title-sub">Global Champion</div>
+        </div>
+      </div>
+      <div class="best-content">
+        <div class="player-info">
+          <div class="player-name">{{ getGlobalBest.playerName }}</div>
+          <div v-if="getGlobalBest.playerName === playerName" class="self-badge">YOU</div>
+        </div>
+        <div class="score-display">
+          <template v-if="getGlobalBest.gameType === 'memory'">
+            <div class="score-value">{{ getGlobalBest.moves }}</div>
+            <div class="score-unit">步</div>
+          </template>
+          <template v-else-if="getGlobalBest.gameType === 'reaction'">
+            <div class="score-value">{{ getGlobalBest.time }}</div>
+            <div class="score-unit">ms</div>
+          </template>
+          <template v-else-if="getGlobalBest.gameType === 'number'">
+            <div class="score-value">{{ getGlobalBest.time }}</div>
+            <div class="score-unit">秒</div>
+          </template>
+          <template v-else>
+            <div class="score-value">{{ getGlobalBest.score }}</div>
+            <div class="score-unit">分</div>
+          </template>
+        </div>
+        <div class="record-time">{{ formatDate(getGlobalBest.completedAt) }}</div>
+      </div>
+    </div>
+
+    <!-- 全球玩家排行榜 -->
+    <div class="records-section records-global">
+      <div class="section-header">
+        <div class="header-icon">🏆</div>
+        <div class="header-title">全球排行</div>
+        <div class="header-count">({{ globalRecords.length }})</div>
+      </div>
+
+      <!-- 載入中狀態 -->
+      <div v-if="isGlobalLoading" class="loading-state">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">載入全球紀錄中...</div>
+      </div>
+
+      <!-- 空狀態 -->
+      <div v-else-if="globalRecords.length === 0" class="empty-state">
+        <div class="empty-icon">�</div>
+        <div class="empty-text">還沒有全球紀錄</div>
+        <div class="empty-hint">成為第一個玩家吧！</div>
+      </div>
+
+      <!-- 全球紀錄列表 -->
+      <div v-else class="records-list">
+        <div
+          v-for="(record, index) in globalRecords"
+          :key="`global-${record.id}-${index}`"
           :class="['record-card', { 'my-record': record.playerName === playerName }]"
         >
           <div class="rank-badge">
@@ -128,7 +197,7 @@
 </template>
 
 <script setup>
-import { watch, onUnmounted } from 'vue'
+import { watch, onUnmounted, onMounted } from 'vue'
 import { useGameRecords } from '~/composables/useGameRecords'
 
 const props = defineProps({
@@ -140,35 +209,65 @@ const props = defineProps({
 
 const {
   playerName,
-  viewMode,
-  isLoading,
-  filteredRecords,
-  getBestRecord,
+  isPersonalLoading,
+  isGlobalLoading,
+  personalRecords,
+  globalRecords,
+  getPersonalBest,
+  getGlobalBest,
   saveGameRecord,
-  startListening,
-  stopListening,
-  toggleViewMode,
+  startPersonalListening,
+  startGlobalListening,
+  stopPersonalListening,
+  stopGlobalListening,
+  preloadCommonGames,
   formatTime,
   formatDate
 } = useGameRecords()
 
-// 當玩家名稱改變時重新監聽
+// 組件載入時預載常用遊戲資料
+onMounted(() => {
+  preloadCommonGames()
+})
+
+// 當玩家名稱改變時重新監聽個人紀錄
 const onPlayerNameChange = () => {
-  if (viewMode.value === 'personal') {
-    startListening(props.gameName)
+  if (playerName.value.trim()) {
+    startPersonalListening(props.gameName)
+  } else {
+    stopPersonalListening()
   }
 }
 
 // 監聽遊戲名稱變化
 watch(() => props.gameName, (newGameName) => {
   if (newGameName) {
-    startListening(newGameName)
+    // 優先啟動全球紀錄監聽（通常資料較多，先載入）
+    startGlobalListening(newGameName)
+    
+    // 如果有玩家名稱，同時啟動個人紀錄監聽
+    if (playerName.value.trim()) {
+      startPersonalListening(newGameName)
+    }
+  }
+}, { immediate: true })
+
+// 監聽玩家名稱變化（優化：避免重複查詢）
+watch(() => playerName.value, (newPlayerName, oldPlayerName) => {
+  // 只有當玩家名稱真的改變且有遊戲名稱時才重新查詢
+  if (newPlayerName.trim() !== oldPlayerName?.trim() && props.gameName) {
+    if (newPlayerName.trim()) {
+      startPersonalListening(props.gameName)
+    } else {
+      stopPersonalListening()
+    }
   }
 }, { immediate: true })
 
 // 組件銷毀時停止監聽
 onUnmounted(() => {
-  stopListening()
+  stopPersonalListening()
+  stopGlobalListening()
 })
 
 // 暴露保存紀錄的方法給父組件使用
@@ -190,42 +289,6 @@ defineExpose({
   overflow-y: auto;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-/* 個人模式樣式 */
-.mode-personal {
-  border: 2px solid rgba(59, 130, 246, 0.4);
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.05) 100%);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
-}
-
-.mode-personal .mode-toggle-btn {
-  background: linear-gradient(135deg, #3b82f6 0%, #93c5fd 100%);
-  border-color: #3b82f6;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-}
-
-.mode-personal .records-section {
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-/* 全球模式樣式 */
-.mode-global {
-  border: 2px solid rgba(236, 72, 153, 0.4);
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(251, 207, 232, 0.05) 100%);
-  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
-}
-
-.mode-global .mode-toggle-btn {
-  background: linear-gradient(135deg, #ec4899 0%, #fbcfe8 100%);
-  border-color: #ec4899;
-  box-shadow: 0 8px 25px rgba(236, 72, 153, 0.3);
-}
-
-.mode-global .records-section {
-  background: rgba(236, 72, 153, 0.08);
-  border: 1px solid rgba(236, 72, 153, 0.2);
 }
 
 /* 玩家輸入區域 */
@@ -266,87 +329,6 @@ defineExpose({
 
 .player-input::placeholder {
   color: rgba(255, 255, 255, 0.5);
-}
-
-/* 模式切換按鈕 */
-.mode-toggle-section {
-  margin-bottom: 1.5rem;
-}
-
-.mode-toggle-btn {
-  width: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.mode-toggle-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
-
-.btn-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.btn-content {
-  flex: 1;
-  text-align: left;
-}
-
-.btn-title {
-  color: white;
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
-.btn-subtitle {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.btn-indicator {
-  display: flex;
-  align-items: center;
-}
-
-.indicator-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-.dot-personal {
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-.dot-global {
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-@keyframes pulse {
-  0%, 100% { 
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% { 
-    opacity: 0.7;
-    transform: scale(1.1);
-  }
 }
 
 /* 最佳紀錄卡片 */
@@ -482,6 +464,17 @@ defineExpose({
 .records-section {
   border-radius: 16px;
   overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.records-personal {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.records-global {
+  background: rgba(236, 72, 153, 0.08);
+  border: 1px solid rgba(236, 72, 153, 0.2);
 }
 
 .section-header {
@@ -637,15 +630,6 @@ defineExpose({
   .game-records-container {
     padding: 1rem;
     max-height: 70vh;
-  }
-  
-  .mode-toggle-btn {
-    padding: 0.875rem;
-    gap: 0.75rem;
-  }
-  
-  .btn-title {
-    font-size: 1rem;
   }
   
   .best-record-card {

@@ -15,6 +15,7 @@ import {
   query,
   where,
   orderBy,
+  limit,
   onSnapshot,
   serverTimestamp,
   type WhereFilterOp,
@@ -134,13 +135,13 @@ export const useFirestore = () => {
       throw error
     }
   }
-
   const listenToCollection = (
     collectionName: string,
     callback: (docs: DocumentData[]) => void,
     conditions: Array<{ field: string; operator: WhereFilterOp; value: any }> = [],
     orderByField?: string,
-    orderDirection: 'asc' | 'desc' = 'asc'
+    orderDirection: 'asc' | 'desc' = 'asc',
+    limitCount: number = 50 // 默認限制50筆記錄，減少傳輸量
   ) => {
     try {
       let q = query(collection($firebase.db, collectionName))
@@ -155,12 +156,17 @@ export const useFirestore = () => {
         q = query(q, orderBy(orderByField, orderDirection))
       }
 
+      // 添加限制，減少不必要的資料傳輸
+      q = query(q, limit(limitCount))
+
       return onSnapshot(q, (querySnapshot) => {
         const docs = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }))
         callback(docs)
+      }, (error) => {
+        console.error('監聽集合錯誤:', error)
       })
     } catch (error) {
       console.error('監聽集合錯誤:', error)

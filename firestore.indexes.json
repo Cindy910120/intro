@@ -1,0 +1,79 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "game_records",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "gameName",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "moves",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "game_records",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "gameName",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "time",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "game_records",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "gameName",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "score",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "game_records",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "gameName",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "playerName",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "completedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "game_records",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "gameName",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "completedAt",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
