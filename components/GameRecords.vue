@@ -13,8 +13,8 @@
           @input="onPlayerNameChange"
         />
       </div>
-    </div>    <!-- 個人最佳紀錄展示 -->
-    <div v-if="!isPersonalLoading && getPersonalBest" class="best-record-card best-personal">
+    </div>    <!-- 個人最佳紀錄展示 - 只有輸入名字且有紀錄時才顯示 -->
+    <div v-if="playerName.trim() && !isPersonalLoading && getPersonalBest" class="best-record-card best-personal">
       <div class="best-header">
         <div class="best-crown">⭐</div>
         <div class="best-title">
@@ -60,9 +60,13 @@
       <div v-if="isPersonalLoading" class="loading-state">
         <div class="loading-spinner"></div>
         <div class="loading-text">載入個人紀錄中...</div>
+      </div>      <!-- 空狀態 - 區分未輸入名字和沒有紀錄 -->
+      <div v-else-if="!playerName.trim()" class="empty-state">
+        <div class="empty-icon">👤</div>
+        <div class="empty-text">請輸入玩家名稱</div>
+        <div class="empty-hint">輸入名稱後即可查看個人紀錄</div>
       </div>
-
-      <!-- 空狀態 -->
+      
       <div v-else-if="personalRecords.length === 0" class="empty-state">
         <div class="empty-icon">🎯</div>
         <div class="empty-text">還沒有個人紀錄</div>
@@ -143,7 +147,7 @@
     <div class="records-section records-global">
       <div class="section-header">
         <div class="header-icon">🏆</div>
-        <div class="header-title">全球排行</div>
+        <div class="header-title">全球前五名</div>
         <div class="header-count">({{ globalRecords.length }})</div>
       </div>
 
@@ -232,10 +236,9 @@ onMounted(() => {
 
 // 當玩家名稱改變時重新監聽個人紀錄
 const onPlayerNameChange = () => {
-  if (playerName.value.trim()) {
+  if (props.gameName) {
+    // 無論名稱是否為空都呼叫，讓 composable 內部處理邏輯
     startPersonalListening(props.gameName)
-  } else {
-    stopPersonalListening()
   }
 }
 
@@ -245,22 +248,16 @@ watch(() => props.gameName, (newGameName) => {
     // 優先啟動全球紀錄監聽（通常資料較多，先載入）
     startGlobalListening(newGameName)
     
-    // 如果有玩家名稱，同時啟動個人紀錄監聽
-    if (playerName.value.trim()) {
-      startPersonalListening(newGameName)
-    }
+    // 處理個人紀錄監聽（內部會判斷是否有玩家名稱）
+    startPersonalListening(newGameName)
   }
 }, { immediate: true })
 
-// 監聽玩家名稱變化（優化：避免重複查詢）
+// 監聽玩家名稱變化（優化：無論名稱是否為空都重新處理）
 watch(() => playerName.value, (newPlayerName, oldPlayerName) => {
-  // 只有當玩家名稱真的改變且有遊戲名稱時才重新查詢
-  if (newPlayerName.trim() !== oldPlayerName?.trim() && props.gameName) {
-    if (newPlayerName.trim()) {
-      startPersonalListening(props.gameName)
-    } else {
-      stopPersonalListening()
-    }
+  // 當玩家名稱改變時，重新處理個人紀錄監聽
+  if (props.gameName) {
+    startPersonalListening(props.gameName)
   }
 }, { immediate: true })
 

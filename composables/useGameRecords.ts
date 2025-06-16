@@ -93,10 +93,20 @@ export const useGameRecords = () => {
     }
     return null
   }
-
-  // 監聽個人遊戲紀錄（優化版）
+  // 監聽個人遊戲紀錄（只有輸入名字才查詢）
   const startPersonalListening = (gameName: string) => {
-    if (!playerName.value.trim()) return
+    // 清空之前的個人記錄
+    personalRecords.value = []
+    
+    // 如果沒有輸入玩家名稱，停止監聽並保持空狀態
+    if (!playerName.value.trim()) {
+      if (personalUnsubscribe) {
+        personalUnsubscribe()
+        personalUnsubscribe = null
+      }
+      isPersonalLoading.value = false
+      return
+    }
     
     const cacheKey = `personal_${gameName}_${playerName.value.trim()}`
     const cachedData = getCache(cacheKey)
@@ -113,14 +123,17 @@ export const useGameRecords = () => {
     
     if (personalUnsubscribe) {
       personalUnsubscribe()
-    }    // 優化查詢：使用複合索引和限制結果數量
+    }
+
+    // 優化查詢：使用複合索引和限制結果數量
     const conditions = [
       { field: 'gameName', operator: '==' as const, value: gameName },
       { field: 'playerName', operator: '==' as const, value: playerName.value.trim() }
     ]
 
     personalUnsubscribe = listenToCollection(
-      'game_records',      (docs) => {
+      'game_records',
+      (docs) => {
         const records = docs as GameRecord[]
         personalRecords.value = records
         setCache(cacheKey, records, false) // 個人記錄快取
@@ -131,7 +144,7 @@ export const useGameRecords = () => {
       'desc',
       20 // 個人記錄限制20筆就足夠了
     )
-  }  // 監聽全球遊戲紀錄（最優化版本）
+  }// 監聽全球遊戲紀錄（最優化版本）
   const startGlobalListening = (gameName: string) => {
     const cacheKey = `global_${gameName}`
     const cachedData = getCache(cacheKey)
@@ -247,7 +260,7 @@ export const useGameRecords = () => {
         } else {
           finalRecords.sort((a, b) => b.score - a.score)
         }
-          globalRecords.value = finalRecords.slice(0, 50) // 只顯示前50名
+          globalRecords.value = finalRecords.slice(0, 5) // 只顯示前5名
         setCache(cacheKey, globalRecords.value, true) // 全球記錄快取（更長時間）
         isGlobalLoading.value = false
       },
@@ -310,9 +323,11 @@ export const useGameRecords = () => {
     // 全球紀錄已經在 startGlobalListening 中排序過了
     return globalRecords.value
   })
-
-  // 獲取個人最佳紀錄
+  // 獲取個人最佳紀錄（只有輸入名字才顯示）
   const getPersonalBest = computed(() => {
+    // 如果沒有輸入玩家名稱，返回 null
+    if (!playerName.value.trim()) return null
+    
     if (sortedPersonalRecords.value.length === 0) return null
     return sortedPersonalRecords.value[0]
   })
