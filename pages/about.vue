@@ -1588,6 +1588,47 @@ onBeforeUnmount(() => {
     margin: 1rem 0;
     border-radius: var(--border-radius-md, 15px);
   }
+
+  .interests-grid {
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+
+  /* 手機版：改為上圖下字的垂直佈局 */
+  .interest-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .interest-image-container {
+    height: 200px;
+  }
+
+  .interest-content {
+    padding: 0;
+  }
+
+  .interest-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .interest-details p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .interest-tags {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
 
 .interests-section .section-header {
