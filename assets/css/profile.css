@@ -17,30 +17,67 @@
   justify-content: center;
   width: 80px;
   height: 80px;
-  background: var(--gradient-pink);
+  background: linear-gradient(45deg, #ff9a9e, #fecfef, #ffc3a0, #ffafbd, #ffc1cc, #ff8a95);
+  background-size: 400% 400%;
   border: none;
   border-radius: var(--radius-full);
   color: white;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-base) ease;
-  animation: pulse 3s infinite;
+  animation: lovelyPulse 3s ease-in-out infinite, floatHeart 4s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-trigger-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffc1cc, #ffb3ba, #ffa8cc, #ff9a9e);
+  background-size: 400% 400%;
+  border-radius: var(--radius-full);
+  z-index: -1;
+  animation: loveBorder 2s linear infinite;
+  filter: blur(4px);
+}
+
+.popup-trigger-btn::after {
+  content: '💕';
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  font-size: 1.2rem;
+  animation: loveFloat 2.5s ease-in-out infinite;
+  z-index: 2;
 }
 
 .popup-trigger-btn:hover {
-  transform: scale(1.1);
-  box-shadow: var(--shadow-xl);
+  transform: scale(1.2) rotate(10deg);
+  box-shadow: 0 0 30px rgba(255, 154, 158, 0.8), 0 0 60px rgba(255, 175, 189, 0.6);
+  animation: lovelyPulse 1.5s ease-in-out infinite, bounceHeart 0.6s ease-in-out infinite;
 }
 
 .trigger-icon {
   font-size: var(--text-lg);
   margin-bottom: var(--space-xs);
+  animation: heartBeat 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  position: relative;
+  z-index: 3;
 }
 
 .trigger-text {
   font-size: var(--text-xs);
   font-weight: 600;
   text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: textGlow 2s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 3;
 }
 
 /* ===== 個人資料區塊 ===== */
@@ -547,7 +584,7 @@
     align-self: center;
   }
   
-  /* 興趣卡片在小螢幕上改為上下排列 */
+  /* 興趣卡片在小螢幕上改为上下排列 */
   .interest-card {
     flex-direction: column;
     min-height: auto;
@@ -803,4 +840,103 @@
   display: inline-block;
   width: 1em;
   margin-right: var(--space-sm);
+}
+
+/* ===== 戀愛系按鈕動畫關鍵幀 ===== */
+@keyframes lovelyPulse {
+  0%, 100% {
+    background-position: 0% 50%;
+    transform: scale(1);
+  }
+  25% {
+    background-position: 50% 50%;
+    transform: scale(1.05);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: scale(1.1);
+  }
+  75% {
+    background-position: 50% 50%;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes loveBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes floatHeart {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-5deg);
+  }
+}
+
+@keyframes bounceHeart {
+  0%, 100% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  50% {
+    transform: scale(1.4) rotate(15deg);
+  }
+}
+
+@keyframes loveFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-10px) rotate(90deg) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-5px) rotate(180deg) scale(0.8);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-12px) rotate(270deg) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 192, 203, 0.8), 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
 }

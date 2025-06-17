@@ -30,6 +30,7 @@
         <NuxtLink to="/about" class="home-link-button">查看自我介紹</NuxtLink>
         <NuxtLink to="/project" class="home-link-button">查看期末專題網頁介紹</NuxtLink>
         <NuxtLink to="/data" class="home-link-button">查看各項學習筆記</NuxtLink>
+        <NuxtLink to="/game" class="home-link-button">查看小遊戲</NuxtLink>
       </div>
     </div>
   </div>

@@ -63,17 +63,18 @@
             </div>
           </div>
         </div>        <div class="overview-right">
-          <div class="project-preview">
-            <div class="preview-hint">
+          <div class="project-preview">            <div class="preview-hint">
               <span class="hint-icon">🔄</span>
-              <span class="hint-text">按住拖拽來旋轉</span>
+              <span class="hint-text">按住拖拽或觸控滑動來旋轉</span>
             </div>
             <div class="preview-controls">
               <button class="reset-rotation-btn" @click="resetRotation">
                 <span>重置視角</span>
               </button>
             </div>
-            <div class="preview-frame" ref="previewFrame" @mousedown="startRotation" @mousemove="handleRotation" @mouseup="stopRotation" @mouseleave="stopRotation">
+            <div class="preview-frame" ref="previewFrame" 
+                 @mousedown="startRotation" @mousemove="handleRotation" @mouseup="stopRotation" @mouseleave="stopRotation"
+                 @touchstart="startRotation" @touchmove="handleRotation" @touchend="stopRotation">
               <div class="frame-header">
                 <div class="frame-dots">
                   <span></span>
@@ -318,7 +319,7 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-icon">⏱️</div>
-          <div class="stat-number" data-target="120">0</div>
+          <div class="stat-number" data-target="60">0</div>
           <div class="stat-label">開發時數</div>
         </div>
         <div class="stat-card">
@@ -333,20 +334,64 @@
         </div>
         <div class="stat-card">
           <div class="stat-icon">📚</div>
-          <div class="stat-number" data-target="20">0</div>
+          <div class="stat-number" data-target="120">0</div>
           <div class="stat-label">法條解析</div>
-        </div>
-      </div>
+        </div>      </div>
     </div>
   </div>
+  <!-- 勞基法學習平台詳細資訊彈跳視窗 -->  <PopupModal 
+    :isVisible="showLaborLawModal" 
+    @close="showLaborLawModal = false"
+    title="勞基法學習平台 - 我們的期許"
+    :showFooter="false"
+    theme="project"
+  >
+    <div class="labor-law-content">
+      <div class="content-section">
+        <h3>💡 學習的重要性</h3>
+        <p>勞基法不只是一部法律，更是保護每一位工作者權益的重要工具。在現代社會中，了解自己的權利與義務是非常重要的。</p>
+      </div>
+      
+      <div class="content-section">
+        <h3>🎯 我們的使命</h3>
+        <p>我們希望透過這個平台，讓複雜的法條變得簡單易懂，讓每個人都能輕鬆掌握勞基法的核心知識，進而保護自己的權益。</p>
+      </div>
+      
+      <div class="content-section">
+        <h3>🌟 期許與願景</h3>
+        <p>希望每一位使用者都能透過這個平台：</p>
+        <ul class="vision-list">
+          <li>📚 深入了解勞基法的重要條文</li>
+          <li>⚖️ 學會運用法律保護自己的權益</li>
+          <li>🤝 促進勞資雙方的和諧關係</li>
+          <li>🏗️ 共同建立更好的工作環境</li>
+        </ul>
+      </div>
+      
+      <div class="content-section">
+        <h3>🚀 立即開始學習</h3>
+        <p>知識就是力量，了解勞基法就是保護自己最好的方式。讓我們一起創造一個更公平、更和諧的工作環境！</p>
+      </div>
+      
+      <div class="cta-section">
+        <a href="https://law-rose.vercel.app/" target="_blank" class="modal-cta-button">
+          <span>🌐 前往學習平台</span>
+        </a>
+      </div>
+    </div>
+  </PopupModal>
 </template>
 
 <script setup>
 import { onMounted, ref, nextTick } from 'vue'
+import PopupModal from '~/components/PopupModal.vue'
 
 const particlesCanvas = ref(null)
 const previewFrame = ref(null)
 const rocketRef = ref(null)
+
+// 彈跳視窗狀態
+const showLaborLawModal = ref(false)
 
 // 旋轉相關狀態
 const isRotating = ref(false)
@@ -514,25 +559,39 @@ const setupTiltEffect = () => {
 
 // 專題詳情顯示
 const showProjectDetails = () => {
-  alert('這裡可以展示更多專題詳細資訊！')
+  showLaborLawModal.value = true
 }
 
 // 預覽框架旋轉功能
 const startRotation = (event) => {
   isRotating.value = true
-  lastMouseX.value = event.clientX
-  lastMouseY.value = event.clientY
   
-  // 防止拖拽時選中文字
+  // 處理觸控和滑鼠事件
+  const clientX = event.touches ? event.touches[0].clientX : event.clientX
+  const clientY = event.touches ? event.touches[0].clientY : event.clientY
+  
+  lastMouseX.value = clientX
+  lastMouseY.value = clientY
+  
+  // 防止拖拽時選中文字和滾動
   event.preventDefault()
   document.body.style.userSelect = 'none'
+  
+  // 觸控時阻止滾動
+  if (event.touches) {
+    document.body.style.overflow = 'hidden'
+  }
 }
 
 const handleRotation = (event) => {
   if (!isRotating.value) return
   
-  const deltaX = event.clientX - lastMouseX.value
-  const deltaY = event.clientY - lastMouseY.value
+  // 處理觸控和滑鼠事件
+  const clientX = event.touches ? event.touches[0].clientX : event.clientX
+  const clientY = event.touches ? event.touches[0].clientY : event.clientY
+  
+  const deltaX = clientX - lastMouseX.value
+  const deltaY = clientY - lastMouseY.value
   
   // 更新旋轉角度（增加敏感度）
   rotationY.value += deltaX * 0.5
@@ -547,13 +606,19 @@ const handleRotation = (event) => {
     previewFrame.value.style.transform = `perspective(1000px) rotateX(${rotationX.value}deg) rotateY(${rotationY.value}deg)`
   }
   
-  lastMouseX.value = event.clientX
-  lastMouseY.value = event.clientY
+  lastMouseX.value = clientX
+  lastMouseY.value = clientY
+  
+  // 觸控時阻止默認行為
+  if (event.touches) {
+    event.preventDefault()
+  }
 }
 
 const stopRotation = () => {
   isRotating.value = false
   document.body.style.userSelect = ''
+  document.body.style.overflow = ''
 }
 
 // 重置旋轉角度
@@ -641,8 +706,7 @@ onMounted(async () => {
   if (rocketRef.value) {
     updateRocketPosition()
   }
-  
-  // 添加全局滑鼠事件監聽器
+    // 添加全局滑鼠和觸控事件監聽器
   const handleGlobalMouseMove = (event) => {
     handleRotation(event)
   }
@@ -651,8 +715,18 @@ onMounted(async () => {
     stopRotation()
   }
   
+  const handleGlobalTouchMove = (event) => {
+    handleRotation(event)
+  }
+  
+  const handleGlobalTouchEnd = () => {
+    stopRotation()
+  }
+  
   document.addEventListener('mousemove', handleGlobalMouseMove)
   document.addEventListener('mouseup', handleGlobalMouseUp)
+  document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false })
+  document.addEventListener('touchend', handleGlobalTouchEnd)
   
   // 清理函數
   const cleanup = () => {
@@ -664,6 +738,8 @@ onMounted(async () => {
     }
     document.removeEventListener('mousemove', handleGlobalMouseMove)
     document.removeEventListener('mouseup', handleGlobalMouseUp)
+    document.removeEventListener('touchmove', handleGlobalTouchMove)
+    document.removeEventListener('touchend', handleGlobalTouchEnd)
   }
   
   // 監聽頁面卸載
@@ -992,6 +1068,11 @@ onMounted(async () => {
   transition: all 0.3s ease;
   cursor: grab;
   user-select: none;
+  /* 觸控優化 */
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .preview-frame:hover {
@@ -1876,5 +1957,105 @@ onMounted(async () => {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
+}
+
+/* ===== 勞基法彈跳視窗樣式 ===== */
+.labor-law-content {
+  padding: 1rem 0;
+}
+
+.content-section {
+  margin-bottom: 2rem;
+}
+
+.content-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #667eea;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.content-section p {
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.vision-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.vision-list li {
+  padding: 0.75rem 0;
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 0.5rem;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.vision-list li:hover {
+  border-left-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  padding-left: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.cta-section {
+  margin-top: 2rem;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.modal-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.modal-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5a6fd8, #6a42a6);
+}
+
+.modal-cta-button:hover::before {
+  left: 100%;
+}
+
+.modal-cta-button:active {
+  transform: translateY(0);
 }
 </style>

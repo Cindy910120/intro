@@ -346,30 +346,39 @@
 }
 
 .home-link-button:nth-child(1) {
-  background: var(--gradient-secondary);
-  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+  background: linear-gradient(135deg, #8fa8ff 0%, #9c88ff 100%);
+  box-shadow: 0 8px 25px rgba(143, 168, 255, 0.25);
 }
 
 .home-link-button:nth-child(1):hover {
-  box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
+  box-shadow: 0 12px 35px rgba(143, 168, 255, 0.35);
 }
 
 .home-link-button:nth-child(2) {
-  background: var(--gradient-warm);
-  box-shadow: 0 8px 25px rgba(255, 154, 158, 0.3);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.25);
 }
 
 .home-link-button:nth-child(2):hover {
-  box-shadow: 0 12px 35px rgba(255, 154, 158, 0.4);
+  box-shadow: 0 12px 35px rgba(79, 172, 254, 0.35);
 }
 
 .home-link-button:nth-child(3) {
-  background: var(--gradient-cool);
-  box-shadow: 0 8px 25px rgba(168, 237, 234, 0.3);
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  box-shadow: 0 8px 25px rgba(168, 237, 234, 0.25);
 }
 
 .home-link-button:nth-child(3):hover {
-  box-shadow: 0 12px 35px rgba(168, 237, 234, 0.4);
+  box-shadow: 0 12px 35px rgba(168, 237, 234, 0.35);
+}
+
+.home-link-button:nth-child(4) {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  box-shadow: 0 8px 25px rgba(255, 236, 210, 0.25);
+}
+
+.home-link-button:nth-child(4):hover {
+  box-shadow: 0 12px 35px rgba(255, 236, 210, 0.35);
 }
 
 /* ===== 複雜動畫關鍵幀 ===== */
