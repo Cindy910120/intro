@@ -322,7 +322,7 @@
             
             <div class="project-content">
               <p class="project-description">
-                現今長期使用電腦，已經成為人們生活的一部分，人們選擇電腦架主要為三個原因，分別為增加筆記型電腦散熱空間、增加桌面利用空間與減少姿勢不良困擾，先來說第一點，長期使用電腦，會使得電腦溫度升高，如果沒有適當的散熱方式，當CPU 溫度太高，將會觸發降低效能以避免損壞處理器的機制，使用電腦架能始的電腦更容易散熱。再來，由於使用了電腦架，桌子的使用空間會比把電腦放在桌上使用時的空間大，我們可以更有效的運用桌子去做其他事情。最後，長時間坐在電腦桌前用筆記型電腦工作，肩頸會不自覺的就開始痠痛，其實是因為螢幕高度與正常平視的角度不同，在使用筆記型電腦時，脖子都會有稍微需要低下來的動作，長期下來便導致肩頸方面的困擾。因此有一個適合自己且方便的電腦架是很重要的。
+                現今長期使用電腦，已經成為人們生活的一部分，人們選擇電腦架主要為三個原因，分別為增加筆記型電腦散熱空間、增加桌面利用空間與減少姿勢不良困擾，先來說第一點，長期使用電腦，會使得電腦溫度升高，如果沒有適當的散熱方式，當CPU 溫度太高，將會觸發降低效能以避免搶壞處理器的機制，使用電腦架能始的電腦更容易散熱。再來，由於使用了電腦架，桌子的使用空間會比把電腦放在桌上使用時的空間大，我們可以更有效的運用桌子去做其他事情。最後，長時間坐在電腦桌前用筆記型電腦工作，肩頸會不自覺的就開始痠痛，其實是因為螢幕高度與正常平視的角度不同，在使用筆記型電腦時，脖子都會有稍微需要低下來的動作，長期下來便導致肩頸方面的困擾。因此有一個適合自己且方便的電腦架是很重要的。
               </p>
             </div>
           </div>
@@ -713,6 +713,27 @@ const initAOS = () => {
   window.addEventListener('scroll', handleScroll)
 }
 
+// 背景動畫相關函數
+const initBackgroundAnimation = () => {
+  // 給每個粒子設置隨機初始位置和動畫延遲
+  const particles = document.querySelectorAll('.particle')
+  particles.forEach(particle => {
+    // 動態設置CSS變數，控制動畫的隨機性
+    particle.style.setProperty('--delay', `${Math.random() * 10}s`)
+    particle.style.setProperty('--duration', `${Math.random() * 15 + 10}s`)
+    particle.style.setProperty('--size', `${Math.random() * 20 + 5}px`)
+    particle.style.setProperty('--x-pos', `${Math.random() * 100}%`)
+    particle.style.setProperty('--y-pos', `${Math.random() * 100}%`)
+    particle.style.setProperty('--color', `hsl(${Math.random() * 60 + 210}, ${Math.random() * 40 + 60}%, ${Math.random() * 30 + 60}%)`)
+  })
+
+  // 給光球添加動態效果
+  const orbs = document.querySelectorAll('.orb')
+  orbs.forEach((orb, index) => {
+    orb.style.setProperty('--orb-delay', `${index * -5}s`)
+  })
+}
+
 // 定義各類型圖片路徑
 const calligraphyImages = [
   '/images/interests/calligraphy/IMG_20250513_105817.jpg',
@@ -952,6 +973,7 @@ const handleKeyDown = (e) => {
 onMounted(() => {
   initAOS()
   startSlideshow()
+  initBackgroundAnimation() // 初始化背景動畫
   window.addEventListener('keydown', handleKeyDown)
 })
 
@@ -1018,14 +1040,16 @@ onBeforeUnmount(() => {
 
 /* 背景動畫新樣式 */
 .animated-background {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   z-index: -1;
   pointer-events: none;
+  will-change: transform;
+  contain: strict;
 }
 
 .particles-container {
@@ -1045,8 +1069,7 @@ onBeforeUnmount(() => {
   background-color: var(--color, rgba(102, 126, 234, 0.6));
   border-radius: 50%;
   opacity: 0.6;
-  box-shadow: 0 0 10px var(--color, rgba(102, 126, 234, 0.4));
-  animation: floatParticle var(--duration, 15s) ease-in-out infinite;
+  box-shadow: 0 0 10px var(--color, rgba(102, 126, 234, 0.4));  animation: floatParticle var(--duration, 15s) ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
 
@@ -1056,13 +1079,15 @@ onBeforeUnmount(() => {
     opacity: 0.2;
   }
   25% {
+    transform: translate(50px, -30px) scale(1);
     opacity: 0.8;
   }
   50% {
-    transform: translate(120px, -80px) scale(1.2);
+    transform: translate(100px, -60px) scale(1.2);
     opacity: 0.6;
   }
   75% {
+    transform: translate(50px, -30px) scale(1);
     opacity: 0.4;
   }
   100% {
@@ -1094,7 +1119,8 @@ onBeforeUnmount(() => {
   width: 50vw;
   height: 50vw;
   background: radial-gradient(circle, rgba(127, 159, 255, 0.6), rgba(102, 126, 234, 0.2));
-  animation-delay: 0s;
+  animation-delay: var(--orb-delay, 0s);
+  animation-duration: 25s;
 }
 
 .orb-2 {
@@ -1103,7 +1129,8 @@ onBeforeUnmount(() => {
   width: 40vw;
   height: 40vw;
   background: radial-gradient(circle, rgba(174, 103, 250, 0.6), rgba(118, 75, 162, 0.2));
-  animation-delay: -5s;
+  animation-delay: var(--orb-delay, -5s);
+  animation-duration: 30s;
 }
 
 .orb-3 {
@@ -1112,7 +1139,8 @@ onBeforeUnmount(() => {
   width: 30vw;
   height: 30vw;
   background: radial-gradient(circle, rgba(102, 219, 255, 0.6), rgba(79, 172, 254, 0.2));
-  animation-delay: -10s;
+  animation-delay: var(--orb-delay, -10s);
+  animation-duration: 22s;
 }
 
 .orb-4 {
@@ -1121,21 +1149,30 @@ onBeforeUnmount(() => {
   width: 35vw;
   height: 35vw;
   background: radial-gradient(circle, rgba(255, 153, 204, 0.5), rgba(240, 147, 251, 0.2));
-  animation-delay: -15s;
+  animation-delay: var(--orb-delay, -15s);
+  animation-duration: 28s;
 }
 
 @keyframes orbFloat {
-  0%, 100% {
+  0% {
     transform: translate(0, 0) scale(1);
+    opacity: 0.4;
   }
   25% {
     transform: translate(5%, -5%) scale(1.05);
+    opacity: 0.5;
   }
   50% {
     transform: translate(3%, 6%) scale(0.95);
+    opacity: 0.4;
   }
   75% {
     transform: translate(-4%, 2%) scale(1.02);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
   }
 }
 
@@ -1228,5 +1265,360 @@ onBeforeUnmount(() => {
 
 .trigger-icon {
   animation: heartPulse 1.5s infinite;
+}
+
+/* 內容區塊樣式 */
+.section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg, 20px);
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.section h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+}
+
+.section h1::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
+}
+
+.profile-container {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-md, 12px);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(31, 38, 135, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-text {
+  color: var(--text-primary);
+}
+
+.info-group {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.info-group:last-child {
+  border-bottom: none;
+}
+
+.info-group h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.info-group p {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* 學術成果和專題經歷區域 */
+.academic-section,
+.projects-section,
+.interests-section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg, 20px);
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.academic-card,
+.project-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-md, 15px);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(31, 38, 135, 0.1);
+  margin-bottom: 2.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.academic-card:hover,
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(31, 38, 135, 0.15);
+}
+
+.academic-card::before,
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  opacity: 1;
+}
+
+/* 專題內容樣式 */
+.project-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.status-badge {
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.status-badge.graduate {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: white;
+}
+
+.status-badge.service {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: white;
+}
+
+.status-badge.design {
+  background: linear-gradient(135deg, #4ECDC4, #45B7B8);
+  color: white;
+}
+
+.status-badge.early {
+  background: linear-gradient(135deg, #A8E6CF, #7FDBCD);
+  color: white;
+}
+
+.status-badge.conference {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-icon {
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 15px;
+  flex-shrink: 0;
+}
+
+.project-title-group h2 {
+  color: #2d3748;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.project-team {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.team-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.team-item .icon {
+  font-size: 1.2rem;
+}
+
+.project-description {
+  color: #4a5568;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+  font-size: 0.95rem;
+}
+
+/* 技術標籤和文檔樣式 */
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+.tech-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tech-tag.primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+}
+
+.tech-tag.secondary {
+  background: rgba(255, 255, 255, 0.7);
+  color: #4a5568;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.tech-tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.project-documents {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.document-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.doc-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9));
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.doc-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.4);
+}
+
+.doc-icon {
+  font-size: 2rem;
+  color: #667eea;
+}
+
+.doc-info {
+  flex: 1;
+}
+
+.doc-info strong {
+  color: #2d3748;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.doc-info p {
+  color: #4a5568;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* 興趣標籤樣式 */
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+/* 確保響應式顯示 */
+@media (max-width: 768px) {
+  .section, .academic-section, .projects-section, .interests-section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-container {
+    padding: 1.5rem;
+  }
+  
+  .academic-card, .project-card {
+    padding: 1.5rem;
+  }
+}
+/* 主容器樣式，確保內容正確顯示 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem var(--space-lg);
+  position: relative;
+  z-index: 5;
 }
 </style>
