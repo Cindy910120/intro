@@ -1,7 +1,14 @@
 <template>
   <div class="game-container">    <!-- 遊戲標題區域 -->
     <div class="game-header">
-      <h1 class="game-title">🎮 迷你遊戲中心</h1>      <p class="game-subtitle">體驗有趣的互動小遊戲，電腦手機都能玩！</p>
+      <h1 class="game-title">🎮 迷你遊戲中心</h1>
+      <p class="game-subtitle">體驗有趣的互動小遊戲，電腦手機都能玩！</p>
+      
+      <!-- 提醒文字 -->
+      <div class="game-reminder">
+        <span class="reminder-icon">⚠️</span>
+        <span class="reminder-text">遊玩前記得輸入姓名喔！</span>
+      </div>
     </div>
 
     <!-- 遊戲選單 -->
@@ -119,10 +126,9 @@
           🎉 完成！用時 {{ numberGame.time }} 秒
         </div>
       </div><!-- 遊戲4: 顏色匹配 -->
-      <div v-if="currentGame === 3" class="color-game game-content">
-        <div class="game-info">
+      <div v-if="currentGame === 3" class="color-game game-content">        <div class="game-info">
           <h3>🎨 顏色匹配</h3>
-          <p>點擊與文字顏色相符的按鈕！</p>
+          <p>根據文字內容選擇正確的顏色，不要被文字顏色迷惑！</p>
           <div class="game-stats">
             <span>分數: {{ colorGame.score }}</span>
             <span v-if="colorGame.isPlaying">時間: {{ colorGame.timeLeft }}s</span>
@@ -450,6 +456,7 @@ const colorGame = reactive({
   timeLeft: 30,
   currentColor: '',
   currentText: '',
+  correctAnswer: null,
   colorOptions: [],
   timer: null,
   gameOver: false,
@@ -462,18 +469,40 @@ const colors = [
   { name: '綠色', value: '#2ed573' },
   { name: '黃色', value: '#ffa502' },
   { name: '紫色', value: '#a55eea' },
-  { name: '粉色', value: '#ff6b81' }
+  { name: '粉色', value: '#ff6b81' },
+  { name: '橘色', value: '#ff7675' },
+  { name: '青色', value: '#00cec9' },
+  { name: '深藍', value: '#0984e3' },
+  { name: '深綠', value: '#00b894' },
+  { name: '棕色', value: '#a0522d' },
+  { name: '灰色', value: '#636e72' },
+  { name: '黑色', value: '#2d3436' },
+  { name: '白色', value: '#ddd' },
+  { name: '淺藍', value: '#74b9ff' },
+  { name: '淺綠', value: '#55a3ff' },
+  { name: '深紫', value: '#6c5ce7' },
+  { name: '深紅', value: '#e17055' },
+  { name: '金色', value: '#fdcb6e' },
+  { name: '銀色', value: '#b2bec3' }
 ]
 
 const generateColorChallenge = () => {
-  const randomColor = colors[Math.floor(Math.random() * colors.length)]
-  const randomText = colors[Math.floor(Math.random() * colors.length)]
+  // 隨機選擇文字內容對應的顏色（正確答案）
+  const textColor = colors[Math.floor(Math.random() * colors.length)]
   
-  colorGame.currentColor = randomColor.value
-  colorGame.currentText = randomText.name
+  // 隨機選擇顯示文字的顏色（必須與文字內容不同）
+  let displayColor
+  do {
+    displayColor = colors[Math.floor(Math.random() * colors.length)]
+  } while (displayColor.name === textColor.name)
   
-  // 隨機選擇4個顏色選項
-  const options = [randomColor]
+  // 設定題目：文字內容是正確答案，但顯示顏色不同
+  colorGame.currentText = textColor.name // 要選擇的顏色名稱
+  colorGame.currentColor = displayColor.value // 文字顯示的顏色
+  colorGame.correctAnswer = textColor // 正確答案
+  
+  // 隨機選擇4個顏色選項，確保包含正確答案
+  const options = [textColor]
   while (options.length < 4) {
     const color = colors[Math.floor(Math.random() * colors.length)]
     if (!options.find(opt => opt.name === color.name)) {
@@ -487,13 +516,13 @@ const generateColorChallenge = () => {
 const selectColor = (selectedColor) => {
   if (colorGame.gameOver || !colorGame.isPlaying) return
   
-  // 檢查是否選擇了正確的顏色（與文字顯示的顏色匹配）
-  const correctColor = colors.find(c => c.value === colorGame.currentColor)
-  
-  if (selectedColor.name === correctColor.name) {
+  // 檢查是否選擇了正確的顏色（與文字內容匹配，而非文字顏色）
+  if (selectedColor.name === colorGame.correctAnswer.name) {
     colorGame.score += 10
+    trackGameEvent('顏色匹配', 'correct_answer', colorGame.score)
   } else {
     colorGame.score = Math.max(0, colorGame.score - 5)
+    trackGameEvent('顏色匹配', 'wrong_answer', colorGame.score)
   }
   
   generateColorChallenge()
@@ -599,11 +628,21 @@ const hitMole = (index) => {
 }
 
 const startMoleGame = () => {
+  // 清理之前的計時器（如果存在）
+  if (moleGame.gameTimer) {
+    clearInterval(moleGame.gameTimer)
+  }
+  if (moleGame.moleTimer) {
+    clearInterval(moleGame.moleTimer)
+  }
+  
+  // 重置遊戲狀態
   moleGame.score = 0
   moleGame.timeLeft = 30
   moleGame.isPlaying = true
   moleGame.gameOver = false
-    // 重置所有洞穴
+  
+  // 重置所有洞穴
   moleGame.holes.forEach(hole => {
     hole.hasMole = false
     hole.hasBomb = false
@@ -614,21 +653,21 @@ const startMoleGame = () => {
   // 開始遊戲計時器
   moleGame.gameTimer = setInterval(() => {
     moleGame.timeLeft--
-  if (moleGame.timeLeft <= 0) {
-    moleGame.isPlaying = false
-    moleGame.gameOver = true
-    clearInterval(moleGame.gameTimer)
-    clearInterval(moleGame.moleTimer)
-    
-    // 儲存遊戲紀錄
-    saveCurrentGameRecord({
-      gameName: '打地鼠',
-      score: moleGame.score,
-      moves: 0,
-      time: 30,
-      gameType: 'mole'
-    })
-  }
+    if (moleGame.timeLeft <= 0) {
+      moleGame.isPlaying = false
+      moleGame.gameOver = true
+      clearInterval(moleGame.gameTimer)
+      clearInterval(moleGame.moleTimer)
+      
+      // 儲存遊戲紀錄
+      saveCurrentGameRecord({
+        gameName: '打地鼠',
+        score: moleGame.score,
+        moves: 0,
+        time: 30,
+        gameType: 'mole'
+      })
+    }
   }, 1000)
   
   // 開始地鼠出現計時器
@@ -680,6 +719,51 @@ onUnmounted(() => {
 .game-subtitle {
   font-size: 1.2rem;
   opacity: 0.9;
+}
+
+.game-reminder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 193, 7, 0.9);
+  color: #333;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  animation: reminderPulse 2s ease-in-out infinite;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reminder-icon {
+  font-size: 1.1rem;
+  animation: reminderShake 1s ease-in-out infinite;
+}
+
+.reminder-text {
+  letter-spacing: 0.3px;
+}
+
+@keyframes reminderPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+  }
+}
+
+@keyframes reminderShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
 }
 
 .game-menu {
@@ -1104,6 +1188,16 @@ onUnmounted(() => {
   
   .game-title {
     font-size: 2rem;
+  }
+
+  .game-reminder {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .reminder-icon {
+    font-size: 1rem;
   }
   
   .game-menu {
