@@ -12,6 +12,7 @@
           <li><NuxtLink to="/about" class="nav-link" @click="closeMobileMenu">自我介紹</NuxtLink></li>
           <li><NuxtLink to="/project" class="nav-link" @click="closeMobileMenu">期末專題</NuxtLink></li>
           <li><NuxtLink to="/data" class="nav-link" @click="closeMobileMenu">技術筆記</NuxtLink></li>
+          <li><NuxtLink to="/online" class="nav-link" @click="closeMobileMenu">ONLINE ROSE</NuxtLink></li>
           <li><NuxtLink to="/game" class="nav-link" @click="closeMobileMenu">小遊戲</NuxtLink></li>
         </ul>
       </nav>

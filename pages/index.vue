@@ -25,11 +25,11 @@
     <div class="container main-content">
       <h1 class="home-title">歡迎來到我的網站</h1>
       <p class="home-subtitle">這是我的個人網站首頁</p>
-      
-      <div class="home-links">
+        <div class="home-links">
         <NuxtLink to="/about" class="home-link-button">查看自我介紹</NuxtLink>
         <NuxtLink to="/project" class="home-link-button">查看期末專題網頁介紹</NuxtLink>
         <NuxtLink to="/data" class="home-link-button">查看各項學習筆記</NuxtLink>
+        <NuxtLink to="/online" class="home-link-button">ONLINE ROSE 系統</NuxtLink>
         <NuxtLink to="/game" class="home-link-button">查看小遊戲</NuxtLink>
       </div>
     </div>
