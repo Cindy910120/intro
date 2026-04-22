@@ -69,9 +69,9 @@
               </div>
             </div>
             <div class="data-card-content">
-              <h3>PX4程式開發學習筆記</h3>
+              <h3>PX4 開發環境建置指南</h3>
               <p class="data-card-description">
-                整理程式設計相關的學習心得、技術要點及實務經驗分享
+                詳細介紹PX4開發環境的安裝配置流程，包含工具鏈設置、編譯環境準備及常見問題排解
               </p>
               <div class="data-card-footer">
                 <span class="data-view-link">
@@ -99,9 +99,9 @@
               </div>
             </div>
             <div class="data-card-content">
-              <h3>PX4 開發環境建置指南</h3>
+              <h3>認識PX4</h3>
               <p class="data-card-description">
-                詳細介紹PX4開發環境的安裝配置流程，包含工具鏈設置、編譯環境準備及常見問題排解
+                簡單介紹PX4
               </p>
               <div class="data-card-footer">
                 <span class="data-view-link">
@@ -123,7 +123,7 @@
             <div class="data-card-content">
               <h3>PX4 SITL模擬器實戰教學</h3>
               <p class="data-card-description">
-                深入探討如何使用Gazebo進行PX4飛行控制模擬，涵蓋SITL配置、場景設定及飛行測試實務
+                深入探討如何使用Gazebo進行PX4飛行控制模擬，涵蓋SITL配置、場景設定及飛行測試實務，內容包含如何看飛行資料的ulg檔案。
               </p>
               <div class="data-card-footer">
                 <span class="data-view-link">
@@ -134,27 +134,6 @@
             </div>
           </div>
 
-          <!-- PX4 文檔 3 -->
-          <div class="data-card card-hover-effect" @click="openLink('https://hackmd.io/@Yo6S6-QbTX2tGrnWSw-aUw/B1v8Si-zll')">
-            <div class="data-card-thumbnail px4">
-              <img src="/images/px4-logo.svg" alt="PX4 Logo" class="data-card-img pulse-animation" />
-              <div class="thumbnail-overlay">
-                <div class="overlay-icon">🔬</div>
-              </div>
-            </div>
-            <div class="data-card-content">
-              <h3>PX4飛控系統架構深度解析</h3>
-              <p class="data-card-description">
-                深入了解PX4飛行控制器的核心架構、模組功能及無人機應用開發的關鍵技術要點
-              </p>
-              <div class="data-card-footer">
-                <span class="data-view-link">
-                  點擊查看全文
-                  <span class="link-arrow">→</span>
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
