@@ -25,9 +25,9 @@
     
     <!-- 彈跳視窗觸發按鈕 - 固定在右側 -->
     <div class="popup-trigger-container">
-      <button class="popup-trigger-btn" @click="openPopup" title="徵男友資訊">
-        <span class="trigger-icon">💕</span>
-        <span class="trigger-text">幫徵男友</span>
+      <button class="popup-trigger-btn" @click="openPopup" title="廣告">
+        <span class="trigger-icon">📢</span>
+        <span class="trigger-text">廣告</span>
       </button>
     </div>
 
@@ -575,53 +575,24 @@
       </div>
     </div><!-- PopupModal 組件 -->    <PopupModal 
       v-model="showPopup"
-      title="幫徵男友"
+      title="廣告"
       :show-footer="true"
-      confirm-text="我有興趣 💕"
-      cancel-text="下次再說"
+      confirm-text="了解更多"
+      cancel-text="關閉"
       theme="about"
       @confirm="handlePopupConfirm"
     ><div class="popup-content">
-        <!-- 照片輪播區域 - 用卡片框起來 -->
-        <div class="photo-carousel-card">
-          <div class="photo-carousel">
-            <div class="carousel-container">
-              <div 
-                v-for="(photo, index) in popupPhotos" 
-                :key="index"
-                class="photo-slide"
-                :class="{ active: currentPhotoIndex === index }"
-              >
-                <img :src="photo.src" :alt="photo.alt" />
-              </div>
-              <div class="photo-indicator">
-                {{ currentPhotoIndex + 1 }} / {{ popupPhotos.length }}
-              </div>
+        <!-- 廣告區域 -->
+        <div class="ad-container">
+          <div class="ad-placeholder">
+            <div class="ad-icon">📢</div>
+            <h3 class="ad-title">廣告位招募中</h3>
+            <p class="ad-description">此處可放置廣告內容，歡迎合作洽談。</p>
+            <div class="ad-banner">
+              <!-- 廣告圖片或內容請放置於此 -->
+              <p class="ad-placeholder-text">廣告內容</p>
             </div>
-          </div>
-        </div>
-
-        <!-- 個人信息卡片 -->
-        <div class="info-card">
-          <div class="dating-info">
-            <h3>💖 關於我</h3>
-            <p><strong>綽號：</strong>世新金冬天</p>
-            <p><strong>年齡：</strong>21歲</p>
-            <p><strong>星座：</strong>天秤(但自認為是射手+雙魚)</p>
-            <p><strong>學歷：</strong>世新大學公共關係暨廣告學系在讀</p>
-            <p><strong>工作：</strong>外商PD，預計七月辭職去打工換宿哈哈哈</p>
-            <p><strong>興趣：</strong>一生摯愛打籃球、音樂祭、偶爾會跑山上看星星、出去玩</p>
-            <p><strong>個性：</strong>爆肝人、邏輯人、微衝動、直接(情緒都在臉上)、熱情</p>
-          </div>
-          
-          <div class="contact-section">
-            <h3>📧 聯絡方式</h3>
-            <p><strong>ig：</strong><a href="https://www.instagram.com/im__yannnnnnn?igsh=MTJ1cWVveTNsMXE4Nw=="target="_blank">查看ig</a></p>
-          </div>
-          
-          <div class="requirements">
-            <h3>💕 理想型</h3>
-            <p>帥的我會怕，醜的也會怕，請你長得合宜適中。對未來有想像、有目標，你如果要軟爛也要軟爛的合理。喜歡熱情的人，可以浪漫一點，我沒體驗過</p>
+            <p class="ad-contact">如需刊登廣告，請透過聯絡方式與我聯繫。</p>
           </div>
         </div>
       </div>
@@ -630,55 +601,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import PopupModal from '@/components/PopupModal.vue'
 
 // PopupModal 相關狀態
 const showPopup = ref(false)
-const currentPhotoIndex = ref(0)
-let photoCarouselInterval = null
-
-// 彈跳視窗照片陣列
-const popupPhotos = [
-  { src: '/images/popup/865798.jpg', alt: '個人照片 1' },
-  { src: '/images/popup/865799_0.jpg', alt: '個人照片 2' },
-  { src: '/images/popup/865800_0.jpg', alt: '個人照片 3' }
-]
 
 // PopupModal 相關方法
 const openPopup = () => {
   showPopup.value = true
-  startPhotoCarousel()
 }
 
 const handlePopupConfirm = () => {
   showPopup.value = false
-  stopPhotoCarousel()
-  // 跳轉到IG頁面
-  window.open('https://www.instagram.com/im__yannnnnnn?igsh=MTJ1cWVveTNsMXE4Nw==', '_blank')
 }
-
-// 照片輪播功能
-const startPhotoCarousel = () => {
-  photoCarouselInterval = setInterval(() => {
-    currentPhotoIndex.value = (currentPhotoIndex.value + 1) % popupPhotos.length
-  }, 3000) // 每3秒切換一張照片
-}
-
-const stopPhotoCarousel = () => {
-  if (photoCarouselInterval) {
-    clearInterval(photoCarouselInterval)
-    photoCarouselInterval = null
-  }
-}
-
-// 監聽彈跳視窗關閉
-watch(showPopup, (newValue) => {
-  if (!newValue) {
-    stopPhotoCarousel()
-    currentPhotoIndex.value = 0 // 重置照片索引
-  }
-})
 
 // 简单的AOS效果实现
 const handleScroll = () => {
