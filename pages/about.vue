@@ -127,6 +127,7 @@
                   <div class="activity-list">
                     <h5>活動紀錄：</h5>
                     <ul>
+                      <li>2025/3 The 9th International Symposium on Electrical Engineering and Computer Science</li>
                       <li>2024/11 CACS研討會</li>
                       <li>112-1學期 修習「資訊科技與輔具應用」運用自己的所學參與校外的服務學習</li>
                       <li>112/7/30 ~ 112/8/5 參與TDU International Workshop</li>
@@ -716,6 +717,18 @@ const physicsImages = [
 
 // 活動圖片數據
 const activityImages = [
+  {
+    src: '/images/activitive/關西研討會參加證明.jpg',
+    alt: '關西研討會參加證明',
+    title: 'The 9th International Symposium on Electrical Engineering and Computer Science',
+    description: '2025/3 參加The 9th International Symposium on Electrical Engineering and Computer Science，取得參加證明'
+  },
+  {
+    src: '/images/activitive/關西研討會得獎.jpg',
+    alt: '關西研討會得獎',
+    title: 'The 9th International Symposium on Electrical Engineering and Computer Science - 得獎',
+    description: '2025/3 The 9th International Symposium on Electrical Engineering and Computer Science，榮獲獎項肯定'
+  },
   {
     src: '/images/activitive/CACS.jpg',
     alt: 'CACS研討會',
