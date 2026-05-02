@@ -742,7 +742,12 @@ const puzzleImages = [
   '/images/interests/puzzle/IMG_20250211_204604.jpg',
   '/images/interests/puzzle/IMG_20250211_204632.jpg',
   '/images/interests/puzzle/IMG_20240908_174112.jpg',
-  '/images/interests/puzzle/IMG_20240120_215049.jpg'
+  '/images/interests/puzzle/IMG_20240120_215049.jpg',
+  '/images/interests/puzzle/IMG_20251202_195032.jpg',
+  '/images/interests/puzzle/IMG_20251205_203355.jpg',
+  '/images/interests/puzzle/IMG_20251206_135345.jpg',
+  '/images/interests/puzzle/IMG_20251207_104354.jpg',
+  '/images/interests/puzzle/IMG_20251207_104538.jpg'
 ]
 
 const physicsImages = [
