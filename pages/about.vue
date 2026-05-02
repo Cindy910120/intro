@@ -36,6 +36,13 @@
       <h1>自我介紹</h1>
       
       <div class="profile-container">
+        <div class="profile-photo-wrapper">
+          <img
+            src="/images/about/生活照.jpg"
+            alt="林芊蓉個人照片"
+            class="profile-photo"
+          />
+        </div>
         <div class="profile-text">
           <h2>姓名 : 林芊蓉</h2>
           
@@ -1317,10 +1324,35 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  gap: 1.8rem;
+  align-items: flex-start;
+}
+
+.profile-photo-wrapper {
+  width: 200px;
+  min-width: 200px;
+  aspect-ratio: 3 / 4;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  display: block;
 }
 
 .profile-text {
   color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
 }
 
 .info-group {
@@ -1617,6 +1649,14 @@ onBeforeUnmount(() => {
   
   .profile-container {
     padding: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .profile-photo-wrapper {
+    width: min(240px, 100%);
+    min-width: auto;
   }
   
   .academic-card, .project-card {
