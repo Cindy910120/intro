@@ -1378,7 +1378,7 @@ onBeforeUnmount(() => {
 }
 
 .profile-basic-info h2 {
-  font-size: clamp(2rem, 2.4vw, 2.6rem);
+  font-size: clamp(1.33rem, 1.6vw, 1.73rem);
   margin-bottom: 1.25rem;
   font-weight: 700;
 }
@@ -1721,7 +1721,7 @@ onBeforeUnmount(() => {
   }
 
   .profile-basic-info h2 {
-    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    font-size: clamp(1.07rem, 4vw, 1.4rem);
     text-align: center;
   }
 
