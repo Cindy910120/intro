@@ -36,28 +36,33 @@
       <h1>自我介紹</h1>
       
       <div class="profile-container">
-        <div class="profile-photo-wrapper">
-          <img
-            src="/images/about/生活照.jpg"
-            alt="林芊蓉個人照片"
-            class="profile-photo"
-          />
-        </div>
-        <div class="profile-text">
-          <h2>姓名 : 林芊蓉</h2>
-          
-          <div class="info-group">
-            <h3>學校</h3>
-            <p>大學 : 中原大學電機工程系 2020~2024</p>
-            <p>碩士 : 中原大學電機工程系 (就學中)2024~</p>
+        <div class="profile-header">
+          <div class="profile-photo-wrapper">
+            <img
+              src="/images/about/生活照.jpg"
+              alt="林芊蓉個人照片"
+              class="profile-photo"
+            />
           </div>
+          <div class="profile-text profile-basic-info">
+            <h2>姓名 : 林芊蓉</h2>
+            
             <div class="info-group">
+              <h3>學校</h3>
+              <p>大學 : 中原大學電機工程系 2020~2024</p>
+              <p>碩士 : 中原大學電機工程系 (就學中)2024~</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-main">
+          <div class="info-group">
             <h3>學習內容</h3>
             <p>主修電機工程，大學曾修習企管、財金、國貿...等科系的課程。</p>
             <p>熟悉 Vue.js、Nuxt.js、C++、Python 、MATLAB等程式語言，對於 PX4 飛控系統有相關研究經驗。</p>
             <p>研討會論文：<a href="https://ieeexplore.ieee.org/document/10773309" target="_blank">Quaternion-Based Attitude Tracking Control Design for UAVs</a></p>
           </div>
-            <div class="info-group">
+          <div class="info-group">
             <h3 class="traits-title">個人特質</h3>
             <div class="personality-traits">
               <div class="trait-item trait-responsible" data-aos="fade-up" data-aos-delay="100">
@@ -105,7 +110,8 @@
                 <div class="trait-decoration"></div>
               </div>
             </div>
-          </div>          <div class="info-group">
+          </div>
+          <div class="info-group">
             <h3>參加過的活動</h3>
             <!-- 活動圖片展示 - 新的左圖右字佈局 -->            
             <div class="activity-card">
@@ -147,7 +153,9 @@
             </div>
           </div>
         </div>
-      </div>    </section>    <!-- 學術成果區域 -->
+      </div>
+    </section>
+    <!-- 學術成果區域 -->
     <section class="section academic-section">
       <div class="section-header">
         <h1>學術成果</h1>
@@ -1324,9 +1332,13 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-header {
   display: flex;
   gap: 1.8rem;
   align-items: flex-start;
+  margin-bottom: 1.25rem;
 }
 
 .profile-photo-wrapper {
@@ -1353,6 +1365,16 @@ onBeforeUnmount(() => {
   color: var(--text-primary);
   flex: 1;
   min-width: 0;
+}
+
+.profile-basic-info .info-group {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.profile-main {
+  width: 100%;
 }
 
 .info-group {
@@ -1649,6 +1671,9 @@ onBeforeUnmount(() => {
   
   .profile-container {
     padding: 1.5rem;
+  }
+
+  .profile-header {
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
