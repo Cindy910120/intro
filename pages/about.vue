@@ -1387,7 +1387,7 @@ onBeforeUnmount(() => {
   margin-bottom: 0;
   border-bottom: none;
   padding: 1.4rem 1.8rem;
-  width: min(760px, 100%);
+  width: 100%;
   background: rgba(248, 250, 255, 0.95);
   border-left: 4px solid #3498db;
   border-radius: 14px;
@@ -1395,7 +1395,7 @@ onBeforeUnmount(() => {
 }
 
 .profile-basic-info .info-group h3 {
-  font-size: 2rem;
+  font-size: 1.45rem;
   margin-bottom: 1rem;
 }
 
