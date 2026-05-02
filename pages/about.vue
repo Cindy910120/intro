@@ -527,7 +527,43 @@
               </div>
             </div>
           </div>
-        </div>        <!-- 玄學研究 -->
+        </div>        <!-- 社團經歷 -->
+        <div class="interest-card">
+          <div class="interest-image-section">
+            <div class="interest-image-container">
+              <div v-for="(image, index) in clubImages" :key="'club-'+index"
+                   class="interest-slide" :class="{ active: currentIndexes.club === index }">
+                <img :src="image" :alt="'社團照片 ' + (index + 1)"
+                     @click="openLightbox('club', index)"
+                     class="interest-img" />
+              </div>
+              <div class="slide-counter">{{ currentIndexes.club + 1 }}/{{ clubImages.length }}</div>
+              <button class="slide-nav-side prev-side" @click="prevSlide('club')" aria-label="上一張">
+                <span class="nav-arrow">‹</span>
+              </button>
+              <button class="slide-nav-side next-side" @click="nextSlide('club')" aria-label="下一張">
+                <span class="nav-arrow">›</span>
+              </button>
+            </div>
+          </div>
+          <div class="interest-content">
+            <div class="interest-icon">🏫</div>
+            <h3 class="interest-title">社團經歷</h3>
+            <div class="interest-details">
+              <p>大學期間參加熱音社、跆拳道社與滑板社，在跆拳道社擔任社內攝影，記錄每次練習與活動的精彩瞬間。</p>
+              <p>曾擔任秋聚活動總召及防衛營副總召，負責活動規劃與統籌協調。</p>
+              <div class="interest-tags">
+                <span class="tag">熱音社</span>
+                <span class="tag">跆拳道社（攝影）</span>
+                <span class="tag">滑板社</span>
+                <span class="tag">秋聚總召</span>
+                <span class="tag">防衛營副總召</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 玄學研究 -->
         <div class="interest-card">
           <div class="interest-image-section">
             <div class="interest-image-container">
@@ -715,6 +751,13 @@ const physicsImages = [
   '/images/interests/physics/螢幕擷取畫面 2025-06-07 182911.png',
 ]
 
+const clubImages = [
+  '/images/interests/club/IMG_20211120_104707.jpg',
+  '/images/interests/club/IMG_20211120_134235.jpg',
+  '/images/interests/club/IMG_20211120_134244.jpg',
+  '/images/interests/club/IMG_20211123_203142.jpg',
+]
+
 // 活動圖片數據
 const activityImages = [
   {
@@ -768,7 +811,8 @@ const currentIndexes = ref({
   draw: 0,
   puzzle: 0,
   physics: 0,
-  activities: 0
+  activities: 0,
+  club: 0
 })
 
 // 圖片放大檢視狀態
@@ -787,7 +831,8 @@ const getImagesArray = (type) => {
     draw: drawImages,
     puzzle: puzzleImages,
     physics: physicsImages,
-    activities: activityImages.map(item => item.src)
+    activities: activityImages.map(item => item.src),
+    club: clubImages
   }
   return imageArrays[type] || []
 }
@@ -896,6 +941,12 @@ const startSlideshow = () => {
   slideshowIntervals.activities = setInterval(() => {
     if (!lightbox.value.show) {
       currentIndexes.value.activities = (currentIndexes.value.activities + 1) % activityImages.length
+    }
+  }, intervalTime)
+
+  slideshowIntervals.club = setInterval(() => {
+    if (!lightbox.value.show) {
+      currentIndexes.value.club = (currentIndexes.value.club + 1) % clubImages.length
     }
   }, intervalTime)
 }
