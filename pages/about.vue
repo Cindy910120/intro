@@ -1377,10 +1377,32 @@ onBeforeUnmount(() => {
   min-width: 0;
 }
 
+.profile-basic-info h2 {
+  font-size: clamp(2rem, 2.4vw, 2.6rem);
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
 .profile-basic-info .info-group {
   margin-bottom: 0;
   border-bottom: none;
-  padding-bottom: 0;
+  padding: 1.4rem 1.8rem;
+  width: min(760px, 100%);
+  background: rgba(248, 250, 255, 0.95);
+  border-left: 4px solid #3498db;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.12);
+}
+
+.profile-basic-info .info-group h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.profile-basic-info .info-group p {
+  font-size: 1.45rem;
+  line-height: 1.7;
+  margin-bottom: 0.65rem;
 }
 
 .profile-main {
@@ -1696,6 +1718,24 @@ onBeforeUnmount(() => {
   .profile-photo-wrapper {
     width: min(240px, 100%);
     min-width: auto;
+  }
+
+  .profile-basic-info h2 {
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    text-align: center;
+  }
+
+  .profile-basic-info .info-group {
+    width: 100%;
+    padding: 1.15rem 1.2rem;
+  }
+
+  .profile-basic-info .info-group h3 {
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+  }
+
+  .profile-basic-info .info-group p {
+    font-size: clamp(1.1rem, 4.2vw, 1.3rem);
   }
   
   .academic-card, .project-card {
