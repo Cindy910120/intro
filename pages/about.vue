@@ -717,6 +717,7 @@ const calligraphyImages = [
   '/images/interests/calligraphy/IMG_20200113_194926.jpg',
   '/images/interests/calligraphy/received_515809348583753.jpg',
   '/images/interests/calligraphy/received_660991897398830.jpg',
+  '/images/interests/calligraphy/IMG_20251017_083133.jpg',
 ]
 
 const drumImages = [
@@ -747,13 +748,17 @@ const puzzleImages = [
   '/images/interests/puzzle/IMG_20251205_203355.jpg',
   '/images/interests/puzzle/IMG_20251206_135345.jpg',
   '/images/interests/puzzle/IMG_20251207_104354.jpg',
-  '/images/interests/puzzle/IMG_20251207_104538.jpg'
+  '/images/interests/puzzle/IMG_20251207_104538.jpg',
+  '/images/interests/puzzle/IMG_20250701_211434.jpg',
+  '/images/interests/puzzle/IMG_20250725_123147.jpg'
 ]
 
 const physicsImages = [
   '/images/interests/physics/img-1950542225_1745635199325.jpg',
   '/images/interests/physics/img1657701570_1745568794007.jpeg',
   '/images/interests/physics/螢幕擷取畫面 2025-06-07 182911.png',
+  '/images/interests/physics/img1625740102_1763272395230.jpeg',
+  '/images/interests/physics/img2019345290_1763272390150.jpeg',
 ]
 
 const clubImages = [
