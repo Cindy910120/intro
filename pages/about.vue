@@ -35,27 +35,30 @@
     <section class="section intro-section">
       <h1>自我介紹</h1>
       
-      <div class="profile-container">
-        <div class="profile-header">
-          <div class="profile-photo-wrapper">
-            <img
-              src="/images/about/生活照.jpg"
-              alt="林芊蓉個人照片"
-              class="profile-photo"
-            />
-          </div>
-          <div class="profile-text profile-basic-info">
-            <h2>姓名 : 林芊蓉</h2>
-            
-            <div class="info-group">
-              <h3>學校</h3>
-              <p>大學 : 中原大學電機工程系 2020~2024</p>
-              <p>碩士 : 中原大學電機工程系 (就學中)2024~</p>
+      <div class="intro-split-layout">
+        <div class="profile-container">
+          <div class="profile-header">
+            <div class="profile-photo-wrapper">
+              <img
+                src="/images/about/生活照.jpg"
+                alt="林芊蓉個人照片"
+                class="profile-photo"
+              />
+            </div>
+            <div class="profile-text profile-basic-info">
+              <h2>姓名 : 林芊蓉</h2>
+              
+              <div class="info-group">
+                <h3>學校</h3>
+                <p>大學 : 中原大學電機工程系 2020~2024</p>
+                <p>碩士 : 中原大學電機工程系 (就學中)2024~</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="profile-main">
+        <div class="profile-details-container">
+          <div class="profile-main">
           <div class="info-group">
             <h3>學習內容</h3>
             <p>主修電機工程，大學曾修習企管、財金、國貿...等科系的課程。</p>
@@ -151,6 +154,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -1324,7 +1328,14 @@ onBeforeUnmount(() => {
   border-radius: 2px;
 }
 
-.profile-container {
+.intro-split-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile-container,
+.profile-details-container {
   background: rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-md, 12px);
   padding: 2rem;
@@ -1338,7 +1349,6 @@ onBeforeUnmount(() => {
   display: flex;
   gap: 1.8rem;
   align-items: flex-start;
-  margin-bottom: 1.25rem;
 }
 
 .profile-photo-wrapper {
@@ -1670,6 +1680,10 @@ onBeforeUnmount(() => {
   }
   
   .profile-container {
+    padding: 1.5rem;
+  }
+
+  .profile-details-container {
     padding: 1.5rem;
   }
 
